@@ -80,7 +80,7 @@
         el.classList.add('go');
       });
       // Set language after elements are visible
-      T.setLang('zh');
+      T.setLang('en');
       updateTranslations();
     }, 220);
 
