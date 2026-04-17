@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Track your runs and watch your progress unfold. Built for runners who refuse to settle. Join IRONFLOW CLUB Sharjah." />
+  <meta name="keywords" content="running club, Sharjah, fitness, track runs, leaderboard, running community" />
+  <meta name="theme-color" content="#ffc107" />
+  <title>IRONFLOW CLUB · Sharjah Running Club</title>
+
+  <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+    <link rel="manifest" href="assets/images/manifest.json">
+
+  <!-- Open Graph / Social Media -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://ironflowclub.github.io/" />
+<meta property="og:title" content="IRONFLOW CLUB · Sharjah Running Club" />
+<meta property="og:description" content="Track your runs and watch your progress unfold. Built for runners who refuse to settle." />
+<meta property="og:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://ironflowclub.github.io/" />
+<meta name="twitter:title" content="IRONFLOW CLUB · Sharjah Running Club" />
+<meta name="twitter:description" content="Track your runs and watch your progress unfold." />
+<meta name="twitter:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
+
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/loader.css" />
+
+  <style>
+    /* Homepage-specific styles */
+    .hero { padding: 0; }
+    .hero-inner { padding: clamp(60px, 12vh, 100px) var(--pad) 24px; }
+    
+    .kicker {
+      margin: 0 0 14px;
+      font-size: 11px;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      color: rgba(161,115,0,.90);
+      font-weight: 800;
+    }
+    
+    .hero-title {
+      margin: 0 0 18px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(40px, 10vw, 72px);
+      line-height: 1.02;
+      color: rgba(17,20,28,.94);
+      letter-spacing: -.02em;
+    }
+    
+    .hero-title .accent { color: #d48d12; }
+    
+    .hero-sub {
+      margin: 0;
+      color: var(--muted);
+      max-width: 56ch;
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+    
+    .word-reveal .word {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+    }
+    
+    .word-reveal .word-inner {
+      display: inline-block;
+      transform: translateY(110%);
+      opacity: 0;
+      animation: wordSlide .6s var(--ease-out) forwards;
+      animation-delay: var(--wd, 0ms);
+    }
+    
+    @keyframes wordSlide {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .accent-line {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .accent-line::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 2px;
+      transition: width .8s var(--ease-out);
+    }
+    
+    .accent-line.draw::after {
+      width: 100%;
+    }
+    
+    .stats-strip {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.60);
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,.85), rgba(255,255,255,.70));
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(17,20,28,.10), inset 0 1px 0 rgba(255,255,255,.8);
+      position: relative;
+    }
+    
+    .stats-strip::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity .3s;
+      z-index: -1;
+      filter: blur(12px);
+    }
+    
+    .stats-strip:hover::before { opacity: .3; }
+    
+    .stat-item {
+      text-align: center;
+      padding: 20px 16px;
+      transition: transform .3s var(--ease-out);
+    }
+    
+    .stat-item:hover { transform: translateY(-2px); }
+    .stat-item + .stat-item { border-left: 1px solid rgba(17,20,28,.08); }
+    
+    .stat-num {
+      display: block;
+      line-height: 1;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 32px;
+      background: linear-gradient(135deg, rgba(17,20,28,.96), rgba(17,20,28,.80));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -.03em;
+    }
+    
+    .stat-lbl {
+      display: block;
+      margin-top: 8px;
+      font-size: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1;
+    }
+    
+    .hero-actions {
+      padding: 28px var(--pad) 32px;
+      display: grid;
+      gap: 12px;
+    }
+    
+    .quote-section {
+      padding: 50px var(--pad) 60px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .quote-divider {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto 28px;
+      position: relative;
+    }
+    
+    .quote-divider::before {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--accent);
+      font-size: 12px;
+      background: var(--bg);
+      padding: 0 8px;
+    }
+    
+    .quote-text {
+      margin: 0 auto 40px;
+      max-width: 42ch;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(20px, 4.8vw, 28px);
+      line-height: 1.35;
+      color: rgba(17,20,28,.92);
+      letter-spacing: -.015em;
+      position: relative;
+    }
+    
+    .quote-text::before,
+    .quote-text::after {
+      font-family: Georgia, serif;
+      font-size: 48px;
+      opacity: .2;
+      position: absolute;
+    }
+    
+    .quote-text::before {
+      content: '"';
+      top: -20px;
+      left: -10px;
+    }
+    
+    .quote-text::after {
+      content: '"';
+      bottom: -30px;
+      right: -10px;
+    }
+    
+    .quote-text .em {
+      background: linear-gradient(135deg, #b87400, #ff9800);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    @media (min-width: 768px) {
+      .hero-inner { padding: 70px 48px 32px; }
+      
+      .hero-actions {
+        padding: 0 48px 60px;
+        display: flex;
+        gap: 16px;
+      }
+      
+      .hero-actions .btn {
+        min-width: 240px;
+        min-height: 64px;
+      }
+      
+      .stats-strip {
+        margin-top: 32px;
+        max-width: 500px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .quote-section { padding: 70px 40px 80px; }
+      .quote-text { max-width: 50ch; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- PAGE LOADER -->
+  <div id="page-loader" aria-hidden="true">
+    <div class="loader-logo-wrap">
+      <div class="loader-ring-2"></div>
+      <div class="loader-ring"></div>
+      <img class="loader-logo" src="assets/images/logo.jpg" alt="" width="64" height="64" />
+    </div>
+    <p class="loader-wordmark">IRONFLOW CLUB</p>
+    <p class="loader-sub">Sharjah · Running Club</p>
+    <div class="loader-progress-wrap">
+      <div class="loader-progress-track">
+        <div class="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-content">
+    <header id="site-header">
+      <div class="container nav">
+        <a class="brand" href="#home">
+          <img src="assets/images/logo.jpg" alt="IRONFLOW CLUB logo" width="42" height="42" />
+          <div class="brand-text">
+            <strong>IRONFLOW CLUB</strong>
+            <small>Sharjah</small>
+          </div>
+        </a>
+        <div class="nav-actions">
+          <a class="nav-cta" href="https://chat.whatsapp.com/LmnBbyXLJFDGekVw8hdJmz" target="_blank" rel="noopener noreferrer" id="chatBtn">CHAT</a>
+          <button class="lang-switch" id="langToggle" aria-label="Switch language">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="content">
+      <section class="hero" id="home">
+        <div class="container">
+          <div class="hero-inner">
+            <p class="kicker s-enter" style="--sd:0ms" id="kickerText">Running Club · Sharjah</p>
+            <h1 class="hero-title word-reveal s-enter" style="--sd:60ms" id="heroTitle" aria-label="Run. Track. Improve.">
+              <span class="word"><span class="word-inner" style="--wd:80ms">Run,</span></span>
+              <span class="word"><span class="word-inner" style="--wd:160ms"> Track</span></span><br>
+              <span class="word"><span class="word-inner accent-line accent" style="--wd:260ms">Improve.</span></span>
+            </h1>
+            <p class="hero-sub s-enter" style="--sd:200ms" id="heroSub">
+              Track your runs and watch your progress unfold. Built for runners who refuse to settle.
+            </p>
+            <div class="stats-strip s-enter" style="--sd:280ms">
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary s-enter" style="--sd:300ms" href="leaderboard.html" id="leaderboardBtn">Leaderboard</a>
+            <a class="btn btn-ghost s-enter" style="--sd:380ms" href="progress.html" id="progressBtn">My Progress</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="quote-section">
+        
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <p class="footer-brand">IRONFLOW CLUB</p>
+        <p class="footer-copy">© <span id="yr"></span> · <span id="rightsText">All rights reserved</span></p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/translations.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

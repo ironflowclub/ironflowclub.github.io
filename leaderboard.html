@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="IRONFLOW CLUB Sharjah — Leaderboard" />
+  <meta name="theme-color" content="#ffc107" />
+  <title>Leaderboard · IRONFLOW CLUB Sharjah</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ironflowclub.github.io/leaderboard.html" />
+  <meta property="og:title" content="Leaderboard · IRONFLOW CLUB" />
+  <meta property="og:description" content="Monthly running leaderboard by overall pace" />
+  <meta property="og:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
+
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/leaderboard.css" />
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.jpg" alt="IRONFLOW CLUB logo" width="42" height="42" />
+        <div class="brand-text">
+          <strong>IRONFLOW CLUB</strong>
+          <small>Sharjah</small>
+        </div>
+      </a>
+      <a class="nav-btn" href="index.html">HOME</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="lb-shell enter" style="animation-delay:60ms">
+        <div class="lb-hero">
+          <div class="lb-hero-inner">
+            <div class="lb-topbar">
+              <h1 class="lb-title">Leaderboard</h1>
+              <div class="month-pill">
+                <span class="sr-only">Month</span>
+                <select id="monthSelect" aria-label="Select month"></select>
+              </div>
+            </div>
+            <div class="top3" id="top3">
+              <div class="state-msg" style="grid-column:1/-1;padding:40px 0">
+                <div class="spinner"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sheet">
+          <div class="list" id="list"></div>
+        </div>
+
+        <div class="wip">
+          <span class="wip-icon">⚙️</span> WORK IN PROGRESS · more features coming soon
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="modalTitle">Runner</h2>
+          <p class="modal-sub" id="modalSub"></p>
+        </div>
+        <button class="icon-btn" id="closeModal" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24">
+            <path d="M18.3 5.71 12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.29 19.71 2.88 18.29 9.17 12 2.88 5.71 4.29 4.29l6.3 6.3 6.3-6.3z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="stats">
+          <div class="stat">
+            <div class="k">Avg Pace</div>
+            <div class="v" id="mScore">—</div>
+          </div>
+          <div class="stat">
+            <div class="k">Distance</div>
+            <div class="v" id="mKm">—</div>
+          </div>
+          <div class="stat">
+            <div class="k">Runs</div>
+            <div class="v" id="mDays">—</div>
+          </div>
+          <div class="stat">
+            <div class="k">Best Pace</div>
+            <div class="v" id="mBest">—</div>
+          </div>
+        </div>
+        <div class="chart">
+          <div class="chart-head">
+            <strong>Pace Over Time</strong>
+            <span style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,20,28,.55)">
+              Lower = Faster
+            </span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="runnerChart" aria-label="Pace chart" role="img"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data-handler.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/leaderboard.js"></script>
+</body>
+</html>

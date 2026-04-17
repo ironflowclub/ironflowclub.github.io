@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yourusername.github.io/ironflow-club/sitemap.xml
+
+# Disallow admin/config files (if any in future)
+Disallow: /assets/js/data-handler.js

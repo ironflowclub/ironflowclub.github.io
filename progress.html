@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="IRONFLOW CLUB Sharjah — My Progress" />
+  <meta name="theme-color" content="#ffc107" />
+  <title>My Progress · IRONFLOW CLUB Sharjah</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ironflowclub.github.io/progress.html" />
+  <meta property="og:title" content="My Progress · IRONFLOW CLUB" />
+  <meta property="og:description" content="Track your running progress and personal records" />
+  <meta property="og:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
+
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/progress.css" />
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.jpg" alt="IRONFLOW CLUB logo" width="42" height="42" />
+        <div class="brand-text">
+          <strong>IRONFLOW CLUB</strong>
+          <small>Sharjah</small>
+        </div>
+      </a>
+      <a class="nav-btn" href="index.html">HOME</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="hero-band enter" style="animation-delay:60ms">
+        <div class="hero-top">
+          <p class="hero-label">Progress Tracker</p>
+          <h1 class="hero-title">Your <span>Journey</span></h1>
+          <div class="selector-wrap">
+            <div class="select-pill">
+              <select id="memberSelect" aria-label="Select member">
+                <option value="">— Select your name —</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="content">
+        <div class="state-msg">
+          <div class="spinner"></div>
+          Loading data…
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Fullscreen Chart Overlay -->
+  <div class="fs-overlay" id="fsOverlay">
+    <div class="fs-header">
+      <div>
+        <div class="fs-title">Pace Over Time</div>
+        <div class="fs-subtitle">Lower = Faster</div>
+      </div>
+      <button class="fs-close" id="fsClose" aria-label="Close fullscreen chart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="fs-hint">Rotate your phone for the best view</div>
+    <div class="fs-chart-wrap">
+      <canvas id="fsChart" aria-label="Pace over time fullscreen chart" role="img"></canvas>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data-handler.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/progress.js"></script>
+</body>
+</html>
