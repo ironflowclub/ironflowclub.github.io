@@ -105,7 +105,7 @@ body {
 header {
   position: sticky;
   top: 0;
-  z-index: 60;
+  z-index: 50;
   background: rgba(251,251,253,.78);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
