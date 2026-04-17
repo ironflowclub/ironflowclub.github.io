@@ -101,6 +101,7 @@ body {
 }
 
 /* ── Header ── */
+/* Default: header visible on all pages */
 header {
   position: sticky;
   top: 0;
@@ -109,12 +110,16 @@ header {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--stroke);
+}
+
+/* Only homepage animates header */
+body.home header {
   transform: translateY(-100%);
   opacity: 0;
   transition: transform .6s var(--ease-out), opacity .6s var(--ease-out);
 }
 
-header.go {
+body.home header.go {
   transform: none;
   opacity: 1;
 }
