@@ -111,6 +111,9 @@ header {
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--stroke);
 }
+main {
+  margin-top: var(--nav-h);
+}
 
 /* Only homepage animates header */
 body.home header {
