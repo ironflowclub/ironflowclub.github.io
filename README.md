@@ -11,7 +11,7 @@ https://ironflowclub.github.io/
 
 - 📊 Monthly Leaderboard (ranked by pace)
 - 📈 Personal Progress Tracking with charts
-- 🌐 English / Chinese language toggle
+- 🌐 Bilingual Support – English & Chinese (中文)
 - 📱 Mobile-first responsive design
 - ⚡ Fast static site (GitHub Pages)
 
