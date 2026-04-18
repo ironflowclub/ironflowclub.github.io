@@ -12,6 +12,7 @@
   }
 
   const Utils = window.IronflowUtils;
+  const MONTH_ALL = 'ALL';
 
   let allData = [];
   let chart = null;
@@ -24,10 +25,13 @@
   const closeModalBtn = document.getElementById('closeModal');
 
   /**
-   * Compute leaderboard for a given month
+   * Compute leaderboard for a given month (or all time)
    */
   function computeLeaderboard(monthKey) {
-    const monthData = allData.filter(r => Utils.ym(r.event_date) === monthKey);
+    const monthData = monthKey === MONTH_ALL
+      ? allData
+      : allData.filter(r => Utils.ym(r.event_date) === monthKey);
+
     const members = [...new Set(allData.map(r => r.member_name))];
 
     const rows = members.map(name => {
@@ -70,17 +74,17 @@
     if (!data.length) {
       top3El.innerHTML = `
         <div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,.55);padding:30px 0;font-weight:700">
-          No runs in this month
+          No runs in this period
         </div>
       `;
       return;
     }
 
-    // Render top 3
+    // Render top 3 podium
     renderTop3(data);
 
-    // Render rest
-    renderList(data.slice(3));
+    // Render FULL list starting from #1
+    renderList(data);
   }
 
   /**
@@ -141,17 +145,20 @@
   }
 
   /**
-   * Render leaderboard list
+   * Render leaderboard list (FULL - starts from #1)
    */
   function renderList(data) {
     data.forEach((r, i) => {
+      const rank = i + 1;
       const row = document.createElement('div');
-      row.className = 'row';
+      row.className = rank <= 3 ? 'row top-rank' : 'row';
       row.setAttribute('role', 'button');
       row.setAttribute('tabindex', '0');
 
+      const medal = rank === 1 ? '🥇' : rank === 2 ? '#2' : rank === 3 ? '#3' : `#${rank}`;
+
       row.innerHTML = `
-        <div class="r-rank">#${i + 4}</div>
+        <div class="r-rank">${medal}</div>
         <div class="r-who">
           <strong>${r.member_name}</strong>
           <small>${r.totalDist.toFixed(1)} km · ${r.runs} runs</small>
@@ -179,7 +186,11 @@
    */
   function openRunner(memberName, monthKey) {
     const runs = allData
-      .filter(r => r.member_name === memberName && Utils.ym(r.event_date) === monthKey)
+      .filter(r => {
+        if (r.member_name !== memberName) return false;
+        if (monthKey === MONTH_ALL) return true;
+        return Utils.ym(r.event_date) === monthKey;
+      })
       .sort((a, b) => a.event_date.localeCompare(b.event_date));
 
     if (!runs.length) return;
@@ -189,9 +200,13 @@
     const overallPace = totalTime / totalDist;
     const bestPace = Math.min(...runs.map(r => Utils.parsePace(r.avg_pace)));
 
+    const subLabel = monthKey === MONTH_ALL
+      ? 'All time · Pace ranking'
+      : `${Utils.monthLabel(monthKey)} · Pace ranking`;
+
     // Update modal content
     document.getElementById('modalTitle').textContent = memberName;
-    document.getElementById('modalSub').textContent = `${Utils.monthLabel(monthKey)} · Pace ranking`;
+    document.getElementById('modalSub').textContent = subLabel;
     document.getElementById('mScore').textContent = Utils.formatPace(overallPace) + ' /km';
     document.getElementById('mKm').textContent = totalDist.toFixed(1) + ' km';
     document.getElementById('mDays').textContent = String(runs.length);
@@ -314,8 +329,16 @@
       .then(data => {
         allData = data;
 
-        // Populate month selector
+        // Populate month selector with All Time at top
         const months = [...new Set(data.map(r => Utils.ym(r.event_date)))].sort().reverse();
+
+        // Add "All Time" option first
+        const allOpt = document.createElement('option');
+        allOpt.value = MONTH_ALL;
+        allOpt.textContent = 'All Time';
+        monthSelect.appendChild(allOpt);
+
+        // Add monthly options
         months.forEach(m => {
           const opt = document.createElement('option');
           opt.value = m;
@@ -323,7 +346,8 @@
           monthSelect.appendChild(opt);
         });
 
-        monthSelect.value = months[0] || '';
+        // Default to most recent month (or All Time if no months)
+        monthSelect.value = months[0] || MONTH_ALL;
         monthSelect.addEventListener('change', () => render(monthSelect.value));
         render(monthSelect.value);
       })
