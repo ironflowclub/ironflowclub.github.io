@@ -346,7 +346,7 @@
             </div>
           </div>
           <div class="hero-actions">
-            <a class="btn btn-primary s-enter" style="--sd:300ms" href="leaderboard.html" id="leaderboardBtn">Leaderboard</a>
+            <button class="btn btn-primary s-enter" style="--sd:300ms" id="leaderboardBtn" type="button">Leaderboard</button>
             <a class="btn btn-ghost s-enter" style="--sd:380ms" href="progress.html" id="progressBtn">My Progress</a>
           </div>
         </div>
@@ -370,4 +370,171 @@
   <script src="assets/js/translations.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
+
+<!-- ── Leaderboard Choice Modal ───────────────────────────── -->
+<div id="lbChoiceModal" aria-hidden="true" style="
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+">
+  <div id="lbChoiceSheet" style="
+    width: 100%;
+    max-width: 540px;
+    border-radius: 28px 28px 0 0;
+    background: rgba(255,255,255,.96);
+    border-top: 1px solid rgba(17,20,28,.10);
+    box-shadow: 0 -24px 60px rgba(17,20,28,.18);
+    padding: 0 0 env(safe-area-inset-bottom, 20px);
+    transform: translateY(100%);
+    transition: transform .35s cubic-bezier(.32,1.1,.45,1);
+  ">
+    <!-- Handle -->
+    <div style="display:flex;justify-content:center;padding:14px 0 4px">
+      <div style="width:40px;height:4px;border-radius:2px;background:rgba(17,20,28,.15)"></div>
+    </div>
+
+    <!-- Header -->
+    <div style="padding:12px 24px 20px">
+      <p style="margin:0 0 4px;font-size:11px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:rgba(17,20,28,.45)">Leaderboard</p>
+      <h2 style="margin:0;font-family:var(--font-display);font-weight:800;font-size:22px;color:rgba(17,20,28,.94);letter-spacing:-.02em;line-height:1.2">
+        What would you like to see?
+      </h2>
+    </div>
+
+    <!-- Options -->
+    <div style="padding:0 16px 20px;display:grid;gap:10px">
+
+      <a href="leaderboard.html" style="
+        display:grid;
+        grid-template-columns:1fr 24px;
+        align-items:center;
+        gap:14px;
+        padding:16px;
+        border-radius:18px;
+        border:1px solid rgba(17,20,28,.08);
+        border-left:3px solid rgba(255,193,7,.80);
+        background:rgba(255,255,255,.90);
+        box-shadow:0 2px 12px rgba(17,20,28,.06);
+        text-decoration:none;
+        transition:transform .18s ease, box-shadow .18s ease;
+        -webkit-tap-highlight-color:transparent;
+      "
+      onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(17,20,28,.10)'"
+      onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(17,20,28,.06)'">
+        <div>
+          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">Overall Stats</strong>
+          <span style="display:block;margin-top:3px;font-size:12px;font-weight:600;color:rgba(17,20,28,.48);line-height:1.5">
+            All-time &amp; monthly — Consistency, Distance, Pace
+          </span>
+        </div>
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:rgba(17,20,28,.25);flex-shrink:0">
+          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+        </svg>
+      </a>
+
+      <a href="event-leaderboard.html" style="
+        display:grid;
+        grid-template-columns:1fr 24px;
+        align-items:center;
+        gap:14px;
+        padding:16px;
+        border-radius:18px;
+        border:1px solid rgba(17,20,28,.08);
+        border-left:3px solid rgba(42,157,92,.70);
+        background:rgba(255,255,255,.90);
+        box-shadow:0 2px 12px rgba(17,20,28,.06);
+        text-decoration:none;
+        transition:transform .18s ease, box-shadow .18s ease;
+        -webkit-tap-highlight-color:transparent;
+      "
+      onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(17,20,28,.10)'"
+      onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(17,20,28,.06)'">
+        <div>
+          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">Stats by Event</strong>
+          <span style="display:block;margin-top:3px;font-size:12px;font-weight:600;color:rgba(17,20,28,.48);line-height:1.5">
+            Pick a specific run — fastest pace on that day
+          </span>
+        </div>
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:rgba(17,20,28,.25);flex-shrink:0">
+          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Cancel -->
+    <div style="padding:0 16px 20px">
+      <button id="lbChoiceCancel" type="button" style="
+        width:100%;padding:15px;
+        border-radius:16px;
+        border:1px solid rgba(17,20,28,.10);
+        background:rgba(17,20,28,.04);
+        font-family:var(--font-display);
+        font-weight:800;font-size:14px;
+        letter-spacing:.06em;text-transform:uppercase;
+        color:rgba(17,20,28,.60);
+        cursor:pointer;
+        transition:background .18s ease;
+      ">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const modal  = document.getElementById('lbChoiceModal');
+  const sheet  = document.getElementById('lbChoiceSheet');
+  const btn    = document.getElementById('leaderboardBtn');
+  const cancel = document.getElementById('lbChoiceCancel');
+
+  function openModal() {
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        sheet.style.transform = 'translateY(0)';
+      });
+    });
+  }
+
+  function closeModal() {
+    sheet.style.transform = 'translateY(100%)';
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { modal.style.display = 'none'; }, 350);
+  }
+
+  if (btn) btn.addEventListener('click', openModal);
+  if (cancel) cancel.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+  });
+
+  // Swipe down to close on mobile
+  let startY = 0;
+  sheet.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, { passive: true });
+  sheet.addEventListener('touchmove', e => {
+    const dy = e.touches[0].clientY - startY;
+    if (dy > 0) sheet.style.transform = `translateY(${dy}px)`;
+  }, { passive: true });
+  sheet.addEventListener('touchend', e => {
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy > 80) { closeModal(); }
+    else { sheet.style.transform = 'translateY(0)'; }
+  });
+})();
+</script>
+
 </html>
