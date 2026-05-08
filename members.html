@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- FIX #2: Added viewport-fit=cover -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Members · IRONFLOW CLUB</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --accent:       #ffc107;
+  --accent2:      #d48d12;
+  --bg:           #0f1117;
+  --card:         #171a22;
+  --text:         #ffffff;
+  --muted:        rgba(255,255,255,.55);
+  --font-display: 'Outfit', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --ease:         cubic-bezier(.22,1,.36,1);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at top, rgba(255,193,7,.10), transparent 35%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* FIX #1: was overflow:hidden — blocks scroll on real content */
+  overflow-x: hidden;
+  padding: 24px 16px;
+}
+
+.card {
+  width: min(92%, 500px);
+  background: rgba(23,26,34,.88);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 28px;
+  padding: clamp(36px, 8vw, 56px) clamp(24px, 6vw, 38px);
+  text-align: center;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 20px 80px rgba(0,0,0,.45),
+    0 0 60px rgba(255,193,7,.08);
+  animation: cardIn .7s var(--ease) both;
+}
+
+.icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 14px rgba(255,193,7,.07),
+    0 12px 40px rgba(255,193,7,.25);
+  animation: float 3s ease-in-out infinite;
+}
+
+.icon svg {
+  width: 42px;
+  height: 42px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+h1 {
+  font-family: var(--font-display);
+  /* FIX #4: was fixed 42px — now fluid */
+  font-size: clamp(28px, 8vw, 42px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 340px;
+  margin: 0 auto 34px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 100px;
+  background: rgba(255,193,7,.10);
+  border: 1px solid rgba(255,193,7,.20);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.4s ease infinite;
+  flex-shrink: 0;
+}
+
+.back-btn {
+  margin-top: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 150px;
+  height: 48px;
+  border-radius: 14px;
+  text-decoration: none;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  transition: transform .25s var(--ease), box-shadow .25s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.30);
+}
+
+.back-btn:active {
+  transform: translateY(-1px);
+}
+
+/* ── KEYFRAMES ── */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(30px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;  transform: scale(1);  }
+  50%       { opacity: .4; transform: scale(.7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" role="main">
+
+  <div class="icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.87"/>
+    </svg>
+  </div>
+
+  <!-- Status badge -->
+  <div class="badge" role="status">
+    <span class="dot" aria-hidden="true"></span>
+    In Development
+  </div>
+
+  <h1>Coming Soon</h1>
+
+  <!-- FIX #3: Fixed incomplete sentence -->
+  <p>
+    The IRONFLOW Members Management System is currently being built.
+    It will be available soon.
+  </p>
+
+  <!-- FIX: clearer label + arrow -->
+  <a href="admin.html" class="back-btn" aria-label="Back to admin dashboard">
+    ← Back
+  </a>
+
+</div>
+
+<!-- FIX Option B: Passive auth guard — no spinner, no network call -->
+<script>
+  (function () {
+    'use strict';
+    var token  = sessionStorage.getItem('if_admin_session');
+    var expiry = sessionStorage.getItem('if_admin_expiry');
+    if (!token || !expiry || Date.now() > Number(expiry)) {
+      window.location.replace('admin.html');
+    }
+  })();
+</script>
+
+</body>
+</html>
