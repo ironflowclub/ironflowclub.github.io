@@ -1,234 +1,1075 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<!-- FIX #2: Added viewport-fit=cover -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Members · IRONFLOW CLUB</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffc107" />
+  <title>Members · IRONFLOW CLUB Admin</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<style>
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:       #d48d12;
+      --accent-2:     #ff9800;
+      --accent-light: rgba(212,141,18,.12);
+      --gold:         #ffc107;
+      --bg:           #f5f4f0;
+      --surface:      #ffffff;
+      --surface-2:    #f9f8f5;
+      --surface-3:    #efefec;
+      --ink:          rgba(17,20,28,.94);
+      --ink-2:        rgba(17,20,28,.65);
+      --ink-3:        rgba(17,20,28,.40);
+      --dark:         #0d0f14;
+      --danger:       #e03434;
+      --danger-dim:   rgba(224,52,52,.08);
+      --border:       rgba(17,20,28,.08);
+      --border-mid:   rgba(17,20,28,.13);
+      --font-display: 'Outfit', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --ease-out:     cubic-bezier(.22,1,.36,1);
+      --ease-back:    cubic-bezier(.34,1.56,.64,1);
+      --pad:          clamp(16px, 5vw, 28px);
+      --max-w:        600px;
+      --nav-h:        60px;
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────
+   INTRO / LOADING SCREEN
+───────────────────────────── */
+
+#intro{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+
+  background:var(--dark);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  animation:introExit .7s var(--ease-out) 2.4s forwards;
 }
 
-:root {
-  --accent:       #ffc107;
-  --accent2:      #d48d12;
-  --bg:           #0f1117;
-  --card:         #171a22;
-  --text:         #ffffff;
-  --muted:        rgba(255,255,255,.55);
-  --font-display: 'Outfit', sans-serif;
-  --font-body:    'Inter', sans-serif;
-  --ease:         cubic-bezier(.22,1,.36,1);
-}
+.intro-glow{
+  position:absolute;
 
-html {
-  -webkit-text-size-adjust: 100%;
-}
+  width:min(600px,120vw);
+  height:min(600px,120vw);
 
-body {
-  min-height: 100vh;
-  min-height: 100dvh;
+  border-radius:50%;
+
   background:
-    radial-gradient(circle at top, rgba(255,193,7,.10), transparent 35%),
-    var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* FIX #1: was overflow:hidden — blocks scroll on real content */
-  overflow-x: hidden;
-  padding: 24px 16px;
+    radial-gradient(
+      circle,
+      rgba(255,193,7,.22) 0%,
+      rgba(255,193,7,.07) 40%,
+      transparent 70%
+    );
+
+  animation:glowPulse 2.4s ease-in-out infinite;
+
+  pointer-events:none;
 }
 
-.card {
-  width: min(92%, 500px);
-  background: rgba(23,26,34,.88);
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 28px;
-  padding: clamp(36px, 8vw, 56px) clamp(24px, 6vw, 38px);
-  text-align: center;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+.intro-sweep{
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(255,255,255,.06) 48%,
+      rgba(255,193,7,.18) 52%,
+      transparent 70%
+    );
+
+  animation:sweep 2.4s var(--ease-out);
+
+  pointer-events:none;
+}
+
+.intro-body{
+  position:relative;
+  z-index:2;
+
+  text-align:center;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.intro-logo{
+  width:clamp(72px,16vw,110px);
+  height:clamp(72px,16vw,110px);
+
+  border-radius:50%;
+  overflow:hidden;
+
+  border:3px solid rgba(255,255,255,.10);
+
   box-shadow:
-    0 20px 80px rgba(0,0,0,.45),
-    0 0 60px rgba(255,193,7,.08);
-  animation: cardIn .7s var(--ease) both;
+    0 0 0 10px rgba(255,193,7,.06),
+    0 0 60px rgba(255,193,7,.24);
+
+  margin-bottom:28px;
+
+  animation:
+    logoPop .85s var(--ease-back) both,
+    logoFloat 3.5s ease-in-out .85s infinite;
 }
 
-.icon {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 0 0 14px rgba(255,193,7,.07),
-    0 12px 40px rgba(255,193,7,.25);
-  animation: float 3s ease-in-out infinite;
+.intro-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
-.icon svg {
-  width: 42px;
-  height: 42px;
-  stroke: #fff;
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.intro-title{
+  font-family:var(--font-display);
+  font-weight:900;
+
+  font-size:clamp(24px,4.5vw,52px);
+
+  letter-spacing:-.03em;
+  line-height:1;
+
+  color:#fff;
+
+  opacity:0;
+  transform:translateY(18px);
+
+  animation:slideUp .7s var(--ease-out) .38s forwards;
 }
 
-h1 {
-  font-family: var(--font-display);
-  /* FIX #4: was fixed 42px — now fluid */
-  font-size: clamp(28px, 8vw, 42px);
-  line-height: 1;
-  letter-spacing: -.03em;
-  margin-bottom: 16px;
+.intro-sub{
+  margin-top:8px;
+
+  font-family:var(--font-display);
+
+  font-size:clamp(9px,1vw,11px);
+
+  letter-spacing:.28em;
+  text-transform:uppercase;
+
+  color:rgba(255,255,255,.40);
+
+  opacity:0;
+
+  animation:fadeIn .7s ease .78s forwards;
 }
 
-p {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--muted);
-  max-width: 340px;
-  margin: 0 auto 34px;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 18px;
-  border-radius: 100px;
-  background: rgba(255,193,7,.10);
-  border: 1px solid rgba(255,193,7,.20);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 28px;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: pulse 1.4s ease infinite;
-  flex-shrink: 0;
-}
-
-.back-btn {
-  margin-top: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 150px;
-  height: 48px;
-  border-radius: 14px;
-  text-decoration: none;
-  background: #fff;
-  color: #111;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
-  transition: transform .25s var(--ease), box-shadow .25s;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.back-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,.30);
-}
-
-.back-btn:active {
-  transform: translateY(-1px);
-}
-
-/* ── KEYFRAMES ── */
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(30px) scale(.96); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0);    }
-  50%       { transform: translateY(-10px); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1;  transform: scale(1);  }
-  50%       { opacity: .4; transform: scale(.7); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
+@keyframes introExit{
+  to{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
   }
 }
-</style>
-</head>
 
+@keyframes glowPulse{
+  0%,100%{
+    transform:scale(1);
+    opacity:.8;
+  }
+
+  50%{
+    transform:scale(1.14);
+    opacity:1;
+  }
+}
+
+@keyframes sweep{
+  from{
+    transform:translateX(-150%);
+  }
+
+  to{
+    transform:translateX(200%);
+  }
+}
+
+@keyframes logoPop{
+  from{
+    opacity:0;
+    transform:scale(.55) rotate(-6deg);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1) rotate(0);
+  }
+}
+
+@keyframes logoFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+}
+
+@keyframes slideUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeIn{
+  to{
+    opacity:1;
+  }
+}
+
+    /* ── NAV ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-h);
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      max-width: var(--max-w); margin: 0 auto;
+      height: 100%; padding: 0 var(--pad);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 10px;
+    }
+    .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .brand img {
+      width: 34px; height: 34px; border-radius: 50%; object-fit: cover;
+      box-shadow: 0 2px 8px rgba(255,193,7,.30);
+    }
+    .brand-text strong {
+      display: block; font-family: var(--font-display); font-weight: 800;
+      font-size: 14px; color: var(--ink); letter-spacing: -.01em; line-height: 1.1;
+    }
+    .brand-text small {
+      display: block; font-size: 10px; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+    }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 5px;
+      height: 34px; padding: 0 14px; border-radius: 999px;
+      border: 1.5px solid var(--border-mid); background: var(--surface);
+      color: var(--ink-2); font-family: var(--font-body);
+      font-size: 12px; font-weight: 600; text-decoration: none;
+      transition: background .18s, box-shadow .18s;
+      white-space: nowrap; -webkit-tap-highlight-color: transparent;
+    }
+    .nav-back svg {
+      width: 14px; height: 14px; stroke: currentColor; fill: none;
+      stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .nav-back:hover { background: var(--surface-2); box-shadow: 0 2px 8px rgba(17,20,28,.06); }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1; max-width: var(--max-w); width: 100%;
+      margin: 0 auto; padding: 28px var(--pad) 80px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-kicker {
+      font-size: 10px; font-weight: 800; letter-spacing: .30em;
+      text-transform: uppercase; color: rgba(161,115,0,.90); margin-bottom: 8px;
+    }
+    .page-title {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(28px, 8vw, 42px); line-height: 1.05;
+      letter-spacing: -.025em; color: var(--ink); margin-bottom: 22px;
+    }
+    .page-title .accent { color: var(--accent); }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.65);
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,.90), rgba(255,255,255,.75));
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(17,20,28,.07), inset 0 1px 0 rgba(255,255,255,.8);
+      margin-bottom: 16px;
+    }
+    .stat-item { text-align: center; padding: 16px 6px; }
+    .stat-item + .stat-item { border-left: 1px solid rgba(17,20,28,.07); }
+    .stat-num {
+      display: block; font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(22px, 6vw, 28px); letter-spacing: -.03em; line-height: 1;
+      background: linear-gradient(135deg, rgba(17,20,28,.96), rgba(17,20,28,.65));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-lbl {
+      display: block; margin-top: 5px;
+      font-size: 9px; font-family: var(--font-display); font-weight: 800;
+      letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.80));
+      border: 1px solid rgba(255,255,255,.70);
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(17,20,28,.06), inset 0 1px 0 rgba(255,255,255,.9);
+      padding: 18px; margin-bottom: 14px;
+    }
+    .card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .card-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .card-icon svg {
+      width: 17px; height: 17px; stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .card-title {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: 15px; letter-spacing: -.01em; color: var(--ink); line-height: 1.1;
+    }
+    .card-desc { font-size: 11px; color: var(--ink-3); margin-top: 2px; font-weight: 500; }
+
+    /* ── FORM ── */
+    .field-row { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label {
+      font-size: 10px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--ink-2);
+    }
+    .field input {
+      height: 46px; border-radius: 12px;
+      border: 1.5px solid var(--border-mid);
+      background: rgba(255,255,255,.80);
+      padding: 0 13px;
+      font-size: 16px; /* prevents iOS zoom */
+      font-family: var(--font-body); color: var(--ink);
+      outline: none;
+      transition: border-color .18s, box-shadow .18s, background .18s;
+      -webkit-appearance: none; width: 100%;
+    }
+    .field input:focus {
+      border-color: var(--accent); background: #fff;
+      box-shadow: 0 0 0 3px rgba(212,141,18,.14);
+    }
+    .field input::placeholder { color: var(--ink-3); }
+    .field input:disabled { opacity: .5; cursor: not-allowed; }
+
+    .btn-add {
+      width: 100%; height: 52px; border: none; border-radius: 14px;
+      cursor: pointer; font-family: var(--font-display); font-weight: 800;
+      font-size: 14px; letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(17,20,28,.90);
+      background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+      box-shadow: 0 6px 20px rgba(212,141,18,.28);
+      transition: transform .2s var(--ease-out), box-shadow .2s, opacity .2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative; overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-add::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.20) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .btn-add svg {
+      width: 16px; height: 16px; stroke: rgba(17,20,28,.75); fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .btn-add:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,141,18,.38); }
+    .btn-add:active:not(:disabled) { transform: translateY(0); }
+    .btn-add:disabled { opacity: .55; cursor: not-allowed; }
+
+    /* ── LIST CARD ── */
+    .list-card {
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.80));
+      border: 1px solid rgba(255,255,255,.70);
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(17,20,28,.06), inset 0 1px 0 rgba(255,255,255,.9);
+      overflow: hidden;
+    }
+    .list-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border-bottom: 1px solid var(--border); gap: 10px;
+    }
+    .list-head-left { display: flex; align-items: center; gap: 8px; }
+    .list-head-title {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: 14px; letter-spacing: -.01em; color: var(--ink);
+    }
+    .count-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 22px; height: 22px; padding: 0 7px; border-radius: 999px;
+      background: rgba(212,141,18,.14);
+      font-family: var(--font-display); font-size: 11px; font-weight: 800;
+      color: rgba(161,115,0,.90);
+    }
+
+    /* Search */
+    .search-wrap { position: relative; }
+    .search-wrap svg {
+      position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+      width: 13px; height: 13px; stroke: var(--ink-3); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      pointer-events: none;
+    }
+    .search-input {
+      height: 34px; width: 130px; border-radius: 999px;
+      border: 1.5px solid var(--border-mid); background: var(--surface-2);
+      padding: 0 12px 0 28px; font-size: 13px;
+      font-family: var(--font-body); color: var(--ink); outline: none;
+      transition: border-color .18s, box-shadow .18s, width .25s var(--ease-out);
+      -webkit-appearance: none;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,141,18,.12);
+      width: 160px;
+    }
+    .search-input::placeholder { color: var(--ink-3); }
+
+    /* Member rows */
+    .members-list { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .member-row {
+      display: grid; grid-template-columns: 42px 1fr 36px;
+      align-items: center; gap: 11px;
+      padding: 11px 10px; border-radius: 14px;
+      background: rgba(255,255,255,.60);
+      border: 1px solid rgba(255,255,255,.80);
+      transition: background .15s, box-shadow .15s;
+      animation: rowIn .22s var(--ease-out) both;
+    }
+    .member-row:hover { background: rgba(255,255,255,.90); box-shadow: 0 2px 10px rgba(17,20,28,.06); }
+
+    .member-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 14px; color: rgba(17,20,28,.82); flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(212,141,18,.22);
+    }
+
+    .member-info { min-width: 0; }
+    .member-name {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 14px; color: var(--ink); letter-spacing: -.01em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .member-meta {
+      display: flex; align-items: center; gap: 5px;
+      margin-top: 2px; flex-wrap: wrap;
+    }
+    .meta-id {
+      font-size: 11px; font-weight: 700; color: var(--ink-3);
+      font-family: var(--font-display); letter-spacing: .04em;
+    }
+    .meta-sep { color: var(--border-mid); font-size: 10px; }
+    .meta-date { font-size: 11px; font-weight: 500; color: var(--ink-3); }
+
+    .btn-remove {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 10px;
+      border: 1.5px solid var(--border-mid); background: transparent;
+      color: var(--ink-3); cursor: pointer;
+      transition: border-color .2s, color .2s, background .2s;
+      flex-shrink: 0; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-remove svg {
+      width: 14px; height: 14px; stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .btn-remove:hover { border-color: rgba(224,52,52,.40); color: var(--danger); background: var(--danger-dim); }
+    .btn-remove:disabled { opacity: .45; cursor: not-allowed; }
+
+    /* States */
+    .state-box {
+      padding: 44px 20px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .spinner {
+      width: 28px; height: 28px;
+      border: 2.5px solid var(--border-mid); border-top-color: var(--accent);
+      border-radius: 50%; animation: spin .75s linear infinite;
+    }
+    .state-lbl { font-size: 13px; font-weight: 500; color: var(--ink-3); }
+    .state-icon {
+      width: 42px; height: 42px; border-radius: 12px; background: var(--surface-3);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .state-icon svg {
+      width: 20px; height: 20px; stroke: var(--ink-3); fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+      left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--dark); color: #fff; border-radius: 999px;
+      padding: 11px 20px; font-family: var(--font-body); font-size: 13px;
+      font-weight: 600; white-space: nowrap; pointer-events: none; opacity: 0;
+      box-shadow: 0 8px 32px rgba(17,20,28,.30);
+      transition: transform .38s var(--ease-out), opacity .25s;
+      z-index: 500; max-width: calc(100vw - 32px); text-align: center;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast-dot {
+      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold); margin-right: 7px; vertical-align: middle;
+    }
+    .toast.err .toast-dot { background: var(--danger); }
+
+    /* ── CONFIRM BOTTOM SHEET ── */
+    .overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(13,15,20,.50);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    .overlay.open { opacity: 1; pointer-events: auto; }
+    .confirm-sheet {
+      width: 100%; max-width: 540px;
+      border-radius: 28px 28px 0 0;
+      background: rgba(255,255,255,.97);
+      border-top: 1px solid rgba(17,20,28,.09);
+      box-shadow: 0 -24px 60px rgba(17,20,28,.18);
+      padding: 0 0 env(safe-area-inset-bottom, 24px);
+      transform: translateY(100%);
+      transition: transform .35s cubic-bezier(.32,1.1,.45,1);
+    }
+    .overlay.open .confirm-sheet { transform: translateY(0); }
+    .sheet-handle { display: flex; justify-content: center; padding: 14px 0 4px; }
+    .sheet-handle span {
+      width: 40px; height: 4px; border-radius: 2px;
+      background: rgba(17,20,28,.14); display: block;
+    }
+    .sheet-body { padding: 8px 22px 20px; }
+    .sheet-icon {
+      width: 46px; height: 46px; border-radius: 13px;
+      background: var(--danger-dim); border: 1px solid rgba(224,52,52,.16);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    }
+    .sheet-icon svg {
+      width: 22px; height: 22px; stroke: var(--danger); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .sheet-title {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: 20px; letter-spacing: -.02em; color: var(--ink); margin-bottom: 6px;
+    }
+    .sheet-desc { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin-bottom: 22px; }
+    .sheet-desc strong { color: var(--ink); font-weight: 600; }
+    .sheet-actions { display: grid; gap: 10px; }
+    .btn-sheet-cancel {
+      width: 100%; height: 50px; border-radius: 14px;
+      border: 1.5px solid var(--border-mid); background: rgba(17,20,28,.04);
+      font-family: var(--font-display); font-size: 14px; font-weight: 800;
+      letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2);
+      cursor: pointer; transition: background .18s; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-sheet-cancel:hover { background: var(--surface-3); }
+    .btn-sheet-confirm {
+      width: 100%; height: 50px; border-radius: 14px; border: none;
+      background: var(--danger); font-family: var(--font-display);
+      font-size: 14px; font-weight: 800; letter-spacing: .06em;
+      text-transform: uppercase; color: #fff; cursor: pointer;
+      transition: opacity .2s, transform .2s; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-sheet-confirm:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-sheet-confirm:disabled { opacity: .55; cursor: not-allowed; }
+
+    /* ── KEYFRAMES ── */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes rowIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 480px) {
+      .field-row { grid-template-columns: 1fr 1fr; }
+      .sheet-actions { grid-template-columns: 1fr 1fr; }
+      .overlay { align-items: center; padding: 20px; }
+      .confirm-sheet {
+        border-radius: 24px; max-width: 400px;
+        transform: scale(.94) translateY(12px);
+      }
+      .overlay.open .confirm-sheet { transform: scale(1) translateY(0); }
+      .sheet-handle { display: none; }
+    }
+    @media (max-width: 360px) {
+      .search-input { width: 100px; }
+      .search-input:focus { width: 120px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    }
+  </style>
+</head>
 <body>
 
-<div class="card" role="main">
+  <!-- ── INTRO SPLASH ── -->
+<div id="intro" role="presentation" aria-hidden="true">
+  <div class="intro-glow"></div>
+  <div class="intro-sweep"></div>
 
-  <div class="icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24">
-      <circle cx="9" cy="7" r="4"/>
-      <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
-      <path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.87"/>
-    </svg>
+  <div class="intro-body">
+    <div class="intro-logo">
+      <img src="assets/images/logo.jpeg" alt="" />
+    </div>
+
+    <p class="intro-title">
+      IRONFLOW CLUB
+    </p>
+
+    <p class="intro-sub">
+      Members Panel
+    </p>
   </div>
-
-  <!-- Status badge -->
-  <div class="badge" role="status">
-    <span class="dot" aria-hidden="true"></span>
-    In Development
-  </div>
-
-  <h1>Coming Soon</h1>
-
-  <!-- FIX #3: Fixed incomplete sentence -->
-  <p>
-    The IRONFLOW Members Management System is currently being built.
-    It will be available soon.
-  </p>
-
-  <!-- FIX: clearer label + arrow -->
-  <a href="admin.html" class="back-btn" aria-label="Back to admin dashboard">
-    ← Back
-  </a>
-
 </div>
 
-<!-- FIX Option B: Passive auth guard — no spinner, no network call -->
-<script>
-  (function () {
-    'use strict';
-    var token  = sessionStorage.getItem('if_admin_session');
-    var expiry = sessionStorage.getItem('if_admin_expiry');
-    if (!token || !expiry || Date.now() > Number(expiry)) {
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="nav">
+      <a class="brand" href="admin.html">
+        <img src="assets/images/logo.jpeg" alt="IronFlow Club logo" />
+        <div class="brand-text">
+          <strong>IRONFLOW CLUB</strong>
+          <small>Admin</small>
+        </div>
+      </a>
+      <a href="admin.html" class="nav-back">
+        <svg viewBox="0 0 16 16"><path d="M10 12L6 8l4-4"/></svg>
+        Dashboard
+      </a>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main>
+
+    <p class="page-kicker">Admin · Sharjah</p>
+    <h1 class="page-title">Club <span class="accent">Members</span></h1>
+
+    <!-- Stats -->
+    <div class="stats-strip">
+      <div class="stat-item">
+        <span class="stat-num" id="statTotal">—</span>
+        <span class="stat-lbl">Members</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" id="statNewest">—</span>
+        <span class="stat-lbl">Latest</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" id="statNextId">—</span>
+        <span class="stat-lbl">Next #</span>
+      </div>
+    </div>
+
+    <!-- Add Member -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/><path d="M12 14v7M9 17h6"/></svg>
+        </div>
+        <div>
+          <p class="card-title">Add New Runner</p>
+          <p class="card-desc">ID auto-assigned · Join date is optional</p>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="inputName">Member Name</label>
+          <input type="text" id="inputName" placeholder="e.g. Ahmed Al Sayed"
+                 autocomplete="off" maxlength="80" enterkeyhint="done" />
+        </div>
+        <div class="field">
+          <label for="inputDate">
+            Join Date
+            <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-3)">(optional)</span>
+          </label>
+          <input type="date" id="inputDate" />
+        </div>
+      </div>
+      <button class="btn-add" id="btnAdd" type="button">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        Add Runner
+      </button>
+    </div>
+
+    <!-- Members List -->
+    <div class="list-card">
+      <div class="list-head">
+        <div class="list-head-left">
+          <span class="list-head-title">All Members</span>
+          <span class="count-badge" id="memberCount">0</span>
+        </div>
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" id="searchInput" type="search"
+                 placeholder="Search…" aria-label="Search members" />
+        </div>
+      </div>
+      <div class="members-list" id="membersList">
+        <div class="state-box">
+          <div class="spinner"></div>
+          <p class="state-lbl">Loading members…</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── TOAST ── -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-dot" aria-hidden="true"></span>
+    <span id="toastMsg"></span>
+  </div>
+
+  <!-- ── CONFIRM BOTTOM SHEET ── -->
+  <div class="overlay" id="confirmOverlay" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="confirm-sheet" id="confirmSheet">
+      <div class="sheet-handle"><span></span></div>
+      <div class="sheet-body">
+        <div class="sheet-icon">
+          <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </div>
+        <h2 class="sheet-title" id="sheetTitle">Remove Member?</h2>
+        <p class="sheet-desc">This will permanently remove <strong id="confirmName"></strong> from the club roster.</p>
+        <div class="sheet-actions">
+          <button class="btn-sheet-cancel" id="btnCancel" type="button">Cancel</button>
+          <button class="btn-sheet-confirm" id="btnConfirmRemove" type="button">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  /* ================================================================
+     CONFIG — replace WRITE_URL with your auth Apps Script URL
+  ================================================================ */
+  const SHEET_ID  = '1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg';
+  const READ_URL  = `https://opensheet.elk.sh/${SHEET_ID}/Member_details`;
+  const WRITE_URL = 'https://script.google.com/macros/s/AKfycbx_Lap_lkvgk0xKIzTGp5joffnGEJrfNr9ltvPsWTCt8RkXw2pXXPomT3dpdslFo5I/exec';
+
+  /* ── AUTH GUARD ── */
+  (function() {
+    const token  = sessionStorage.getItem('if_admin_session');
+    const expiry = sessionStorage.getItem('if_admin_expiry');
+    if (!token || !expiry || Date.now() >= Number(expiry)) {
       window.location.replace('admin.html');
     }
   })();
-</script>
+
+  /* ── STATE ── */
+  let allMembers  = [];
+  let pendingRemove = null;
+
+  /* ── ELEMENTS ── */
+  const membersList      = document.getElementById('membersList');
+  const memberCount      = document.getElementById('memberCount');
+  const statTotal        = document.getElementById('statTotal');
+  const statNewest       = document.getElementById('statNewest');
+  const statNextId       = document.getElementById('statNextId');
+  const inputName        = document.getElementById('inputName');
+  const inputDate        = document.getElementById('inputDate');
+  const btnAdd           = document.getElementById('btnAdd');
+  const searchInput      = document.getElementById('searchInput');
+  const confirmOverlay   = document.getElementById('confirmOverlay');
+  const confirmSheet     = document.getElementById('confirmSheet');
+  const confirmNameEl    = document.getElementById('confirmName');
+  const btnCancel        = document.getElementById('btnCancel');
+  const btnConfirmRemove = document.getElementById('btnConfirmRemove');
+
+  /* ── TOAST ── */
+  const Toast = (() => {
+    let t = null;
+    const el = document.getElementById('toast');
+    const msg = document.getElementById('toastMsg');
+    return {
+      show(text, isErr = false) {
+        msg.textContent = text;
+        el.classList.toggle('err', isErr);
+        el.classList.add('show');
+        clearTimeout(t);
+        t = setTimeout(() => el.classList.remove('show'), 3200);
+      }
+    };
+  })();
+
+  /* ── LOAD ── */
+  async function loadMembers() {
+    showLoading();
+    try {
+      const res  = await fetch(READ_URL);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      allMembers = Array.isArray(data) ? data : [];
+      render();
+      updateStats();
+    } catch(err) {
+      membersList.innerHTML = `<div class="state-box">
+        <div class="state-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+        <p class="state-lbl">Could not load. Check your connection.</p>
+      </div>`;
+    }
+  }
+
+  function showLoading() {
+    membersList.innerHTML = `<div class="state-box"><div class="spinner"></div><p class="state-lbl">Loading members…</p></div>`;
+  }
+
+  /* ── RENDER ── */
+  function render() {
+    const q = searchInput.value.trim().toLowerCase();
+    const list = q
+      ? allMembers.filter(m =>
+          (m.member_name || '').toLowerCase().includes(q) ||
+          String(m.member_id || '').includes(q)
+        )
+      : [...allMembers];
+
+    memberCount.textContent = list.length;
+
+    if (!list.length) {
+      membersList.innerHTML = `<div class="state-box">
+        <div class="state-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
+        <p class="state-lbl">${q ? 'No members match your search.' : 'No members yet. Add one above!'}</p>
+      </div>`;
+      return;
+    }
+
+    membersList.innerHTML = list.map((m, i) => {
+      const initials = (m.member_name || '?')
+        .split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+      const datePart = m.join_date
+        ? `<span class="meta-sep">·</span><span class="meta-date">${esc(m.join_date)}</span>`
+        : '';
+      return `
+        <div class="member-row" style="animation-delay:${i * 22}ms">
+          <div class="member-avatar">${esc(initials)}</div>
+          <div class="member-info">
+            <div class="member-name">${esc(m.member_name || 'Unknown')}</div>
+            <div class="member-meta">
+              <span class="meta-id">#${esc(String(m.member_id ?? ''))}</span>
+              ${datePart}
+            </div>
+          </div>
+          <button class="btn-remove"
+            data-id="${esc(String(m.member_id ?? ''))}"
+            data-name="${esc(m.member_name || '')}"
+            type="button"
+            aria-label="Remove ${esc(m.member_name || '')}">
+            <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </button>
+        </div>`;
+    }).join('');
+  }
+
+  /* ── STATS ── */
+  function updateStats() {
+    statTotal.textContent = allMembers.length;
+    const withDates = [...allMembers]
+      .filter(m => m.join_date)
+      .sort((a, b) => new Date(b.join_date) - new Date(a.join_date));
+    statNewest.textContent = withDates.length
+      ? (withDates[0].member_name || '—').split(' ')[0]
+      : '—';
+    statNextId.textContent = nextSerial();
+  }
+
+  function nextSerial() {
+    if (!allMembers.length) return 1;
+    const nums = allMembers.map(m => parseInt(m.member_id) || 0);
+    return Math.max(...nums) + 1;
+  }
+
+  /* ── ADD ── */
+  async function addMember() {
+    const name = inputName.value.trim();
+    const date = inputDate.value.trim();
+    if (!name) { inputName.focus(); Toast.show('Please enter a name.', true); return; }
+
+    const newId = nextSerial();
+    setFormBusy(true);
+    try {
+      const res = await fetch(WRITE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          action: 'addMember',
+          token:  sessionStorage.getItem('if_admin_session'),
+          member_id:   newId,
+          member_name: name,
+          join_date:   date
+        }),
+        redirect: 'follow'
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (data.success) {
+        allMembers.push({ member_id: data.member_id ?? newId, member_name: name, join_date: date });
+        inputName.value = '';
+        inputDate.value = '';
+        render();
+        updateStats();
+        Toast.show(`✓ ${name} added as #${data.member_id ?? newId}`);
+      } else {
+        throw new Error(data.error || 'Failed');
+      }
+    } catch(err) {
+      Toast.show('Could not add member. Try again.', true);
+    } finally {
+      setFormBusy(false);
+    }
+  }
+
+  function setFormBusy(busy) {
+    inputName.disabled = busy;
+    inputDate.disabled = busy;
+    btnAdd.disabled    = busy;
+    btnAdd.innerHTML   = busy
+      ? 'Adding…'
+      : `<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Add Member`;
+  }
+
+  /* ── REMOVE ── */
+  function openConfirm(id, name) {
+    pendingRemove = { member_id: id, member_name: name };
+    confirmNameEl.textContent = name;
+    confirmOverlay.classList.add('open');
+    btnConfirmRemove.focus();
+  }
+
+  function closeConfirm() {
+    confirmOverlay.classList.remove('open');
+    confirmSheet.style.transform = '';
+    pendingRemove = null;
+  }
+
+  async function doRemove() {
+    if (!pendingRemove) return;
+    const { member_id, member_name } = pendingRemove;
+    btnConfirmRemove.disabled    = true;
+    btnConfirmRemove.textContent = 'Removing…';
+    try {
+      const res = await fetch(WRITE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          action:    'removeMember',
+          token:     sessionStorage.getItem('if_admin_session'),
+          member_id
+        }),
+        redirect: 'follow'
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (data.success) {
+        allMembers = allMembers.filter(m => String(m.member_id) !== String(member_id));
+        render(); updateStats(); closeConfirm();
+        Toast.show(`${member_name} removed`);
+      } else {
+        throw new Error(data.error || 'Failed');
+      }
+    } catch(err) {
+      Toast.show('Could not remove. Try again.', true);
+    } finally {
+      btnConfirmRemove.disabled    = false;
+      btnConfirmRemove.textContent = 'Remove';
+    }
+  }
+
+  /* ── UTIL ── */
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ── EVENTS ── */
+  btnAdd.addEventListener('click', addMember);
+  inputName.addEventListener('keydown', e => { if (e.key === 'Enter') addMember(); });
+  searchInput.addEventListener('input', render);
+
+  membersList.addEventListener('click', e => {
+    const b = e.target.closest('.btn-remove');
+    if (b) openConfirm(b.dataset.id, b.dataset.name);
+  });
+
+  btnCancel.addEventListener('click', closeConfirm);
+  btnConfirmRemove.addEventListener('click', doRemove);
+  confirmOverlay.addEventListener('click', e => { if (e.target === confirmOverlay) closeConfirm(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && confirmOverlay.classList.contains('open')) closeConfirm();
+  });
+
+  /* Swipe down to close on mobile */
+  let ty = 0;
+  confirmSheet.addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
+  confirmSheet.addEventListener('touchmove',  e => {
+    const d = e.touches[0].clientY - ty;
+    if (d > 0) confirmSheet.style.transform = `translateY(${d}px)`;
+  }, { passive: true });
+  confirmSheet.addEventListener('touchend',   e => {
+    if (e.changedTouches[0].clientY - ty > 80) closeConfirm();
+    else confirmSheet.style.transform = '';
+  });
+
+  (function initIntro(){
+
+  const intro = document.getElementById('intro');
+
+  if(!intro) return;
+
+  function removeIntro(){
+    intro.remove();
+  }
+
+  intro.addEventListener('animationend', function handler(e){
+
+    if(e.animationName === 'introExit'){
+
+      intro.removeEventListener('animationend', handler);
+
+      removeIntro();
+    }
+  });
+
+  setTimeout(removeIntro, 4000);
+
+})();
+  /* ── INIT ── */
+  loadMembers();
+  </script>
 
 </body>
 </html>
