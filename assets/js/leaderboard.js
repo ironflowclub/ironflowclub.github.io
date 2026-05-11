@@ -113,22 +113,22 @@
   }
 
   function renderImprovedBanner() {
-    if (!improvedBanner) return;
-    const imp = computeMostImproved();
-    if (!imp || imp.improvement <= 0) {
-      improvedBanner.style.display = 'none';
-      return;
-    }
-    const secs = Math.round(imp.improvement * 60);
-    improvedBanner.style.display = '';
-    improvedBanner.innerHTML = `
-      <span class="imp-icon">📈</span>
-      <span class="imp-text">
-        <strong>${imp.name}</strong> is most improved —
-        ${secs}s/km faster than their first runs
-      </span>
-    `;
+  if (!improvedBanner) return;
+  const imp = computeMostImproved();
+  if (!imp || imp.improvement <= 0) {
+    improvedBanner.style.display = 'none';
+    return;
   }
+  const secs = Math.round(imp.improvement * 60);
+  improvedBanner.style.display = '';
+  improvedBanner.innerHTML = `
+    <span class="imp-icon">📈</span>
+    <span class="imp-text">
+      <strong>${Utils.sanitize(imp.name)}</strong> is most improved —
+      ${secs}s/km faster than their first runs
+    </span>
+  `;
+}
 
   /* ─── Render ────────────────────────────────────────────── */
 
@@ -218,11 +218,11 @@
             </svg>
           </div>
           <div class="r-who">
-            <strong>${r.member_name} ${r.isNewcomer ? '<span class="badge-new">NEW</span>' : ''}</strong>
+            <strong>${Utils.sanitize(r.member_name)} ${r.isNewcomer ? '<span class="badge-new">NEW</span>' : ''}</strong>
             <small>${r.runs} run${r.runs !== 1 ? 's' : ''} · ${needed} more to qualify</small>
           </div>
           <div class="r-right">
-            <div class="score score-muted">${Utils.formatPace(r.overallPace)} /km</div>
+            <div class="score score-muted">${Utils.sanitize(Utils.formatPace(r.overallPace))} /km</div>
             <div class="lbl">Current Pace</div>
           </div>
         `;
@@ -271,7 +271,8 @@
       const display = getDisplay(runner);
 
       card.innerHTML = `
-        <div class="avatar-wrap" role="button" tabindex="0" aria-label="${runner.member_name}">
+        <div class="avatar-wrap" role="button" tabindex="0"
+            aria-label="${Utils.sanitize(runner.member_name)}">
           ${isTop1 ? `
             <div class="crown">
               <svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .5-4.5 4 1.6 6-6.1-3.4L5.9 18.5l1.6-6L3 8.5 9 8z"/></svg>
@@ -279,11 +280,11 @@
           <div class="avatar">${Utils.initials(runner.member_name)}</div>
           <div class="rank-chip">#${slot.rank}</div>
         </div>
-        <p class="t-name" title="${runner.member_name}">
-          ${runner.member_name}${runner.isNewcomer ? ' <span class="badge-new badge-new--dark">NEW</span>' : ''}
+        <p class="t-name" title="${Utils.sanitize(runner.member_name)}">
+          ${Utils.sanitize(runner.member_name)}${runner.isNewcomer ? ' <span class="badge-new badge-new--dark">NEW</span>' : ''}
         </p>
-        <div class="t-score">${display.score}</div>
-        <div class="t-dist">${display.sub}</div>
+        <div class="t-score">${Utils.sanitize(display.score)}</div>
+        <div class="t-dist">${Utils.sanitize(display.sub)}</div>
       `;
 
       const wrap = card.querySelector('.avatar-wrap');
@@ -312,12 +313,12 @@
       row.innerHTML = `
         <div class="r-rank">${medal}</div>
         <div class="r-who">
-          <strong>${r.member_name}${r.isNewcomer ? ' <span class="badge-new">NEW</span>' : ''}</strong>
-          <small>${display.sub}</small>
+          <strong>${Utils.sanitize(r.member_name)}${r.isNewcomer ? ' <span class="badge-new">NEW</span>' : ''}</strong>
+          <small>${Utils.sanitize(display.sub)}</small>
         </div>
         <div class="r-right">
-          <div class="score">${display.score}<span class="score-unit"> ${display.scoreUnit}</span></div>
-          <div class="lbl">${display.label}</div>
+          <div class="score">${Utils.sanitize(display.score)}<span class="score-unit"> ${Utils.sanitize(display.scoreUnit)}</span></div>
+          <div class="lbl">${Utils.sanitize(display.label)}</div>
         </div>
       `;
 

@@ -692,8 +692,7 @@ header{
 /* ─────────────────────────────────────────────────────────────
    CONSTANTS & STATE
 ───────────────────────────────────────────────────────────── */
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwZOIinjiUJgwHWycX-u9oUBOhNmcdmXfT5P6aT26Dar5GInrbPfoDkX9AxnTyaZQ/exec';
-const PUBLISH_SECRET = 'ironflow-secret-2024';          // ← set your secret here if needed; empty string is safe
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx_Lap_lkvgk0xKIzTGp5joffnGEJrfNr9ltvPsWTCt8RkXw2pXXPomT3dpdslFo5I/exec';
 const STORAGE_KEY    = 'if_tournament';
 const BACKUP_KEY     = 'if_tournament_backup';
 const AUTO_SAVE_MS   = 30000;       // 30-second autosave interval
@@ -745,13 +744,11 @@ function buildStateSnapshot() {
 function saveState() {
   try {
     const snapshot = JSON.stringify(buildStateSnapshot());
-    // Primary store — survives browser restarts
-    localStorage.setItem(STORAGE_KEY, snapshot);
-    // Secondary store — fastest reload if same session
-    sessionStorage.setItem(STORAGE_KEY, snapshot);
-    // Rolling backup — always one version behind
+    
     const prev = localStorage.getItem(STORAGE_KEY);
     if (prev) localStorage.setItem(BACKUP_KEY, prev);
+    localStorage.setItem(STORAGE_KEY, snapshot);
+    sessionStorage.setItem(STORAGE_KEY, snapshot);
     showSaveIndicator();
   } catch (e) {
     console.warn('saveState error:', e);
@@ -1272,7 +1269,7 @@ function showFinalSummary() {
 function saveHistoricalData(finalStandings) {
   showToast('Publishing results...');
   const payload = {
-    secret: PUBLISH_SECRET,
+    session: AuthGuard.getToken(),
     action: 'publish',
     tournament: {
       players: finalStandings.map(function (p) {

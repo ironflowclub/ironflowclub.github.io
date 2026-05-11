@@ -27,6 +27,7 @@
   const leaderboardBtn = document.getElementById('leaderboardBtn');
   const progressBtn = document.getElementById('progressBtn');
   const chatBtn = document.getElementById('chatBtn');
+  const badmintonBtn = document.getElementById('badmintonBtn');
   const quoteTextEl = document.getElementById('quoteText');
   const rightsSpan = document.getElementById('rightsText');
 
@@ -41,6 +42,7 @@
     if (heroSubEl) heroSubEl.textContent = t.heroSub;
     if (leaderboardBtn) leaderboardBtn.textContent = t.leaderboardBtn;
     if (progressBtn) progressBtn.textContent = t.progressBtn;
+    if (badmintonBtn) badmintonBtn.textContent = t.badmintonBtn;
     if (chatBtn) chatBtn.textContent = t.chatBtn;
     if (quoteTextEl) quoteTextEl.innerHTML = t.quote;
     if (rightsSpan) rightsSpan.textContent = t.rights;

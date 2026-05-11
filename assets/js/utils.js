@@ -143,9 +143,6 @@
 
     /**
      * Debounce function calls
-     * @param {Function} func - Function to debounce
-     * @param {number} wait - Wait time in ms
-     * @returns {Function}
      */
     debounce(func, wait) {
       let timeout;
@@ -157,8 +154,22 @@
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
       };
+    },                           // ← add comma here
+
+    /**
+     * Escape HTML special characters to prevent XSS
+     * Use this on ALL values that come from Google Sheets
+     * before inserting them into innerHTML.
+     * @param {*} val - Any value from external data
+     * @returns {string} - Safe HTML string
+     */
+    sanitize(val) {
+      const div = document.createElement('div');
+      div.textContent = String(val == null ? '' : val);
+      return div.innerHTML;
     }
-  };
+
+  };   // ← this closes the Utils object
 
   // Export to global scope
   window.IronflowUtils = Utils;

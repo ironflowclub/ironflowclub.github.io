@@ -764,7 +764,7 @@
           <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
         </div>
         <h2 class="sheet-title" id="sheetTitle">Remove Member?</h2>
-        <p class="sheet-desc">This will permanently remove <strong id="confirmName"></strong> from the club roster.</p>
+        <p class="sheet-desc">This will permanently remove <span id="confirmName"></span> from the club roster.</p>
         <div class="sheet-actions">
           <button class="btn-sheet-cancel" id="btnCancel" type="button">Cancel</button>
           <button class="btn-sheet-confirm" id="btnConfirmRemove" type="button">Remove</button>
@@ -964,11 +964,27 @@
 
   /* ── REMOVE ── */
   function openConfirm(id, name) {
-    pendingRemove = { member_id: id, member_name: name };
-    confirmNameEl.textContent = name;
-    confirmOverlay.classList.add('open');
-    btnConfirmRemove.focus();
-  }
+  pendingRemove = { member_id: id, member_name: name };
+
+  confirmNameEl.innerHTML = `
+    ${esc(name)}<br><br>
+    <span style="
+      display:block;
+      font-size:clamp(11px,3.2vw,13px);
+      line-height:1.6;
+      font-weight:500;
+      color:var(--danger);
+    ">
+      Names are linked to member IDs.<br>
+      Removing this member will permanently delete all running data connected to this ID.<br><br>
+      Adding the member again will NOT restore previous data.<br><br>
+      If this was accidental, contact <strong> Admin ASAP </strong>.
+    </span>
+  `;
+
+  confirmOverlay.classList.add('open');
+  btnConfirmRemove.focus();
+}
 
   function closeConfirm() {
     confirmOverlay.classList.remove('open');
