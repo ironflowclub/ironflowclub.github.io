@@ -21,7 +21,7 @@
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       font-src 'self' https://fonts.gstatic.com data:;
       img-src 'self' data: blob:;
-      connect-src 'self' https://script.google.com https://opensheet.elk.sh;
+      connect-src 'self' https://script.google.com https://script.googleusercontent.com https://opensheet.elk.sh;
       object-src 'none';
       base-uri 'self';
       form-action 'self';
@@ -701,6 +701,10 @@ header{
 <div class="hero">
   <p class="hero-kicker">IronFlow Club · Sharjah</p>
   <h1 class="hero-title">Badminton<br>Tournament</h1>
+  <div class="live-pill" id="livePill">
+    <span class="live-dot"></span>
+    <span id="livePillText">Loading...</span>
+  </div>
 </div>
 
 <!-- CHAMPION CARD (hidden until data loads) -->
@@ -726,6 +730,8 @@ header{
     </div>
   </div>
 </div>
+
+
 
 <!-- TABS -->
 <div class="tabs-wrap">
@@ -774,7 +780,7 @@ header{
 <script src="assets/js/utils.js"></script>
 <script>
 // ── CONFIG ──
-const API_URL = 'https://script.google.com/macros/s/AKfycbwZOIinjiUJgwHWycX-u9oUBOhNmcdmXfT5P6aT26Dar5GInrbPfoDkX9AxnTyaZQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbw1Wc2zxro6o8C4QkyFQ4EbUoM0622RYJsTc-4k3BEORn-x_TBsDUmZiEg8S8hEsQ/exec';
 const CACHE_TTL = 60000; // 1 min cache
 
 let _cachedData = null;
@@ -972,7 +978,12 @@ function renderRules() {
   </div>`;
 }
 
-
+function showError() {
+  const html = emptyHTML('Could Not Load', 'Please check your connection and try again.');
+  document.getElementById('standingsContent').innerHTML = html;
+  document.getElementById('bracketContent').innerHTML = html;
+  document.getElementById('finalsContent').innerHTML = html;
+}
 
 // ── STANDINGS ──
 function renderStandings(standings) {
@@ -1102,6 +1113,8 @@ function renderBracket(matchList, players) {
 
 const refreshBtn = document.getElementById('refreshBtn');
 refreshBtn?.addEventListener('click', handleRefresh);
+
+
 
 // ── FINALS ──
 function renderFinals(matchList, players) {
