@@ -1,3 +1,4 @@
+<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,29 @@
 <title>IRONFLOW · Badminton Tournament</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.onesignal.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: blob:;
+      connect-src 'self' https://script.google.com https://opensheet.elk.sh;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+      upgrade-insecure-requests;
+    "
+  />
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -463,6 +487,184 @@ header{
   font-weight:500;margin-bottom:18px;
 }
 
+
+/* ── RULES TAB ── */
+.rules-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rules-section {
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.rules-section-head {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--stroke);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rules-section-icon {
+  display: none;
+}
+
+.rules-section-title {
+  font-family: var(--ff);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.rules-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rules-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--surface2);
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+
+.rules-row-icon {
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.rules-row strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+/* Points table */
+.points-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.points-table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.points-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--stroke);
+  color: var(--ink2);
+  font-weight: 500;
+}
+
+.points-table tr:last-child td {
+  border-bottom: none;
+}
+
+.points-table td:last-child {
+  font-family: var(--ff);
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+}
+
+.pts-gold { color: var(--gold2) !important; }
+.pts-green { color: var(--green) !important; }
+
+/* Win rate bar */
+.wr-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 10px;
+}
+
+.wr-row.green { background: var(--green-dim); color: var(--green); }
+.wr-row.orange { background: rgba(255,152,0,.10); color: #e65100; }
+.wr-row.red { background: var(--red-dim); color: var(--red); }
+
+.wr-label { flex: 1; }
+.wr-value { font-family: var(--ff); font-weight: 700; font-size: 13px; }
+
+/* Ranking order */
+.rank-order {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rank-order-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: var(--surface2);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink2);
+}
+
+.rank-order-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+.rank-order-item.gold-item { background: rgba(255,193,7,.08); }
+.rank-order-item.gold-item .rank-order-num { background: var(--gold); color: #141414; border-color: transparent; }
+.rank-order-item.silver-item { background: rgba(192,192,192,.08); }
+.rank-order-item.silver-item .rank-order-num { background: #c0c0c0; color: #fff; border-color: transparent; }
+.rank-order-item.bronze-item { background: rgba(205,127,50,.08); }
+.rank-order-item.bronze-item .rank-order-num { background: #cd7f32; color: #fff; border-color: transparent; }
+
+.rank-order-divider {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  padding: 6px 12px 2px;
+}
+
+
+
 /* ── MOBILE ── */
 @media(max-width:400px){
   .champ-stats-row{gap:16px;}
@@ -535,6 +737,7 @@ header{
     <button class="tab active" onclick="switchTab('standings', this)">Standings</button>
     <button class="tab" onclick="switchTab('bracket', this)">Bracket</button>
     <button class="tab" onclick="switchTab('finals', this)">Finals</button>
+    <button class="tab" onclick="switchTab('rules', this)">Rules</button>
   </div>
 </div>
 
@@ -568,6 +771,11 @@ header{
   </div>
 </div>
 
+<div class="screen" id="rulesScreen">
+  <div id="rulesContent"></div>
+</div>
+
+<script src="assets/js/utils.js"></script>
 <script>
 // ── CONFIG ──
 const API_URL = 'https://script.google.com/macros/s/AKfycbwZOIinjiUJgwHWycX-u9oUBOhNmcdmXfT5P6aT26Dar5GInrbPfoDkX9AxnTyaZQ/exec';
@@ -582,6 +790,7 @@ function switchTab(name, btn) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(name + 'Screen').classList.add('active');
+  if (name === 'rules') renderRules();
   if (btn) btn.classList.add('active');
 }
 
@@ -661,6 +870,135 @@ function renderChampion(data) {
 
   document.getElementById('champCard').style.display = 'block';
 }
+function renderRules() {
+  const el = document.getElementById('rulesContent');
+
+  el.innerHTML = `
+  <div class="rules-wrap">
+
+    <div class="rules-section">
+      <div class="rules-section-head">
+        <span class="rules-section-title">Round Structure</span>
+      </div>
+      <div class="rules-body">
+        <div class="rules-row">
+          <div><strong>Round 1 — Qualifiers</strong>
+          All players randomly paired. Win goes to Top bracket, loss to Bottom bracket.</div>
+        </div>
+        <div class="rules-row">
+          <div><strong>Round 2 — Split</strong>
+          Players paired within their bracket only. Top vs Top, Bottom vs Bottom.</div>
+        </div>
+        <div class="rules-row">
+          <div><strong>Round 3 — Filtering</strong>
+          Same bracket pairing. Stronger players face stronger opponents.</div>
+        </div>
+        <div class="rules-row">
+          <div><strong>Round 4 — Finals</strong>
+          Gold Final, Bronze Match, and placement matches.
+          Gold Final plays last — only after all other R4 matches finish.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-head">
+        <span class="rules-section-title">Points System</span>
+      </div>
+      <div class="rules-body" style="padding:0;">
+        <table class="points-table">
+          <thead>
+            <tr>
+              <th>Outcome</th>
+              <th>Round</th>
+              <th style="text-align:right;">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bye (auto-advance)</td>
+              <td>Any</td>
+              <td class="pts-gold">+1</td>
+            </tr>
+            <tr>
+              <td>Win</td>
+              <td>R1 – R3</td>
+              <td class="pts-green">+3</td>
+            </tr>
+            <tr>
+              <td>Win</td>
+              <td>Finals (R4)</td>
+              <td class="pts-gold">+5</td>
+            </tr>
+            <tr>
+              <td>Loss</td>
+              <td>Any</td>
+              <td>+1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-head">
+        <span class="rules-section-title">Win Rate</span>
+      </div>
+      <div class="rules-body">
+        <div class="rules-row">
+          <div>Bye wins are <strong>excluded</strong> — only real match results count toward win rate.</div>
+        </div>
+        <div class="wr-row green">
+          <span class="wr-label">Strong</span>
+          <span class="wr-value">70%+</span>
+        </div>
+        <div class="wr-row orange">
+          <span class="wr-label">Average</span>
+          <span class="wr-value">50 – 69%</span>
+        </div>
+        <div class="wr-row red">
+          <span class="wr-label">Below Average</span>
+          <span class="wr-value">Below 50%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-head">
+        <span class="rules-section-title">Final Ranking Order</span>
+      </div>
+      <div class="rules-body">
+        <div class="rank-order">
+          <div class="rank-order-item gold-item">
+            <span class="rank-order-num">1</span>Gold Final Winner
+          </div>
+          <div class="rank-order-item silver-item">
+            <span class="rank-order-num">2</span>Gold Final Runner-up
+          </div>
+          <div class="rank-order-item bronze-item">
+            <span class="rank-order-num">3</span>Bronze Match Winner
+          </div>
+          <div class="rank-order-item">
+            <span class="rank-order-num">4</span>Bronze Match Runner-up
+          </div>
+          <div class="rank-order-item">
+            <span class="rank-order-num">5+</span>Top Bracket Placements
+          </div>
+          <div class="rank-order-divider">Bottom Bracket</div>
+          <div class="rank-order-item">
+            <span class="rank-order-num">—</span>Bottom Final Winner & Runner-up
+          </div>
+          <div class="rank-order-item">
+            <span class="rank-order-num">—</span>Bottom Placement Results
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>`;
+}
+
+
 
 // ── STANDINGS ──
 function renderStandings(standings) {
@@ -686,10 +1024,10 @@ function renderStandings(standings) {
       <div class="standing-row ${cls}">
         <div class="rank-badge">${s.rank}</div>
         <div class="standing-info">
-          <div class="standing-name">${s.name}</div>
+          <div class="standing-name">${Utils.sanitize(s.name)}</div>
           <div class="standing-sub">
             ${s.wins}W · ${s.losses}L
-            ${s.bracket ? `<span class="bracket-chip ${bCls}">${s.bracket}</span>` : ''}
+            ${s.bracket ? `<span class="bracket-chip ${bCls}">${Utils.sanitize(s.bracket)}</span>` : ''}
           </div>
         </div>
         <div class="standing-metrics">
@@ -707,7 +1045,7 @@ function renderStandings(standings) {
 
   el.innerHTML = `
     <div class="refresh-row">
-      <button class="refresh-btn" id="refreshBtn" onclick="handleRefresh()">
+      <button class="refresh-btn" id="refreshBtn">
         <svg viewBox="0 0 16 16"><path d="M14 8A6 6 0 1 1 8 2a6 6 0 0 1 4.24 1.76L14 2v4h-4l1.59-1.59"/></svg>
         Refresh
       </button>
@@ -757,7 +1095,7 @@ function renderBracket(matchList, players) {
       html += `
         <div class="bye-match-row">
           <svg viewBox="0 0 16 16"><path d="M8 2v4l3 3"/><circle cx="8" cy="8" r="6"/></svg>
-          ${m.player1} — Auto Advance (BYE)
+          ${Utils.sanitize(m.player1)} — Auto Advance (BYE)
         </div>`;
     });
 
@@ -773,11 +1111,11 @@ function renderBracket(matchList, players) {
       html += `
         <div class="bracket-match ${isDone ? 'done' : ''} ${isGold ? 'finals-gold' : ''}">
           <div class="match-players">
-            <div class="match-p ${p1Cls}">${m.player1}</div>
+            <div class="match-p ${p1Cls}">${Utils.sanitize(m.player1)}</div>
             <span class="match-vs">VS</span>
-            <div class="match-p ${p2Cls}">${m.player2 || 'TBD'}</div>
+            <div class="match-p ${p2Cls}">${Utils.sanitize(m.player2 || 'TBD')}</div>
           </div>
-          ${lbl ? `<span class="match-court">${lbl}</span>` : ''}
+          ${lbl ? `<span class="match-court">${Utils.sanitize(lbl)}</span>` : ''}
         </div>`;
     });
 
@@ -787,6 +1125,9 @@ function renderBracket(matchList, players) {
   html += '</div>';
   el.innerHTML = html;
 }
+
+const refreshBtn = document.getElementById('refreshBtn');
+refreshBtn?.addEventListener('click', handleRefresh);
 
 // ── FINALS ──
 function renderFinals(matchList, players) {
@@ -822,17 +1163,17 @@ function renderFinals(matchList, players) {
     html += `
       <div class="final-match-card ${cardCls}">
         <div class="final-match-label ${labelCls}">
-          ${emoji} ${labelTxt}
+          ${emoji} ${Utils.sanitize(labelTxt)}
         </div>
         <div class="final-versus">
           <div class="final-player ${p1Cls}">
-            ${m.player1}
-            ${p1Tag ? `<span class="final-player-tag">${p1Tag}</span>` : ''}
+            ${Utils.sanitize(m.player1)}
+            ${p1Tag ? `<span class="final-player-tag">${Utils.sanitize(p1Tag)}</span>` : ''}
           </div>
           <div class="final-vs-mid">VS</div>
           <div class="final-player ${p2Cls}">
-            ${m.player2 || 'TBD'}
-            ${p2Tag ? `<span class="final-player-tag">${p2Tag}</span>` : ''}
+            ${Utils.sanitize(m.player2 || 'TBD')}
+            ${p2Tag ? `<span class="final-player-tag">${Utils.sanitize(p2Tag)}</span>` : ''}
           </div>
         </div>
         ${!m.completed ? '<p class="pending-badge">⏳ Match in progress</p>' : ''}
@@ -867,8 +1208,8 @@ async function handleRefresh() {
 function emptyHTML(title, desc) {
   return `<div class="empty-wrap">
     <span class="empty-icon">🏸</span>
-    <p class="empty-title">${title}</p>
-    <p class="empty-desc">${desc}</p>
+    <p class="empty-title">${Utils.sanitize(title)}</p>
+    <p class="empty-desc">${Utils.sanitize(desc)}</p>
   </div>`;
 }
 
