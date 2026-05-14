@@ -803,13 +803,24 @@ async function fetchTournamentData(force = false) {
     return _cachedData;
   }
 
-  const url = API_URL + '?action=getLatest';
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const data = await res.json();
-  _cachedData = data;
-  _cacheTime = now;
-  return data;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000); // 8s timeout
+
+  try {
+    const res = await fetch(API_URL + '?action=getLatest', {
+      signal: controller.signal,
+      redirect: 'follow'   // ← Google Apps Script needs this
+    });
+    clearTimeout(timeout);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    _cachedData = data;
+    _cacheTime = now;
+    return data;
+  } catch(e) {
+    clearTimeout(timeout);
+    throw e;
+  }
 }
 
 // ── INIT ──
@@ -840,19 +851,39 @@ function updateLivePill(data) {
   const pill = document.getElementById('livePill');
   const text = document.getElementById('livePillText');
 
-  // Check if all matches are done = tournament finished
-  const allDone = data.matches
-    .filter(m => !m.bye)
-    .every(m => m.completed);
+  if (!data || !Array.isArray(data.matches)) {
+    pill.classList.remove('done');
+    text.textContent = 'Data unavailable';
+    return;
+  }
 
-  if (allDone && data.matches.length > 0) {
+  const validMatches = data.matches.filter(m => !m.bye);
+
+  const allDone =
+    validMatches.length > 0 &&
+    validMatches.every(m => m.completed);
+
+  if (allDone) {
     pill.classList.add('done');
+
     const d = new Date(data.publishedAt);
-    text.textContent = 'Final Results · ' + d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+
+    text.textContent =
+      'Final Results · ' +
+      d.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+
   } else {
-    const done = data.matches.filter(m => !m.bye && m.completed).length;
-    const total = data.matches.filter(m => !m.bye).length;
-    text.textContent = 'Live · ' + done + ' of ' + total + ' matches done';
+    pill.classList.remove('done');
+
+    const done = validMatches.filter(m => m.completed).length;
+
+    text.textContent =
+      'Live · ' + done + ' of ' +
+      validMatches.length + ' matches done';
   }
 }
 
@@ -1111,8 +1142,7 @@ function renderBracket(matchList, players) {
   el.innerHTML = html;
 }
 
-const refreshBtn = document.getElementById('refreshBtn');
-refreshBtn?.addEventListener('click', handleRefresh);
+
 
 
 
@@ -1208,6 +1238,11 @@ function showEmpty() {
   document.getElementById('livePillText').textContent = 'No data yet';
 }
 
+document.addEventListener('click', function(e) {
+  if (e.target.closest('#refreshBtn')) {
+    handleRefresh();
+  }
+});
 
 
 // ── START ──
