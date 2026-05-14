@@ -756,7 +756,20 @@ header{
   <div id="rulesContent"></div>
 </div>
 
-<script src="assets/js/utils.js"></script>
+<script>
+const Utils = {
+  sanitize(str = '') {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+};
+
+</script>
+
 <script>
 // ── CONFIG ──
 const API_URL = 'https://script.google.com/macros/s/AKfycbw1Wc2zxro6o8C4QkyFQ4EbUoM0622RYJsTc-4k3BEORn-x_TBsDUmZiEg8S8hEsQ/exec';
@@ -803,10 +816,30 @@ async function init() {
     }
 
     updateLivePill(data);
-    renderChampion(data);
-    renderStandings(data.standings);
-    renderBracket(data.matches, data.players);
-    renderFinals(data.matches, data.players);
+
+    try {
+      renderChampion(data);
+    } catch(e) {
+      console.error('Champion failed', e);
+    }
+
+    try {
+      renderStandings(data.standings);
+    } catch(e) {
+      console.error('Standings failed', e);
+    }
+
+    try {
+      renderBracket(data.matches, data.players);
+    } catch(e) {
+      console.error('Bracket failed', e);
+    }
+
+    try {
+      renderFinals(data.matches, data.players);
+    } catch(e) {
+      console.error('Finals failed', e);
+    }
 
   } catch (err) {
     console.error(err);
