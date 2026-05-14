@@ -701,10 +701,6 @@ header{
 <div class="hero">
   <p class="hero-kicker">IronFlow Club · Sharjah</p>
   <h1 class="hero-title">Badminton<br>Tournament</h1>
-  <div class="live-pill" id="livePill">
-    <span class="live-dot"></span>
-    <span id="livePillText">Loading...</span>
-  </div>
 </div>
 
 <!-- CHAMPION CARD (hidden until data loads) -->
@@ -1221,13 +1217,7 @@ function showEmpty() {
   document.getElementById('livePillText').textContent = 'No data yet';
 }
 
-function showError() {
-  const html = emptyHTML('Could Not Load', 'Please check your connection and try again.');
-  document.getElementById('standingsContent').innerHTML = html;
-  document.getElementById('bracketContent').innerHTML = html;
-  document.getElementById('finalsContent').innerHTML = html;
-  document.getElementById('livePillText').textContent = 'Connection error';
-}
+
 
 // ── START ──
 init();
