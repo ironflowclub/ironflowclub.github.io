@@ -874,13 +874,27 @@ function renderChampion(data) {
   if (!champ) return;
 
   document.getElementById('champName').textContent = champ.name;
+  if (champ.member1 || champ.member2) {
+    document.getElementById('champMeta').textContent =
+      (champ.member1 || '?') + ' & ' + (champ.member2 || '?');
+  }
   document.getElementById('champWins').textContent = champ.wins;
   document.getElementById('champLosses').textContent = champ.losses;
   document.getElementById('champWR').textContent = champ.winRate + '%';
 
   const d = new Date(data.publishedAt);
-  document.getElementById('champMeta').textContent =
-    'IronFlow Badminton · ' + d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+  if (champ.member1 || champ.member2) {
+    document.getElementById('champMeta').innerHTML =
+      '<span style="color:rgba(255,255,255,.70);font-size:14px;font-weight:600;">'
+      + (champ.member1 || '?') + ' &amp; ' + (champ.member2 || '?')
+      + '</span><br>'
+      + '<span style="font-size:12px;color:rgba(255,255,255,.35);">IronFlow Badminton · '
+      + d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })
+      + '</span>';
+  } else {
+    document.getElementById('champMeta').textContent =
+      'IronFlow Badminton · ' + d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+  }
 
   document.getElementById('champCard').style.display = 'block';
 }
@@ -1022,6 +1036,7 @@ function renderStandings(standings) {
         <div class="rank-badge">${s.rank}</div>
         <div class="standing-info">
           <div class="standing-name">${Utils.sanitize(s.name)}</div>
+          ${(s.member1 || s.member2) ? `<div style="font-size:11px;color:var(--ink3);font-weight:500;margin-top:1px;">${Utils.sanitize(s.member1 || '?')} & ${Utils.sanitize(s.member2 || '?')}</div>` : ''}
           <div class="standing-sub">
             ${s.wins}W · ${s.losses}L
             ${s.bracket ? `<span class="bracket-chip ${bCls}">${Utils.sanitize(s.bracket)}</span>` : ''}
