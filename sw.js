@@ -3,7 +3,7 @@
  * Bump CACHE_VERSION whenever you deploy updates
  */
 
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v10';
 const CACHE_NAME = `ironflow-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -26,6 +26,7 @@ const STATIC_ASSETS = [
   '/tournament.html',
   '/admin.html',
   '/auth-guard.js',
+  '/running.html'
 
 ];
 
@@ -54,6 +55,12 @@ self.addEventListener('activate', event => {
 // ── Fetch: network first for data, cache first for assets ──────
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+
+  // ── Never cache proxy / API calls ──────────────────────────
+  if (url.hostname === 'ironflow-proxy.syed-mujeebprojects.workers.dev') {
+    event.respondWith(fetch(event.request));
+    return;
+  }
 
   // Always go network-first for Google Sheets data
   if (url.hostname === 'opensheet.elk.sh') {
