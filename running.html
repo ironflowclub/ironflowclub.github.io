@@ -1144,14 +1144,20 @@
      INLINE ADD RUNNER
   ================================================================ */
   document.getElementById('activityMember').addEventListener('change', function () {
-    if (this.value === '__add_new__') {
-      this.value = ''; // reset so validation still catches empty
-      document.getElementById('inlineAddRunner').style.display = 'block';
-      setTimeout(() => document.getElementById('newRunnerNameInput').focus(), 60);
-    } else {
-      document.getElementById('inlineAddRunner').style.display = 'none';
-    }
-  });
+  const inline = document.getElementById('inlineAddRunner');
+
+  if (this.value === '__add_new__') {
+    inline.style.display = 'block';
+
+    setTimeout(() => {
+      inline.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('newRunnerNameInput').focus();
+    }, 60);
+
+  } else {
+    inline.style.display = 'none';
+  }
+});
 
   function closeInlineAdd() {
     document.getElementById('inlineAddRunner').style.display = 'none';
