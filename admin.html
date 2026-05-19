@@ -1,13 +1,35 @@
+<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>IRONFLOW CLUB · Admin</title>
-
+  <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <meta
+  http-equiv="Content-Security-Policy"
+  content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.onesignal.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: blob:;
+    connect-src 'self' https://ironflow-proxy.syed-mujeebprojects.workers.dev;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+  "
+/>
 
   <style>
     *, *::before, *::after {
@@ -35,9 +57,8 @@
       --danger-dim:   rgba(224, 52, 52, .08);
       --border:       rgba(17, 20, 28, .08);
       --border-2:     rgba(17, 20, 28, .14);
-      /* FIX #14: consistent naming matches tournament.html */
       --font-display: 'Outfit', sans-serif;
-      --font-body:    'DM Sans', sans-serif;
+      --font-body:    'Inter', sans-serif;
       --ease:         cubic-bezier(.22, 1, .36, 1);
       --ease-back:    cubic-bezier(.34, 1.56, .64, 1);
       --nav-h:        64px;
@@ -45,10 +66,7 @@
       --pad-x:        clamp(16px, 4vw, 32px);
     }
 
-    html {
-      -webkit-text-size-adjust: 100%;
-      scroll-behavior: smooth;
-    }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
     body {
       font-family: var(--font-body);
@@ -81,8 +99,8 @@
       height: min(600px, 120vw);
       border-radius: 50%;
       background: radial-gradient(circle,
-        rgba(255, 193, 7, .22) 0%,
-        rgba(255, 193, 7, .07) 40%,
+        rgba(255,193,7,.22) 0%,
+        rgba(255,193,7,.07) 40%,
         transparent 70%
       );
       animation: glowPulse 2.4s ease-in-out infinite;
@@ -95,8 +113,8 @@
       background: linear-gradient(
         105deg,
         transparent 20%,
-        rgba(255, 255, 255, .06) 48%,
-        rgba(255, 193, 7, .18) 52%,
+        rgba(255,255,255,.06) 48%,
+        rgba(255,193,7,.18) 52%,
         transparent 70%
       );
       animation: sweep 2.4s var(--ease);
@@ -113,30 +131,23 @@
     }
 
     .intro-logo {
-      width: clamp(72px, 16vw, 110px);
-      height: clamp(72px, 16vw, 110px);
+      width: clamp(72px,16vw,110px);
+      height: clamp(72px,16vw,110px);
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid rgba(255, 255, 255, .10);
-      box-shadow:
-        0 0 0 10px rgba(255, 193, 7, .06),
-        0 0 60px rgba(255, 193, 7, .24);
+      border: 3px solid rgba(255,255,255,.10);
+      box-shadow: 0 0 0 10px rgba(255,193,7,.06), 0 0 60px rgba(255,193,7,.24);
       animation: logoPop .85s var(--ease-back) both,
                  logoFloat 3.5s ease-in-out .85s infinite;
       margin-bottom: 28px;
     }
 
-    .intro-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .intro-logo img { width:100%; height:100%; object-fit:cover; display:block; }
 
     .intro-title {
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: clamp(24px, 4.5vw, 52px);
+      font-size: clamp(24px,4.5vw,52px);
       letter-spacing: -.03em;
       color: #fff;
       line-height: 1;
@@ -146,25 +157,19 @@
     }
 
     .intro-sub {
-  margin-top: 8px;
-  font-family: var(--font-display);
-  font-size: clamp(9px, 1vw, 11px);
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, .40);
-  opacity: 0;
-  animation: fadeIn .7s ease .78s forwards;
-}
+      margin-top: 8px;
+      font-family: var(--font-display);
+      font-size: clamp(9px,1vw,11px);
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.40);
+      opacity: 0;
+      animation: fadeIn .7s ease .78s forwards;
+    }
 
     /* ── PAGE SYSTEM ── */
-    .page {
-      display: none;
-      flex: 1;
-      flex-direction: column;
-    }
-    .page.active {
-      display: flex;
-    }
+    .page { display:none; flex:1; flex-direction:column; }
+    .page.active { display:flex; }
 
     /* ── NAV ── */
     .site-header {
@@ -172,7 +177,7 @@
       top: 0;
       z-index: 100;
       height: var(--nav-h);
-      background: rgba(255, 255, 255, .90);
+      background: rgba(255,255,255,.90);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
@@ -198,20 +203,14 @@
     }
 
     .brand-mark {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       overflow: hidden;
       flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(255, 193, 7, .28);
+      box-shadow: 0 2px 8px rgba(255,193,7,.28);
     }
 
-    .brand-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .brand-mark img { width:100%; height:100%; object-fit:cover; display:block; }
 
     .brand-copy strong {
       display: block;
@@ -222,7 +221,6 @@
       letter-spacing: -.01em;
     }
 
-    /* FIX #14: was 10px */
     .brand-copy small {
       display: block;
       font-size: 11px;
@@ -232,11 +230,7 @@
       color: var(--ink-3);
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .nav-actions { display:flex; align-items:center; gap:8px; }
 
     .nav-pill {
       display: inline-flex;
@@ -259,36 +253,31 @@
     }
 
     .nav-pill svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      flex-shrink: 0;
+      width:14px; height:14px;
+      stroke:currentColor; fill:none;
+      stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+      flex-shrink:0;
     }
 
     .nav-pill:hover {
       background: var(--surface-2);
       border-color: var(--border-2);
-      box-shadow: 0 2px 8px rgba(17, 20, 28, .06);
+      box-shadow: 0 2px 8px rgba(17,20,28,.06);
     }
 
     .nav-pill.danger:hover {
-      border-color: rgba(224, 52, 52, .30);
+      border-color: rgba(224,52,52,.30);
       color: var(--danger);
       background: var(--danger-dim);
     }
 
-    /* FIX #3: visibility utility — no inline style for auth state */
-    .auth-hidden { display: none !important; }
+    .auth-hidden { display:none !important; }
 
     /* ── LOGIN PAGE ── */
     #login-page {
       align-items: center;
       justify-content: center;
-      padding: clamp(24px, 6vw, 60px) var(--pad-x);
+      padding: clamp(24px,6vw,60px) var(--pad-x);
     }
 
     .login-card {
@@ -298,10 +287,10 @@
       border-radius: 24px;
       border: 1px solid var(--border);
       box-shadow:
-        0 2px 4px rgba(17, 20, 28, .04),
-        0 12px 40px rgba(17, 20, 28, .08),
-        0 40px 80px rgba(17, 20, 28, .05);
-      padding: clamp(28px, 6vw, 44px) clamp(24px, 5vw, 40px);
+        0 2px 4px rgba(17,20,28,.04),
+        0 12px 40px rgba(17,20,28,.08),
+        0 40px 80px rgba(17,20,28,.05);
+      padding: clamp(28px,6vw,44px) clamp(24px,5vw,40px);
       animation: cardRise .55s var(--ease) both;
     }
 
@@ -314,19 +303,12 @@
     }
 
     .login-logo {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(212, 141, 18, .24);
+      width:64px; height:64px;
+      border-radius:50%; overflow:hidden;
+      box-shadow:0 6px 20px rgba(212,141,18,.24);
     }
 
-    .login-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .login-logo img { width:100%; height:100%; object-fit:cover; display:block; }
 
     .login-wordmark {
       font-family: var(--font-display);
@@ -336,7 +318,6 @@
       color: var(--ink);
     }
 
-    /* FIX #14: was 11px — keeping at 11px minimum */
     .login-label {
       font-size: 11px;
       font-weight: 600;
@@ -348,7 +329,7 @@
     .login-heading {
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: clamp(22px, 5vw, 26px);
+      font-size: clamp(22px,5vw,26px);
       letter-spacing: -.02em;
       color: var(--ink);
       margin-bottom: 6px;
@@ -364,7 +345,7 @@
     .error-banner {
       display: none;
       background: var(--danger-dim);
-      border: 1px solid rgba(224, 52, 52, .22);
+      border: 1px solid rgba(224,52,52,.22);
       border-radius: 10px;
       padding: 11px 14px;
       margin-bottom: 18px;
@@ -378,14 +359,9 @@
       animation: shake .35s ease;
     }
 
-    /* ── FIX #9: Wrapped in form — now has proper form element ── */
-    .login-form {
-      width: 100%;
-    }
+    .login-form { width:100%; }
 
-    .field {
-      margin-bottom: 16px;
-    }
+    .field { margin-bottom:16px; }
 
     .field label {
       display: block;
@@ -404,7 +380,7 @@
       border: 1.5px solid var(--border-2);
       background: var(--surface-2);
       padding: 0 14px;
-      font-size: 16px; /* FIX: prevents iOS zoom */
+      font-size: 16px;
       font-family: var(--font-body);
       color: var(--ink);
       outline: none;
@@ -415,12 +391,11 @@
     .field input:focus {
       border-color: var(--gold-mid);
       background: var(--surface);
-      box-shadow: 0 0 0 3px rgba(255, 193, 7, .14);
+      box-shadow: 0 0 0 3px rgba(255,193,7,.14);
     }
 
-    .field input::placeholder { color: var(--ink-3); }
+    .field input::placeholder { color:var(--ink-3); }
 
-    /* FIX #7: Rate limit counter display */
     .lockout-msg {
       display: none;
       font-size: 12px;
@@ -429,7 +404,8 @@
       margin-top: 6px;
       text-align: center;
     }
-    .lockout-msg.visible { display: block; }
+
+    .lockout-msg.visible { display:block; }
 
     .login-submit {
       width: 100%;
@@ -445,7 +421,7 @@
       text-transform: uppercase;
       color: var(--ink);
       background: linear-gradient(135deg, var(--gold) 0%, var(--gold-mid) 100%);
-      box-shadow: 0 6px 20px rgba(212, 141, 18, .28);
+      box-shadow: 0 6px 20px rgba(212,141,18,.28);
       transition: transform .2s var(--ease), box-shadow .2s, opacity .2s;
       position: relative;
       overflow: hidden;
@@ -456,34 +432,27 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,.18) 0%, transparent 60%);
+      background: linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 60%);
       pointer-events: none;
     }
 
     .login-submit:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(212, 141, 18, .38);
+      box-shadow: 0 10px 30px rgba(212,141,18,.38);
     }
 
-    .login-submit:active:not(:disabled) { transform: translateY(0); }
-
-    .login-submit:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-    }
+    .login-submit:active:not(:disabled) { transform:translateY(0); }
+    .login-submit:disabled { opacity:.55; cursor:not-allowed; }
 
     /* ── DASHBOARD ── */
-    /* FIX #13: Dashboard wrapped in <main> with proper landmark */
-    #dashboard-page {
-      background: var(--bg);
-    }
+    #dashboard-page { background:var(--bg); }
 
     .dash-wrap {
       flex: 1;
       max-width: var(--max-w);
       width: 100%;
       margin: 0 auto;
-      padding: clamp(28px, 5vw, 52px) var(--pad-x) clamp(48px, 8vw, 80px);
+      padding: clamp(28px,5vw,52px) var(--pad-x) clamp(48px,8vw,80px);
     }
 
     .welcome-kicker {
@@ -501,7 +470,7 @@
     .welcome-title {
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: clamp(32px, 7vw, 52px);
+      font-size: clamp(32px,7vw,52px);
       line-height: 1.02;
       letter-spacing: -.03em;
       color: var(--ink);
@@ -509,11 +478,11 @@
       animation: slideUp .65s var(--ease) .18s forwards;
     }
 
-    .welcome-title .accent { color: var(--gold-mid); }
+    .welcome-title .accent { color:var(--gold-mid); }
 
     .tools-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+      grid-template-columns: repeat(auto-fill,minmax(min(100%,260px),1fr));
       gap: 14px;
       margin-top: 36px;
     }
@@ -541,7 +510,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--gold-glow), transparent 55%);
+      background: linear-gradient(135deg,var(--gold-glow),transparent 55%);
       opacity: 0;
       transition: opacity .3s;
       pointer-events: none;
@@ -549,53 +518,45 @@
 
     .tool-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(17, 20, 28, .10);
-      border-color: rgba(212, 141, 18, .28);
+      box-shadow: 0 16px 48px rgba(17,20,28,.10);
+      border-color: rgba(212,141,18,.28);
     }
 
-    .tool-card:hover::before { opacity: 1; }
-    .tool-card:active { transform: translateY(-2px); }
+    .tool-card:hover::before { opacity:1; }
+    .tool-card:active { transform:translateY(-2px); }
 
     .tool-card.is-primary {
-      background: linear-gradient(150deg, var(--dark) 0%, var(--dark-2) 100%);
+      background: linear-gradient(150deg,var(--dark) 0%,var(--dark-2) 100%);
       border-color: var(--dark-3);
       color: #fff;
     }
 
     .tool-card.is-primary::before {
-      background: linear-gradient(135deg, rgba(255, 193, 7, .10), transparent 55%);
+      background: linear-gradient(135deg,rgba(255,193,7,.10),transparent 55%);
     }
 
     .tool-card.is-primary:hover {
-      box-shadow: 0 16px 48px rgba(17, 20, 28, .28);
-      border-color: rgba(255, 193, 7, .22);
+      box-shadow: 0 16px 48px rgba(17,20,28,.28);
+      border-color: rgba(255,193,7,.22);
     }
 
     .tool-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: rgba(255, 193, 7, .12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-      flex-shrink: 0;
+      width:48px; height:48px;
+      border-radius:14px;
+      background:rgba(255,193,7,.12);
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:18px; flex-shrink:0;
     }
 
-    .tool-card.is-primary .tool-icon { background: rgba(255, 193, 7, .16); }
+    .tool-card.is-primary .tool-icon { background:rgba(255,193,7,.16); }
 
     .tool-icon svg {
-      width: 22px;
-      height: 22px;
-      stroke: var(--gold-mid);
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      width:22px; height:22px;
+      stroke:var(--gold-mid); fill:none;
+      stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
     }
 
-    .tool-card.is-primary .tool-icon svg { stroke: var(--gold); }
+    .tool-card.is-primary .tool-icon svg { stroke:var(--gold); }
 
     .tool-name {
       font-family: var(--font-display);
@@ -607,65 +568,44 @@
       line-height: 1.2;
     }
 
-    .tool-card.is-primary .tool-name { color: #fff; }
+    .tool-card.is-primary .tool-name { color:#fff; }
 
     .tool-desc {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--ink-2);
-      line-height: 1.55;
+      font-size:13px; font-weight:400;
+      color:var(--ink-2); line-height:1.55;
     }
 
-    .tool-card.is-primary .tool-desc { color: rgba(255, 255, 255, .48); }
+    .tool-card.is-primary .tool-desc { color:rgba(255,255,255,.48); }
 
     .tool-arrow {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--surface-3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .2s, transform .25s var(--ease-back);
+      position:absolute; bottom:20px; right:20px;
+      width:32px; height:32px;
+      border-radius:50%;
+      background:var(--surface-3);
+      display:flex; align-items:center; justify-content:center;
+      transition:background .2s,transform .25s var(--ease-back);
     }
 
-    .tool-card:hover .tool-arrow {
-      background: var(--gold);
-      transform: translateX(4px);
-    }
+    .tool-card:hover .tool-arrow { background:var(--gold); transform:translateX(4px); }
 
     .tool-arrow svg {
-      width: 13px;
-      height: 13px;
-      stroke: var(--ink-2);
-      fill: none;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: stroke .2s;
+      width:13px; height:13px;
+      stroke:var(--ink-2); fill:none;
+      stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round;
+      transition:stroke .2s;
     }
 
-    .tool-card:hover .tool-arrow svg { stroke: var(--ink); }
+    .tool-card:hover .tool-arrow svg { stroke:var(--ink); }
 
-    .tool-card.is-primary .tool-arrow {
-      background: rgba(255, 255, 255, .10);
-    }
-
-    .tool-card.is-primary .tool-arrow svg {
-      stroke: rgba(255, 255, 255, .60);
-    }
-
-    .tool-card.is-primary:hover .tool-arrow { background: var(--gold); }
-
-    .tool-card.is-primary:hover .tool-arrow svg { stroke: var(--ink); }
+    .tool-card.is-primary .tool-arrow { background:rgba(255,255,255,.10); }
+    .tool-card.is-primary .tool-arrow svg { stroke:rgba(255,255,255,.60); }
+    .tool-card.is-primary:hover .tool-arrow { background:var(--gold); }
+    .tool-card.is-primary:hover .tool-arrow svg { stroke:var(--ink); }
 
     /* ── TOAST ── */
     .toast {
       position: fixed;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+      bottom: calc(env(safe-area-inset-bottom,0px) + 24px);
       left: 50%;
       transform: translateX(-50%) translateY(80px);
       background: var(--dark);
@@ -679,74 +619,64 @@
       white-space: nowrap;
       pointer-events: none;
       opacity: 0;
-      box-shadow: 0 8px 32px rgba(17, 20, 28, .28);
+      box-shadow: 0 8px 32px rgba(17,20,28,.28);
       transition: transform .38s var(--ease), opacity .25s;
       z-index: 500;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
     .toast-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-right: 8px;
-      vertical-align: middle;
+      display:inline-block;
+      width:7px; height:7px;
+      border-radius:50%;
+      background:var(--gold);
+      margin-right:8px;
+      vertical-align:middle;
     }
 
     /* ── KEYFRAMES ── */
-    @keyframes introExit {
-      to { opacity: 0; visibility: hidden; pointer-events: none; }
-    }
+    @keyframes introExit { to { opacity:0; visibility:hidden; pointer-events:none; } }
     @keyframes glowPulse {
-      0%, 100% { transform: scale(1);    opacity: .8; }
-      50%       { transform: scale(1.14); opacity: 1;  }
+      0%,100% { transform:scale(1);    opacity:.8; }
+      50%      { transform:scale(1.14); opacity:1;  }
     }
     @keyframes sweep {
-      from { transform: translateX(-150%); }
-      to   { transform: translateX(200%);  }
+      from { transform:translateX(-150%); }
+      to   { transform:translateX(200%);  }
     }
     @keyframes logoPop {
-      from { opacity: 0; transform: scale(.55) rotate(-6deg); }
-      to   { opacity: 1; transform: scale(1) rotate(0); }
+      from { opacity:0; transform:scale(.55) rotate(-6deg); }
+      to   { opacity:1; transform:scale(1) rotate(0); }
     }
     @keyframes logoFloat {
-      0%, 100% { transform: translateY(0);   }
-      50%       { transform: translateY(-8px); }
+      0%,100% { transform:translateY(0);   }
+      50%      { transform:translateY(-8px); }
     }
-    @keyframes slideUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes cardRise {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes slideUp { to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn  { to { opacity:1; } }
+    @keyframes cardRise { to { opacity:1; transform:translateY(0); } }
     @keyframes shake {
-      0%, 100% { transform: translateX(0);    }
-      25%       { transform: translateX(-5px); }
-      75%       { transform: translateX( 5px); }
+      0%,100% { transform:translateX(0);   }
+      25%      { transform:translateX(-5px); }
+      75%      { transform:translateX( 5px); }
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 480px) {
-      .tools-grid { grid-template-columns: 1fr; }
-      .nav-pill span.label { display: none; }
-      .nav-pill { padding: 0 12px; gap: 0; }
+    @media (max-width:480px) {
+      .tools-grid { grid-template-columns:1fr; }
+      .nav-pill span.label { display:none; }
+      .nav-pill { padding:0 12px; gap:0; }
     }
 
-    @media (min-width: 900px) {
-      .tools-grid { grid-template-columns: repeat(3, 1fr); }
+    @media (min-width:900px) {
+      .tools-grid { grid-template-columns:repeat(3,1fr); }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after {
+        animation-duration:.01ms !important;
+        transition-duration:.01ms !important;
       }
     }
   </style>
@@ -780,7 +710,6 @@
       </a>
 
       <div class="nav-actions">
-        <!-- FIX #3: auth-hidden class instead of inline style -->
         <a href="index.html" id="homeBtn" class="nav-pill" aria-label="Go home">
           <svg viewBox="0 0 16 16" aria-hidden="true">
             <path d="M2 6.5L8 2l6 4.5V14H10v-3H6v3H2z"/>
@@ -804,10 +733,6 @@
     <div class="login-card">
 
       <div class="login-logo-area">
-        <!-- FIX #12: Removed empty .space-between div -->
-        <div class="space-between">
-          
-        </div>
         <p class="login-wordmark">IRONFLOW CLUB</p>
         <p class="login-label">Admin Portal</p>
       </div>
@@ -818,7 +743,6 @@
       <div class="error-banner" id="errorBanner"
            role="alert" aria-live="assertive"></div>
 
-      <!-- FIX #9: Proper <form> wrapping inputs -->
       <form class="login-form" id="loginForm" novalidate>
         <div class="field">
           <label for="username">Username</label>
@@ -848,10 +772,8 @@
           />
         </div>
 
-        <!-- FIX #7: Lockout message element -->
         <p class="lockout-msg" id="lockoutMsg" aria-live="polite"></p>
 
-        <!-- FIX #9: type="submit" for proper form semantics -->
         <button class="login-submit" id="loginBtn" type="submit">
           Sign In
         </button>
@@ -861,7 +783,6 @@
   </main>
 
   <!-- ── DASHBOARD PAGE ── -->
-  <!-- FIX #13: Changed <div> to <main> but only one is active at a time -->
   <main class="page" id="dashboard-page" aria-label="Admin dashboard">
     <div class="dash-wrap">
 
@@ -872,15 +793,36 @@
 
       <div class="tools-grid" id="toolsGrid">
 
-        <!-- FIX #6: Fixed typo b-trunament.html → tournament.html -->
-        <a class="tool-card is-primary" href="tournament.html"
-            onclick="goToTournament(event)"
+
+        <a class="tool-card is-primary"
+           href="running.html"
+           style="animation-delay:.10s"
+           aria-label="Running">
+          <div class="tool-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="13" r="8"/>
+              <path d="M12 9v4l2 2"/>
+              <path d="M10 2h4"/>
+              <path d="M12 2v2"/>
+              <path d="M20 5l-1.5 1.5"/>
+            </svg>
+          </div>
+          <p class="tool-name">Running</p>
+          <p class="tool-desc">Create &amp; manage running events.</p>
+          <div class="tool-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+        </a>
+
+        
+
+        <a class="tool-card"
+           href="tournament.html"
            style="animation-delay:.10s"
            aria-label="Go to Tournament Manager">
           <div class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24">
               <path d="M8 21h8M12 17v4M5 3h14l-1 7a6 6 0 0 1-12 0L5 3z"/>
               <path d="M5 3H3M19 3h2"/>
             </svg>
@@ -892,13 +834,12 @@
           </div>
         </a>
 
-        <a class="tool-card" href="members.html"
+        <a class="tool-card"
+           href="members.html"
            style="animation-delay:.20s"
            aria-label="Go to Members management">
           <div class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24">
               <circle cx="9" cy="7" r="4"/>
               <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
               <path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.87"/>
@@ -921,36 +862,50 @@
     <span id="toastMsg"></span>
   </div>
 
+  <footer>
+    <div class="container footer-inner">
+      <p class="footer-brand">IRONFLOW CLUB</p>
+      <p class="footer-copy">
+        © 2026 · <span id="rightsText">All rights reserved</span>
+      </p>
+    </div>
+  </footer>
+
+  <!--
+    auth-guard.js is NOT loaded here on purpose.
+    admin.html is the login page — there is no session to protect yet.
+    auth-guard.js is loaded by members.html and tournament.html only.
+  -->
   <script>
   /* ================================================================
      CONFIG
-     FIX #1: NO credentials here — authentication is server-side
-     Replace SHEETS_URL with your actual Apps Script deployment URL
+     Single source of truth for the Apps Script URL.
+     This must match the SHEETS_URL in auth-guard.js exactly.
   ================================================================ */
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx_Lap_lkvgk0xKIzTGp5joffnGEJrfNr9ltvPsWTCt8RkXw2pXXPomT3dpdslFo5I/exec';
+  const SHEETS_URL = 'https://ironflow-proxy.syed-mujeebprojects.workers.dev';
 
   /* ================================================================
      ELEMENT REFS
   ================================================================ */
-  const loginPage    = document.getElementById('login-page');
-  const dashPage     = document.getElementById('dashboard-page');
-  const loginForm    = document.getElementById('loginForm');
-  const loginBtn     = document.getElementById('loginBtn');
-  const logoutBtn    = document.getElementById('logoutBtn');
-  const homeBtn      = document.getElementById('homeBtn');
-  const errorBanner  = document.getElementById('errorBanner');
-  const lockoutMsg   = document.getElementById('lockoutMsg');
-  const usernameEl   = document.getElementById('username');
-  const passwordEl   = document.getElementById('password');
+  const loginPage   = document.getElementById('login-page');
+  const dashPage    = document.getElementById('dashboard-page');
+  const loginForm   = document.getElementById('loginForm');
+  const loginBtn    = document.getElementById('loginBtn');
+  const logoutBtn   = document.getElementById('logoutBtn');
+  const homeBtn     = document.getElementById('homeBtn');
+  const errorBanner = document.getElementById('errorBanner');
+  const lockoutMsg  = document.getElementById('lockoutMsg');
+  const usernameEl  = document.getElementById('username');
+  const passwordEl  = document.getElementById('password');
 
   /* ================================================================
-     FIX #7: BRUTE FORCE PROTECTION — client-side rate limiting
-     (Server-side rate limiting in Apps Script is the real defence)
+     BRUTE FORCE PROTECTION — client-side rate limiting
+     The real defence is server-side; this just improves UX.
   ================================================================ */
-  const MAX_ATTEMPTS  = 5;
-  const LOCKOUT_MS    = 30000; // 30 seconds
-  let   failedAttempts = 0;
-  let   lockedUntil    = 0;
+  const MAX_ATTEMPTS = 5;
+  const LOCKOUT_MS   = 30000; // 30 seconds
+  let failedAttempts = 0;
+  let lockedUntil    = 0;
 
   function isLockedOut() {
     return Date.now() < lockedUntil;
@@ -959,8 +914,8 @@
   function recordFailedAttempt() {
     failedAttempts++;
     if (failedAttempts >= MAX_ATTEMPTS) {
-      lockedUntil = Date.now() + LOCKOUT_MS;
-      failedAttempts = 0; // reset counter after lockout applied
+      lockedUntil    = Date.now() + LOCKOUT_MS;
+      failedAttempts = 0;
       startLockoutCountdown();
     }
   }
@@ -985,9 +940,8 @@
 
   /* ================================================================
      TOAST
-     FIX #10: Timer inside closure, not global
   ================================================================ */
-  const Toast = (function() {
+  const Toast = (function () {
     let timer = null;
     const el  = document.getElementById('toast');
     const msg = document.getElementById('toastMsg');
@@ -1002,8 +956,7 @@
   })();
 
   /* ================================================================
-     AUTH STATE
-     FIX #3: CSS class instead of inline style
+     AUTH STATE — controls which nav buttons are visible
   ================================================================ */
   function setAuthState(loggedIn) {
     if (loggedIn) {
@@ -1019,7 +972,8 @@
      PAGE NAVIGATION
   ================================================================ */
   function navigate(targetPage) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.page')
+      .forEach(p => p.classList.remove('active'));
     targetPage.classList.add('active');
   }
 
@@ -1034,15 +988,22 @@
   }
 
   /* ================================================================
-     LOGIN — OPTION A (Apps Script backend)
-     FIX #1: Credentials validated server-side only
-     FIX #2: Session token set after login
-     FIX #4: Removed dead zoom/transform code
+     LOGIN
+     Flow:
+       1. POST { action:'login', username, password } to Apps Script
+       2. Apps Script validates credentials, creates SESSION_ property
+       3. Apps Script returns { success:true, sessionToken:'uuid', expiry:ms }
+       4. We store sessionToken and expiry from the server response
+       5. Redirect to dashboard
+
+     Key fixes vs old version:
+       - Reads data.sessionToken  (not data.token)
+       - Uses data.expiry from server (not a local Date.now() calculation)
+       - AuthGuard.signIn() stores both values under the correct keys
   ================================================================ */
   async function attemptLogin(e) {
-    if (e) e.preventDefault(); // FIX #9: prevent form default submit
+    e.preventDefault();
 
-    /* FIX #7: Check lockout before doing anything */
     if (isLockedOut()) return;
 
     const u = usernameEl.value.trim();
@@ -1061,27 +1022,38 @@
 
     try {
       const res = await fetch(SHEETS_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'text/plain' }, // Apps Script requires this
-        body:    JSON.stringify({ action: 'login', username: u, password: p }),
+        method  : 'POST',
+        headers : { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body    : JSON.stringify({
+          action   : 'login',
+          username : u,
+          password : p
+        }),
         redirect: 'follow'
       });
 
       if (!res.ok) throw new Error('HTTP ' + res.status);
+
       const data = await res.json();
 
-      if (data.success && data.token) {
-        /* FIX #2: Set session token */
-        sessionStorage.setItem('if_admin_session', data.token);
-        sessionStorage.setItem('if_admin_expiry',
-          String(Date.now() + 3_600_000)); // 1 hour
+      if (data.success && data.sessionToken) {
+        /*
+          Store using the exact keys auth-guard.js reads:
+            if_admin_session = the UUID token
+            if_admin_expiry  = timestamp in ms from the server
 
-        failedAttempts = 0; // reset on success
+          We use the expiry Apps Script returned — not a local
+          calculation — so client and server agree on when the
+          session ends.
+        */
+        sessionStorage.setItem('if_admin_session', data.sessionToken);
+        sessionStorage.setItem('if_admin_expiry',  String(data.expiry));
+
+        failedAttempts = 0;
         goToDashboard();
         Toast.show('Signed in successfully');
 
       } else {
-        /* FIX #7: record failed attempt */
         recordFailedAttempt();
         showError('Incorrect username or password.');
         passwordEl.value = '';
@@ -1089,8 +1061,9 @@
       }
 
     } catch (err) {
-      console.error('Login error:', err);
-      showError('Connection error. Please try again.');
+      console.error('[Login] Error:', err);
+      showError('Connection error — please try again.');
+
     } finally {
       if (!isLockedOut()) {
         loginBtn.disabled    = false;
@@ -1099,54 +1072,6 @@
     }
   }
 
-  /* ─── If you have NO backend yet — use this TEMPORARY version ───
-     Remove this and use attemptLogin above once Apps Script is ready.
-     This uses SHA-256 hashing — still client-side, still not real
-     security, but vastly better than plaintext.
-
-  async function attemptLogin(e) {
-    if (e) e.preventDefault();
-    if (isLockedOut()) return;
-
-    const u = usernameEl.value.trim();
-    const p = passwordEl.value;
-    errorBanner.classList.remove('visible');
-    if (!u || !p) { showError('Please enter your credentials.'); return; }
-
-    loginBtn.disabled = true;
-    loginBtn.textContent = 'Signing in…';
-
-    // Generate this hash once offline and paste it here:
-    // In console: hashCreds('admin', 'your_password').then(console.log)
-    const STORED_HASH = 'PASTE_YOUR_HASH_HERE';
-
-    const hash = await hashCreds(u, p);
-    if (hash === STORED_HASH) {
-      const token = crypto.randomUUID();
-      sessionStorage.setItem('if_admin_session', token);
-      sessionStorage.setItem('if_admin_expiry', String(Date.now() + 3_600_000));
-      failedAttempts = 0;
-      goToDashboard();
-      Toast.show('Signed in successfully');
-    } else {
-      recordFailedAttempt();
-      showError('Incorrect username or password.');
-      passwordEl.value = '';
-      passwordEl.focus();
-    }
-
-    loginBtn.disabled = false;
-    loginBtn.textContent = 'Sign In';
-  }
-
-  async function hashCreds(user, pass) {
-    const encoded = new TextEncoder().encode(user + ':' + pass);
-    const buf     = await crypto.subtle.digest('SHA-256', encoded);
-    return Array.from(new Uint8Array(buf))
-      .map(x => x.toString(16).padStart(2, '0')).join('');
-  }
-  ─────────────────────────────────────────────────────────────── */
-
   function showError(msg) {
     errorBanner.textContent = msg;
     errorBanner.classList.add('visible');
@@ -1154,48 +1079,59 @@
 
   /* ================================================================
      LOGOUT
-     FIX #2: Clears session properly
+     Sends sessionToken to Apps Script so it can delete the
+     SESSION_ property server-side, then clears local storage.
   ================================================================ */
   async function doLogout() {
     const token = sessionStorage.getItem('if_admin_session');
 
-    /* Best-effort server-side token invalidation */
     if (token) {
       try {
+        // Best-effort — we clear client side regardless of outcome
         await fetch(SHEETS_URL, {
-          method:  'POST',
-          headers: { 'Content-Type': 'text/plain' },
-          body:    JSON.stringify({ action: 'logout', token }),
+          method  : 'POST',
+          headers : { 'Content-Type': 'text/plain;charset=UTF-8' },
+          body    : JSON.stringify({
+            action       : 'logout',
+            sessionToken : token   // matches what Code.gs handleLogout reads
+          }),
           redirect: 'follow'
         });
-      } catch(e) { /* best effort — still clear client side */ }
+      } catch (e) {
+        // Network failure during logout — still clear client side
+        console.warn('[Logout] Server invalidation failed:', e);
+      }
     }
 
+    // Always clear local state, even if server call failed
     sessionStorage.removeItem('if_admin_session');
     sessionStorage.removeItem('if_admin_expiry');
     localStorage.removeItem('if_tournament');
 
     usernameEl.value = '';
     passwordEl.value = '';
+
     goToLogin();
     Toast.show('Signed out');
   }
 
   /* ================================================================
      SESSION CHECK ON PAGE LOAD
-     FIX #2 + #5: If already has a valid session, skip login
+     admin.html only does a lightweight local check.
+     If a session exists locally, we show the dashboard.
+     The real security check happens in auth-guard.js on the
+     protected pages (members.html, tournament.html).
   ================================================================ */
   function checkExistingSession() {
     const token  = sessionStorage.getItem('if_admin_session');
     const expiry = sessionStorage.getItem('if_admin_expiry');
 
     if (token && expiry && Date.now() < Number(expiry)) {
-      /* Already logged in — go straight to dashboard */
       goToDashboard();
       return true;
     }
 
-    /* Expired or no session */
+    // Expired or missing — clean up and show login
     sessionStorage.removeItem('if_admin_session');
     sessionStorage.removeItem('if_admin_expiry');
     return false;
@@ -1203,14 +1139,12 @@
 
   /* ================================================================
      EVENT LISTENERS
-     FIX #7: All via addEventListener, no inline handlers
   ================================================================ */
   loginForm.addEventListener('submit', attemptLogin);
   logoutBtn.addEventListener('click',  doLogout);
 
   /* ================================================================
      INTRO REMOVAL
-     FIX #11: Uses animationend event as fallback, not just timeout
   ================================================================ */
   (function initIntro() {
     const intro = document.getElementById('intro');
@@ -1218,7 +1152,6 @@
 
     function removeIntro() { intro.remove(); }
 
-    /* Primary: remove after animation completes */
     intro.addEventListener('animationend', function handler(e) {
       if (e.animationName === 'introExit') {
         intro.removeEventListener('animationend', handler);
@@ -1226,27 +1159,13 @@
       }
     });
 
-    /* Fallback: remove after max 4s regardless */
-    setTimeout(removeIntro, 4000);
+    setTimeout(removeIntro, 4000); // fallback
   })();
 
   /* ================================================================
      INIT
   ================================================================ */
   checkExistingSession();
-
-  function goToTournament(e) {
-  e.preventDefault();
-  const token  = sessionStorage.getItem('if_admin_session');
-  const expiry = sessionStorage.getItem('if_admin_expiry');
-  if (!token || !expiry || Date.now() >= Number(expiry)) {
-    Toast.show('Session expired — please sign in again');
-    doLogout();
-    return;
-  }
-  window.location.href = 'tournament.html';
-}
-
   </script>
 
 </body>
