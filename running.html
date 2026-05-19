@@ -523,7 +523,6 @@
       75%      { transform:translateX(4px); }
     }
 
-
     /* ── RESPONSIVE ── */
     @media (max-width: 400px) {
       .nav-pill .label { display: none; }
@@ -690,18 +689,50 @@
       </div>
       <div class="sheet-body">
         <div class="error-banner" id="activityError" role="alert"></div>
+
+        <!-- EVENT -->
         <div class="field">
           <label for="activityEvent">Event</label>
           <select id="activityEvent" name="activityEvent" required>
             <option value="">Select an event…</option>
           </select>
         </div>
+
+        <!-- RUNNER -->
         <div class="field">
           <label for="activityMember">Runner</label>
           <select id="activityMember" name="activityMember" required>
             <option value="">Select a runner…</option>
+            <option value="__add_new__">+ Add new runner</option>
           </select>
         </div>
+
+        <!-- INLINE ADD RUNNER (hidden until "+ Add new runner" is picked) -->
+        <div id="inlineAddRunner" style="display:none;margin-top:-6px;margin-bottom:13px;
+          padding:12px 13px;border-radius:11px;border:1.5px solid var(--border-2);
+          background:var(--surface)">
+          <p style="font-size:10px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+            color:var(--ink-2);margin-bottom:8px">New runner</p>
+          <input type="text" id="newRunnerNameInput" placeholder="Full name"
+            style="width:100%;height:40px;border-radius:9px;border:1.5px solid var(--border-2);
+              background:var(--surface-2);padding:0 11px;font-size:14px;
+              font-family:var(--font-body);color:var(--ink);outline:none;
+              margin-bottom:8px;box-sizing:border-box" />
+          <div style="display:flex;gap:8px">
+            <button type="button" onclick="saveInlineRunner()"
+              style="flex:1;height:36px;border-radius:8px;border:none;
+                background:linear-gradient(135deg,var(--gold),var(--gold-mid));
+                font-family:var(--font-display);font-weight:800;font-size:12px;
+                color:var(--ink);cursor:pointer">Save &amp; select</button>
+            <button type="button" onclick="closeInlineAdd()"
+              style="height:36px;padding:0 14px;border-radius:8px;
+                border:1.5px solid var(--border-2);background:var(--surface-2);
+                font-family:var(--font-display);font-weight:700;font-size:12px;
+                color:var(--ink-2);cursor:pointer">Cancel</button>
+          </div>
+        </div>
+
+        <!-- DISTANCE + TIME -->
         <div class="fields-row">
           <div class="field">
             <label for="activityDistance">Distance (km)</label>
@@ -714,6 +745,8 @@
                    placeholder="e.g. 28.5" step="0.1" min="0" required />
           </div>
         </div>
+
+        <!-- PACE + STEPS -->
         <div class="fields-row">
           <div class="field">
             <label for="activityPace">Avg Pace (mm:ss)</label>
@@ -797,12 +830,12 @@
   /* ================================================================
      DATA STORE
   ================================================================ */
-  let allEvents     = [];
-  let allMembers    = [];
-  let allAppData    = [];
+  let allEvents  = [];
+  let allMembers = [];
+  let allAppData = [];
 
   /* ================================================================
-     FETCH HELPER (POST only — READ_URL is unused, removed)
+     FETCH HELPER
   ================================================================ */
   async function fetchPost(body) {
     const res = await fetch(PROXY_URL, {
@@ -833,11 +866,6 @@
     } catch { return String(val); }
   }
 
-  function parsePace(val) {
-  if (!val) return '—';
-  return String(val).trim();
-}
-
   function initials(name) {
     if (!name) return '?';
     const parts = String(name).trim().split(/\s+/);
@@ -846,7 +874,7 @@
   }
 
   /* ================================================================
-     RENDER — EVENTS (compact list rows)
+     RENDER — EVENTS
   ================================================================ */
   function renderEvents(events) {
     const grid = document.getElementById('eventsGrid');
@@ -882,7 +910,7 @@
   }
 
   /* ================================================================
-     RENDER — ACTIVITIES (compact list rows)
+     RENDER — ACTIVITIES
   ================================================================ */
   function renderActivities(data) {
     const grid = document.getElementById('activitiesGrid');
@@ -933,8 +961,8 @@
      POPULATE DROPDOWNS
   ================================================================ */
   function populateEventDropdowns(events) {
-    const actSel  = document.getElementById('activityEvent');
-    const filter  = document.getElementById('eventFilter');
+    const actSel = document.getElementById('activityEvent');
+    const filter = document.getElementById('eventFilter');
     actSel.innerHTML = '<option value="">Select an event…</option>';
     filter.innerHTML = '<option value="">All Events</option>';
     events.forEach(ev => {
@@ -950,13 +978,16 @@
 
   function populateMemberDropdown(members) {
     const sel = document.getElementById('activityMember');
-    sel.innerHTML = '<option value="">Select a runner…</option>';
+    const current = sel.value; // remember current selection
+    sel.innerHTML = '<option value="">Select a runner…</option><option value="__add_new__">+ Add new runner</option>';
     members.forEach(m => {
       const opt = document.createElement('option');
       opt.value       = m.member_id;
       opt.textContent = m.member_name;
       sel.appendChild(opt);
     });
+    // restore selection if it was a real member
+    if (current && current !== '__add_new__') sel.value = current;
   }
 
   /* ================================================================
@@ -1009,7 +1040,7 @@
       const json = await fetchPost({ action: 'getAppData' });
       allAppData = json.data || [];
       const sorted = [...allAppData].sort((a, b) => new Date(b.event_date) - new Date(a.event_date));
-      renderActivities(sorted); /* BUG FIX: was only rendering 3 items (.slice(0,3)) */
+      renderActivities(sorted);
     } catch (err) {
       console.error('[loadAppData]', err);
       document.getElementById('activitiesSkeleton').style.display = 'none';
@@ -1110,17 +1141,71 @@
   });
 
   /* ================================================================
+     INLINE ADD RUNNER
+  ================================================================ */
+  document.getElementById('activityMember').addEventListener('change', function () {
+    if (this.value === '__add_new__') {
+      this.value = ''; // reset so validation still catches empty
+      document.getElementById('inlineAddRunner').style.display = 'block';
+      setTimeout(() => document.getElementById('newRunnerNameInput').focus(), 60);
+    } else {
+      document.getElementById('inlineAddRunner').style.display = 'none';
+    }
+  });
+
+  function closeInlineAdd() {
+    document.getElementById('inlineAddRunner').style.display = 'none';
+    document.getElementById('newRunnerNameInput').value = '';
+    document.getElementById('activityMember').value = '';
+  }
+
+  async function saveInlineRunner() {
+    const name = document.getElementById('newRunnerNameInput').value.trim();
+    if (!name) return;
+    const saveBtn = document.querySelector('#inlineAddRunner button');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+    try {
+      const res = await fetchPost({ action: 'addMember', member_name: name });
+      if (res.success && res.member_id) {
+        allMembers.push({ member_id: res.member_id, member_name: name });
+        populateMemberDropdown(allMembers);
+        document.getElementById('activityMember').value = res.member_id;
+        document.getElementById('inlineAddRunner').style.display = 'none';
+        document.getElementById('newRunnerNameInput').value = '';
+        Toast.show('Runner added & selected');
+      } else {
+        alert(res.error || 'Could not add runner.');
+      }
+    } catch {
+      alert('Connection error. Try again.');
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save & select';
+    }
+  }
+
+  /* ================================================================
      LOG ACTIVITY
   ================================================================ */
-  document.getElementById('openAddActivity').addEventListener('click', () =>
-    openSheet('addActivityOverlay', 'addActivitySheet'));
+  document.getElementById('openAddActivity').addEventListener('click', () => {
+    // reset runner field cleanly every time sheet opens
+    document.getElementById('activityMember').value = '';
+    document.getElementById('inlineAddRunner').style.display = 'none';
+    document.getElementById('newRunnerNameInput').value = '';
+    openSheet('addActivityOverlay', 'addActivitySheet');
+  });
 
-  document.getElementById('cancelAddActivity').addEventListener('click', () =>
-    closeSheet('addActivityOverlay', 'addActivitySheet'));
+  document.getElementById('cancelAddActivity').addEventListener('click', () => {
+    closeSheet('addActivityOverlay', 'addActivitySheet');
+    closeInlineAdd();
+  });
 
   document.getElementById('addActivityOverlay').addEventListener('click', e => {
-    if (e.target === document.getElementById('addActivityOverlay'))
+    if (e.target === document.getElementById('addActivityOverlay')) {
       closeSheet('addActivityOverlay', 'addActivitySheet');
+      closeInlineAdd();
+    }
   });
 
   document.getElementById('submitAddActivity').addEventListener('click', async () => {
@@ -1148,7 +1233,8 @@
         Toast.show('Activity logged successfully');
         closeSheet('addActivityOverlay', 'addActivitySheet');
         ['activityEvent','activityMember','activityDistance','activityTime','activityPace','activitySteps']
-          .forEach(id => document.getElementById(id).value = '');
+          .forEach(id => { document.getElementById(id).value = ''; });
+        document.getElementById('inlineAddRunner').style.display = 'none';
         await loadAppData();
       } else {
         errBanner.textContent = res.error || 'Failed to log activity.';
@@ -1162,29 +1248,24 @@
     }
   });
 
+  /* ================================================================
+     SWITCH TO ACTIVITY TAB
+  ================================================================ */
   function switchToActivity(eventId) {
-  // Switch to activities tab
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    b.classList.remove('active');
-    b.setAttribute('aria-selected', 'false');
-  });
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-
-  const actTab = document.getElementById('tab-activities');
-  actTab.classList.add('active');
-  actTab.setAttribute('aria-selected', 'true');
-  document.getElementById('panel-activities').classList.add('active');
-
-  // Set the filter dropdown and trigger render
-  const filter = document.getElementById('eventFilter');
-  filter.value = String(eventId);
-  setTimeout(() => filter.dispatchEvent(new Event('change')), 50);
-
-  // Scroll to top of activities
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  console.log('eventId:', eventId, 'allAppData length:', allAppData.length);
-  console.log('matching:', allAppData.filter(a => String(a.event_id) === String(eventId)));
-}
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    const actTab = document.getElementById('tab-activities');
+    actTab.classList.add('active');
+    actTab.setAttribute('aria-selected', 'true');
+    document.getElementById('panel-activities').classList.add('active');
+    const filter = document.getElementById('eventFilter');
+    filter.value = String(eventId);
+    setTimeout(() => filter.dispatchEvent(new Event('change')), 50);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   /* ================================================================
      KEYBOARD — ESC
@@ -1193,8 +1274,10 @@
     if (e.key !== 'Escape') return;
     if (document.getElementById('addEventOverlay').classList.contains('open'))
       closeSheet('addEventOverlay', 'addEventSheet');
-    if (document.getElementById('addActivityOverlay').classList.contains('open'))
+    if (document.getElementById('addActivityOverlay').classList.contains('open')) {
       closeSheet('addActivityOverlay', 'addActivitySheet');
+      closeInlineAdd();
+    }
   });
 
   /* ================================================================
@@ -1203,8 +1286,6 @@
   loadEvents();
   loadMembers();
   loadAppData();
-
-
 
   </script>
 
