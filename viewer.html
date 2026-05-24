@@ -819,7 +819,7 @@ function renderBracket() {
     });
     byePlayers.forEach(function(p) {
       html += '<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--r);background:var(--amber-dim);border:1px dashed rgba(179,92,0,.25);margin-top:6px;font-size:12px;font-weight:600;color:var(--amber);">'
-        +'<span style="font-size:14px;">🔀</span>'
+        +'<span style="font-size:14px;"></span>'
         +'<span>BYE — <strong>'+esc(p.name)+'</strong> · No opponent · Auto-assigned rank #'+(p.finalRank||'?')+'</span>'
         +'</div>';
     });
