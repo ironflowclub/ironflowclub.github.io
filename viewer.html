@@ -1,5 +1,5 @@
 <!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
-<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -281,7 +281,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(245,244,240,.94);backdro
 <!-- ══ NAV ══════════════════════════════════════════════════ -->
 <header>
   <div class="nav">
-    <a class="brand" href="#">
+    <a class="brand" href="index.html">
       <div class="brand-icon">
         <img src="assets/images/logo.jpeg" alt="IRONFLOW" onerror="this.parentElement.textContent='IF'">
       </div>
@@ -318,15 +318,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(245,244,240,.94);backdro
 <!-- ══ TABS ══════════════════════════════════════════════════ -->
 <div class="tabs-wrap">
   <div class="tab-bar">
-    <button class="tab active" onclick="switchTab('standings',this)">Standings</button>
-    <button class="tab"        onclick="switchTab('bracket',this)">Bracket</button>
-    <button class="tab"        onclick="switchTab('matches',this)">Matches</button>
-    <button class="tab"        onclick="switchTab('rules',this)">Rules</button>
-  </div>
+      <button class="tab active" onclick="switchTab('rules',this)">Rules</button>
+      <button class="tab"        onclick="switchTab('standings',this)">Standings</button>
+      <button class="tab"        onclick="switchTab('bracket',this)">Bracket</button>
+      <button class="tab"        onclick="switchTab('matches',this)">Matches</button>
+</div>
 </div>
 
 <!-- ══ SCREENS ═══════════════════════════════════════════════ -->
-<div class="screen active" id="standingsScreen">
+<div class="screen" id="standingsScreen">
   <div id="standingsContent">
     <div class="loading-wrap"><div class="spinner"></div><div class="loading-text">Loading standings…</div></div>
   </div>
@@ -344,7 +344,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(245,244,240,.94);backdro
   </div>
 </div>
 
-<div class="screen" id="rulesScreen">
+<div class="screen active" id="rulesScreen">
   <div id="rulesContent"></div>
 </div>
 
@@ -363,7 +363,7 @@ var _data         = null;    // latest tournament payload
 var _viewingRound = 1;
 var _pollTimer    = null;
 var _toastTimer   = null;
-var _activeTab    = 'standings';
+var _activeTab    = 'rules';
 
 // ─────────────────────────────────────────────────────────────
 //  BOOT
@@ -445,6 +445,8 @@ function setLoadingState() {
 }
 
 function setNoDataState() {
+  localStorage.removeItem('ifc_viewer_cache_v1');
+  _data = null;
   var el = document.getElementById('standingsContent');
   if (el) el.innerHTML = '<div class="error-wrap"><span class="error-icon">🏸</span><div class="error-title">Tournament Not Started</div><div class="error-desc">No data has been published yet. Check back soon!</div></div>';
   setStatusBar(false, false, 'Not started');
@@ -1099,11 +1101,13 @@ function esc(str) {
 
 function showToast(msg, err) {
   var t = document.getElementById('toast');
+  if (!t) return;
   t.textContent = msg;
   t.className = 'toast show' + (err ? ' err' : ' ok');
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(function(){ t.className = 'toast'; }, 2200);
 }
+
 </script>
 
 <!-- TEAM DETAIL OVERLAY -->
