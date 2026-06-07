@@ -1,3 +1,4 @@
+<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,11 +7,13 @@
   <meta name="description" content="IRONFLOW CLUB Sharjah — Stats by Event" />
   <meta name="theme-color" content="#ffc107" />
   <title>Stats by Event · IRONFLOW CLUB Sharjah</title>
-
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon_v3.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon_v3.png">
+
+    <!-- Security -->
+
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ironflowclub.github.io/event-leaderboard.html" />
@@ -27,8 +30,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 
+  
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/leaderboard.css" />
+  <link rel="stylesheet" href="assets/css/theme.css" />
 
   <style>
     .event-picker-wrap { position: relative; }
@@ -163,6 +168,10 @@
   display: none;
   overscroll-behavior: contain;
 }
+
+.nav-home-btn { display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0 16px; border-radius:var(--pill); border:1px solid rgba(17,20,28,.14); background:rgba(255,255,255,.88); font-family:var(--font-display); font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:rgba(17,20,28,.88); box-shadow:0 4px 16px rgba(17,20,28,.07); transition:background .25s var(--ease-out),border-color .25s var(--ease-out),color .25s var(--ease-out),box-shadow .25s var(--ease-out),transform .25s var(--ease-out); -webkit-tap-highlight-color:transparent; user-select:none; white-space:nowrap; }
+.nav-home-btn:hover { background:#fff; border-color:rgba(255,193,7,.50); color:var(--gold-text); box-shadow:0 6px 22px rgba(255,193,7,.16); transform:translateY(-1px); }
+.nav-home-btn:active { transform:scale(.96); }
 
 .event-dropdown.open {
   display: block;
@@ -454,21 +463,24 @@
 <body>
 
   <header>
-  <div class="container nav">
-    <a class="brand" href="index.html" aria-label="IRONFLOW CLUB home">
-      <img src="assets/images/logo.jpeg" alt="IRONFLOW CLUB logo" width="42" height="42" />
-      <div class="brand-text">
-        <strong>IRONFLOW CLUB</strong>
-        <small>Sharjah</small>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <div class="brand-text">
+          <strong>IRON FLOW CLUB</strong>
+          <small>Running</small>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-home-btn" href="index.html" aria-label="Go to homepage">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/>
+            <path d="M9 21V12h6v9"/>
+          </svg>
+          <span>Home</span>
+        </a>
       </div>
-    </a>
-
-    <nav class="nav-actions" aria-label="Main">
-      <a class="nav-btn home-btn" href="index.html">HOME</a>
-      
-    </nav>
-  </div>
-</header>
+    </div>
+  </header>
 
   <main>
     <div class="container">
@@ -565,6 +577,9 @@
       </div>
     </div>
   </div>
+  <div id="footer-container"></div>
+
+
 
   <script src="assets/js/data-handler.js"></script>
   <script src="assets/js/utils.js"></script>
@@ -1077,5 +1092,6 @@
       }
     })();
   </script>
+  <script src="/assets/js/components.js"></script>
 </body>
 </html>
