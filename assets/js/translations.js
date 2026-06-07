@@ -9,14 +9,14 @@
   const translations = {
     en: {
       // Homepage
-      kicker: "Running Club · Sharjah",
+      kicker: "Men’s Movement Club",
       heroTitleHtml: `
         <span class="word"><span class="word-inner" style="--wd:80ms">Run,</span></span>
         <span class="word"><span class="word-inner" style="--wd:160ms"> Track</span></span><br>
         <span class="word"><span class="word-inner accent-line accent" style="--wd:260ms">Improve.</span></span>
       `,
-      heroSub: "Track your runs and watch your progress unfold. Built for runners who refuse to settle.",
-      leaderboardBtn: "Leaderboard",
+      heroSub: "Built for men who move. Weekly runs, sport sessions, and a community that refuses to settle.",
+      leaderboardBtn: "Running",
       progressBtn: "My Progress",
       badmintonBtn: "Badminton", 
       chatBtn: "CHAT",
@@ -36,14 +36,14 @@
 
     zh: {
       // Homepage
-      kicker: "跑步俱乐部 · 沙迦",
+      kicker: "男子运动俱乐部",
       heroTitleHtml: `
         <span class="word"><span class="word-inner" style="--wd:80ms">奔跑，</span></span>
         <span class="word"><span class="word-inner" style="--wd:160ms"> 记录</span></span><br>
         <span class="word"><span class="word-inner accent-line accent" style="--wd:260ms">进步。</span></span>
       `,
-      heroSub: "记录你的每一次奔跑，见证自己的成长。为不甘平庸的跑者而生。",
-      leaderboardBtn: "排行榜",
+      heroSub: "为行动者而生。每周跑步、运动课程，以及一个永不止步的社群。",
+      leaderboardBtn: "跑步",
       progressBtn: "我的进度",
       badmintonBtn: "羽毛球",
       chatBtn: "聊天",
