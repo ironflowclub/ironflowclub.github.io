@@ -33,7 +33,7 @@ button, input, select {
 }
 
 :focus-visible { 
-  outline: 3px solid rgba(255,193,7,.55); 
+  outline: none; 
   outline-offset: 3px; 
   border-radius: 12px; 
 }
@@ -137,6 +137,7 @@ body.home header.go {
   align-items: center;
   gap: 12px;
   min-width: 0;
+  flex-shrink: 0;
 }
 
 .brand img {
@@ -162,6 +163,8 @@ body.home header.go {
   letter-spacing: -.01em !important;
   text-transform: none !important;
   color: var(--ink) !important;
+  font-size: 15px;
+  white-space: nowrap;
 }
 
 .brand small,
@@ -173,6 +176,8 @@ body.home header.go {
   text-transform: uppercase;
   color: rgba(161,115,0,.92) !important; /* ✅ gold colour back */
   margin-top: 2px;
+
+  
 }
 
 .brand-text small {
