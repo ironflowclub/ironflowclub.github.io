@@ -4,32 +4,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="Track your runs and watch your progress unfold. Built for runners who refuse to settle. Join IRONFLOW CLUB Sharjah." />
+  <meta name="description" content="Built for men who move. Weekly runs, sport sessions, and a community that refuses to settle." />
   <meta name="keywords" content="running club, Sharjah, fitness, track runs, leaderboard, running community" />
   <meta name="theme-color" content="#ffc107" />
-  <title>IRONFLOW CLUB · Sharjah Running Club</title>
+  <title>IRON FLOW CLUB · Sharjah Running Club</title>
 
-    <!-- Security -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-
-  <meta
-    http-equiv="Content-Security-Policy"
-    content="
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.onesignal.com;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-      font-src 'self' https://fonts.gstatic.com data:;
-      img-src 'self' data: blob:;
-      connect-src 'self' https://script.google.com https://opensheet.elk.sh;
-      object-src 'none';
-      base-uri 'self';
-      form-action 'self';
-      frame-ancestors 'none';
-      upgrade-insecure-requests;
-    "
-  />
-
+  
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
@@ -40,7 +20,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ironflowclub.github.io/" />
   <meta property="og:title" content="IRONFLOW CLUB · Sharjah Running Club" />
-  <meta property="og:description" content="Track your runs and watch your progress unfold. Built for runners who refuse to settle." />
+  <meta property="og:description" content="Built for men who move. Weekly runs, sport sessions, and a community that refuses to settle." />
   <meta property="og:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
 
   <!-- Twitter Card -->
@@ -70,6 +50,7 @@
   
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/loader.css" />
+  <link rel="stylesheet" href="/assets/css/theme.css" />
 
   <!-- OneSignal Push Notifications -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -87,13 +68,16 @@
     .hero { padding: 0; }
     .hero-inner { padding: clamp(60px, 12vh, 100px) var(--pad) 24px; }
     
-    .kicker {
+    .kicker{
       margin: 0 0 14px;
       font-size: 11px;
-      letter-spacing: .34em;
+      letter-spacing: .08em;
       text-transform: uppercase;
       color: rgba(161,115,0,.90);
       font-weight: 800;
+      white-space: nowrap;
+      position: relative;
+      left: 1px;
     }
     
     .hero-title {
@@ -109,7 +93,7 @@
     .hero-title .accent { color: #d48d12; }
     
     .hero-sub {
-      margin: 0;
+      margin: 0px 1px;
       color: var(--muted);
       max-width: 56ch;
       font-size: 16px;
@@ -325,8 +309,8 @@
       <div class="loader-ring"></div>
       <img class="loader-logo" src="assets/images/logo.jpeg" alt="" width="64" height="64" />
     </div>
-    <p class="loader-wordmark">IRONFLOW CLUB</p>
-    <p class="loader-sub">Sharjah · Running Club</p>
+    <p class="loader-wordmark">IRON FLOW CLUB</p>
+    <p class="loader-sub">Men’s Movement Club</p>
     <div class="loader-progress-wrap">
       <div class="loader-progress-track">
         <div class="loader-progress-bar"></div>
@@ -338,9 +322,8 @@
     <header id="site-header">
       <div class="container nav">
         <a class="brand" href="#home">
-          <img src="assets/images/logo.jpeg" alt="IRONFLOW CLUB logo" width="42" height="42" />
           <div class="brand-text">
-            <strong>IRONFLOW CLUB</strong>
+            <strong>IRON FLOW CLUB</strong>
             <small>Sharjah</small>
           </div>
         </a>
@@ -360,22 +343,22 @@
       <section class="hero" id="home">
         <div class="container">
           <div class="hero-inner">
-            <p class="kicker s-enter" style="--sd:0ms" id="kickerText">Running Club · Sharjah</p>
+            <p class="kicker s-enter" style="--sd:0ms" id="kickerText">Men’s Movement Club</p>
             <h1 class="hero-title word-reveal s-enter" style="--sd:60ms" id="heroTitle" aria-label="Run. Track. Improve.">
               <span class="word"><span class="word-inner" style="--wd:80ms">Run,</span></span>
               <span class="word"><span class="word-inner" style="--wd:160ms"> Track</span></span><br>
               <span class="word"><span class="word-inner accent-line accent" style="--wd:260ms">Improve.</span></span>
             </h1>
             <p class="hero-sub s-enter" style="--sd:200ms" id="heroSub">
-              Track your runs and watch your progress unfold. Built for runners who refuse to settle.
+              Built for men who move. Weekly runs, sport sessions, and a community that refuses to settle.
             </p>
             <div class="stats-strip s-enter" style="--sd:280ms">
             </div>
           </div>
           <div class="hero-actions">
-            <button class="btn btn-primary s-enter" style="--sd:300ms" id="leaderboardBtn" type="button">Leaderboard</button>
-            <a class="btn btn-ghost s-enter" style="--sd:380ms" href="progress.html" id="progressBtn">My Progress</a>
-            <a class="btn btn-ghost s-enter" style="--sd:380ms" href="viewer.html" id="badmintonBtn">Badminton</a>
+            <button class="btn btn-primary s-enter" style="--sd:300ms" id="leaderboardBtn" type="button">Running</button>
+            <a class="btn btn-ghost s-enter" style="--sd:380ms" href="maintainance.html" id="badmintonBtn">Badminton</a>
+
           </div>
         </div>
       </section>
@@ -385,12 +368,10 @@
       </section>
     </main>
 
-    <footer>
-      <div class="container footer-inner">
-        <p class="footer-brand">IRONFLOW CLUB</p>
-        <p class="footer-copy">© <span id="yr"></span> · <span id="rightsText">All rights reserved</span></p>
-      </div>
-    </footer>
+    <div id="footer-container"></div>
+
+
+    
   </div>
 
   <!-- Scripts -->
@@ -457,7 +438,7 @@
       onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(17,20,28,.10)'"
       onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(17,20,28,.06)'">
         <div>
-          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">Overall Stats</strong>
+          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">Leaderboard</strong>
           <span style="display:block;margin-top:3px;font-size:12px;font-weight:600;color:rgba(17,20,28,.48);line-height:1.5">
             All-time &amp; monthly — Consistency, Distance, Pace
           </span>
@@ -485,7 +466,7 @@
       onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(17,20,28,.10)'"
       onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(17,20,28,.06)'">
         <div>
-          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">Stats by Event</strong>
+          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">Weekly Runs</strong>
           <span style="display:block;margin-top:3px;font-size:12px;font-weight:600;color:rgba(17,20,28,.48);line-height:1.5">
             Pick a specific run — fastest pace on that day
           </span>
@@ -494,8 +475,38 @@
           <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
         </svg>
       </a>
+
+      <a href="progress.html" style="
+        display:grid;
+        grid-template-columns:1fr 24px;
+        align-items:center;
+        gap:14px;
+        padding:16px;
+        border-radius:18px;
+        border:1px solid rgba(17,20,28,.08);
+        border-left:3px solid rgba(99,102,241,.70);
+        background:rgba(255,255,255,.90);
+        box-shadow:0 2px 12px rgba(17,20,28,.06);
+        text-decoration:none;
+        transition:transform .18s ease, box-shadow .18s ease;
+        -webkit-tap-highlight-color:transparent;
+      "
+      onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(17,20,28,.10)'"
+      onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(17,20,28,.06)'">
+        <div>
+          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">My Progress</strong>
+          <span style="display:block;margin-top:3px;font-size:12px;font-weight:600;color:rgba(17,20,28,.48);line-height:1.5">
+            Your personal stats, history &amp; achievements
+          </span>
+        </div>
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:rgba(17,20,28,.25);flex-shrink:0">
+          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+        </svg>
+      </a>
+
     </div>
 
+    
     <!-- Cancel -->
     <div style="padding:0 16px 20px">
       <button id="lbChoiceCancel" type="button" style="
@@ -564,5 +575,5 @@
   });
 })();
 </script>
-
+<script src="/assets/js/components.js"></script>
 </html>
