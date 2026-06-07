@@ -1,0 +1,50 @@
+<style>
+  footer {
+    padding: 28px 0;
+    background: #0e0f14;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .footer-brand {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .90);
+    font-weight: 800;
+  }
+
+  .footer-copy {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .38);
+  }
+
+
+
+  @media (min-width: 768px) {
+    .footer-inner {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+</style>
+
+<footer>
+  <div class="container footer-inner">
+    <p class="footer-brand">IRON FLOW CLUB</p>
+    <p class="footer-copy">© <span class="yr"></span> · All rights reserved</p>
+  </div>
+</footer>
