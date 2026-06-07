@@ -3,7 +3,7 @@
  * Bump CACHE_VERSION whenever you deploy updates
  */
 
-const CACHE_VERSION = 'v19';
+const CACHE_VERSION = 'v20';
 const CACHE_NAME = `ironflow-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -16,6 +16,7 @@ const STATIC_ASSETS = [
   '/assets/css/main.css',
   '/assets/css/leaderboard.css',
   '/assets/css/progress.css',
+  '/assets/css/theme.css',
   '/assets/css/loader.css',
   '/assets/js/main.js',
   '/assets/js/leaderboard.js',
@@ -23,10 +24,15 @@ const STATIC_ASSETS = [
   '/assets/js/data-handler.js',
   '/assets/js/utils.js',
   '/assets/js/translations.js',
+  '/assets/js/components.js',
+  '/assets/components/header.html',
+  '/assets/components/footer.html',
   '/tournament.html',
   '/admin.html',
   '/auth-guard.js',
-  '/running.html'
+  '/badminton.html',
+  '/champions.html',
+  '/members.html'
 
 ];
 
