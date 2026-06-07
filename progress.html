@@ -1,3 +1,4 @@
+<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,6 +7,8 @@
   <meta name="description" content="IRONFLOW CLUB Sharjah — My Progress" />
   <meta name="theme-color" content="#ffc107" />
   <title>My Progress · IRONFLOW CLUB Sharjah</title>
+
+
 
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
@@ -20,9 +23,7 @@
   <meta property="og:description" content="Track your running progress and personal records" />
   <meta property="og:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
 
-  <!-- Security -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,19 +36,29 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/progress.css" />
+  <link rel="stylesheet" href="assets/css/theme.css" />
+
 </head>
 
 <body>
-  <header>
+
+    <header>
     <div class="container nav">
       <a class="brand" href="index.html">
-        <img src="assets/images/logo.jpeg" alt="IRONFLOW CLUB logo" width="42" height="42" />
         <div class="brand-text">
-          <strong>IRONFLOW CLUB</strong>
-          <small>Sharjah</small>
+          <strong>IRON FLOW CLUB</strong>
+          <small>Running</small>
         </div>
       </a>
-      <a class="nav-btn" href="index.html">HOME</a>
+      <div class="nav-actions">
+        <a class="nav-home-btn" href="index.html" aria-label="Go to homepage">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/>
+            <path d="M9 21V12h6v9"/>
+          </svg>
+          <span>Home</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -95,7 +106,14 @@
       <canvas id="fsChart" aria-label="Pace over time fullscreen chart" role="img"></canvas>
     </div>
   </div>
-
+  
+    <footer>
+      <div class="container footer-inner">
+        <p class="footer-brand">IRONFLOW CLUB</p>
+        <p class="footer-copy">© 2026 <span id="yr"></span> · <span id="rightsText">All rights reserved</span></p>
+      </div>
+    </footer>
+  
   <!-- Scripts -->
   <script src="assets/js/data-handler.js"></script>
   <script src="assets/js/utils.js"></script>
