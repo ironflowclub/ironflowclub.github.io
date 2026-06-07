@@ -10,6 +10,7 @@ const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/leaderboard.html',
+  '/event-leaderboard.html',
   '/progress.html',
   '/404.html',
   '/manifest.json',
