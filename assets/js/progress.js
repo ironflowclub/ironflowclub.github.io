@@ -17,6 +17,7 @@
   let paceChart = null;
   let fsChartInstance = null;
   let currentChartData = null;
+  let activeChart = 'pace'; // 'pace' | 'distance'
 
   // DOM Elements
   const memberSelect = document.getElementById('memberSelect');
@@ -137,38 +138,103 @@
     };
   }
 
+
+  function buildDistanceChartConfig(labels, distances, isDark) {
+  const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(17,20,28,0.05)';
+  const tickColor = isDark ? 'rgba(255,255,255,0.55)' : 'rgba(17,20,28,0.60)';
+  const tooltipBg = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(28,31,58,0.95)';
+  const maxDist = Math.max(...distances);
+
+  return {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Distance (km)',
+        data: distances,
+        borderColor: 'rgba(255,193,7,0.95)',
+        backgroundColor: isDark ? 'rgba(255,193,7,0.12)' : 'rgba(255,193,7,0.10)',
+        fill: true,
+        tension: 0.35,
+        borderWidth: 3,
+        pointRadius: 6,
+        pointHoverRadius: 9,
+        pointBackgroundColor: distances.map(d =>
+          d === maxDist ? '#48c774' : 'rgba(255,193,7,0.95)'
+        ),
+        pointBorderColor: isDark ? 'rgba(255,255,255,0.25)' : '#fff',
+        pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: tooltipBg,
+          titleColor: '#fff',
+          bodyColor: '#fff',
+          titleFont: { family: 'Outfit', weight: 800, size: 13 },
+          bodyFont: { family: 'Inter', weight: 700, size: 14 },
+          cornerRadius: 12,
+          padding: 14,
+          callbacks: {
+            label: (ctx) => ` ${ctx.raw.toFixed(2)} km`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: gridColor },
+          ticks: { color: tickColor, font: { weight: 700, size: 12 }, maxRotation: 45, minRotation: 0 }
+        },
+        y: {
+          min: 0,
+          grid: { color: gridColor },
+          ticks: {
+            color: tickColor,
+            font: { weight: 700, size: 12 },
+            callback: (val) => `${val} km`
+          }
+        }
+      },
+      layout: { padding: { left: 4, right: 12, top: 10, bottom: 4 } }
+    }
+  };
+}
   /**
    * Open fullscreen chart
    */
   function openFullscreen() {
-    if (!currentChartData) return;
-
-    fsOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-
-    // Try to lock to landscape
-    if (screen.orientation && screen.orientation.lock) {
-      screen.orientation.lock('landscape').catch(() => {});
-    }
-
-    requestAnimationFrame(() => {
-      const ctx = document.getElementById('fsChart');
-      if (fsChartInstance) fsChartInstance.destroy();
-
-      const { labels, paceDecimals, minPace, maxPace } = currentChartData;
-      const config = buildChartConfig(labels, paceDecimals, minPace, maxPace, true);
-
-      // Fullscreen tweaks
-      config.options.scales.x.ticks.font.size = 13;
-      config.options.scales.y.ticks.font.size = 13;
-      config.options.plugins.tooltip.bodyFont.size = 15;
-      config.data.datasets[0].pointRadius = 7;
-      config.data.datasets[0].pointHoverRadius = 11;
-      config.data.datasets[0].borderWidth = 3.5;
-
-      fsChartInstance = new Chart(ctx, config);
-    });
+  if (!currentChartData) return;
+  fsOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.querySelector('.fs-title').textContent =
+    currentChartData.type === 'distance' ? 'Distance Over Time' : 'Pace Over Time';
+  document.querySelector('.fs-subtitle').textContent =
+    currentChartData.type === 'distance' ? 'Longest run highlighted' : 'Lower = Faster';
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(() => {});
   }
+
+  requestAnimationFrame(() => {
+    const ctx = document.getElementById('fsChart');
+    if (fsChartInstance) fsChartInstance.destroy();
+
+    const { labels, paceDecimals, minPace, maxPace, type } = currentChartData;
+    const config = type === 'distance'
+      ? buildDistanceChartConfig(labels, paceDecimals, true)
+      : buildChartConfig(labels, paceDecimals, minPace, maxPace, true);
+
+    // Fullscreen tweaks
+    config.options.scales.x.ticks.font = { ...config.options.scales.x.ticks.font, size: 13 };
+    config.options.scales.y.ticks.font = { ...config.options.scales.y.ticks.font, size: 13 };
+
+    fsChartInstance = new Chart(ctx, config);
+  });
+}
 
   /**
    * Close fullscreen chart
@@ -220,7 +286,7 @@
     const paceDecimals = runs.map(r => Utils.parsePace(r.avg_pace));
     const minPace = Math.min(...paceDecimals);
     const maxPace = Math.max(...paceDecimals);
-    currentChartData = { labels, paceDecimals, minPace, maxPace };
+    currentChartData = { labels, paceDecimals, minPace, maxPace, type: 'pace' };
 
     let html = '';
 
@@ -284,11 +350,14 @@
     html += `
       <div class="chart-card enter" style="animation-delay:160ms">
         <div class="chart-card-head">
-          <strong>Pace Over Time</strong>
-          <span>Lower = Faster</span>
+          <div class="chart-toggle">
+            <button class="chart-toggle-btn ${activeChart === 'pace' ? 'active' : ''}" data-chart="pace">Pace</button>
+            <button class="chart-toggle-btn ${activeChart === 'distance' ? 'active' : ''}" data-chart="distance">Distance</button>
+          </div>
+          <span id="chartSubtitle">${activeChart === 'pace' ? 'Lower = Faster' : 'Longest run highlighted'}</span>
         </div>
         <div class="chart-wrap">
-          <canvas id="paceChart" aria-label="Pace over time chart" role="img"></canvas>
+          <canvas id="paceChart" aria-label="Chart" role="img"></canvas>
         </div>
         <button class="expand-btn" id="expandChartBtn" aria-label="View chart fullscreen">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -357,13 +426,38 @@
 
     // Draw inline chart
     requestAnimationFrame(() => {
-      const ctx = document.getElementById('paceChart');
-      if (!ctx) return;
-      if (paceChart) paceChart.destroy();
+  const ctx = document.getElementById('paceChart');
+  if (!ctx) return;
+  if (paceChart) paceChart.destroy();
 
-      const config = buildChartConfig(labels, paceDecimals, minPace, maxPace, false);
-      paceChart = new Chart(ctx, config);
+  const distances = runs.map(r => parseFloat(r.distance_km));
+  const config = activeChart === 'pace'
+    ? buildChartConfig(labels, paceDecimals, minPace, maxPace, false)
+    : buildDistanceChartConfig(labels, distances, false);
+
+  paceChart = new Chart(ctx, config);
+
+  // Wire toggle buttons
+  document.querySelectorAll('.chart-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeChart = btn.dataset.chart;
+      document.querySelectorAll('.chart-toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('chartSubtitle').textContent =
+        activeChart === 'pace' ? 'Lower = Faster' : 'Longest run highlighted';
+
+      if (paceChart) paceChart.destroy();
+      const distances2 = runs.map(r => parseFloat(r.distance_km));
+      const newConfig = activeChart === 'pace'
+        ? buildChartConfig(labels, paceDecimals, minPace, maxPace, false)
+        : buildDistanceChartConfig(labels, distances2, false);
+      paceChart = new Chart(ctx, newConfig);
+      currentChartData = activeChart === 'distance'
+          ? { labels, paceDecimals: distances, minPace: 0, maxPace: Math.max(...distances), type: 'distance' }
+          : { labels, paceDecimals, minPace, maxPace, type: 'pace' };
     });
+  });
+});
   }
 
   /**
