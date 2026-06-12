@@ -3,6 +3,11 @@
    ============================================================ */
 
 /* ── Sticky Footer Layout (Page-Level) ─────────────────────── */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -65,7 +70,7 @@ body > footer {
   margin: 0 0 18px;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(26px, 6vw, 38px);
+  font-size: clamp(26px, 2vw + 1rem, 38px);
   line-height: 1.1;
   letter-spacing: -.02em;
   color: rgba(255, 255, 255, .96);
@@ -325,6 +330,10 @@ body > footer {
   font-size: 16px;
   color: var(--ink);
   letter-spacing: -.01em;
+}
+.brand-text strong {
+  white-space: nowrap;
+  font-size: 14px;
 }
 
 .chart-card-head span {
@@ -628,4 +637,46 @@ footer {
     gap: 6px;
     
   }
+}
+
+/* ── Toggle Buttons ── */
+.chart-toggle {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.chart-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 193, 7, 0.3);
+  background: transparent;
+  color: var(--muted, #888);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.chart-toggle-btn.active {
+  background: rgba(255, 193, 7, 0.15);
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.chart-toggle-btn:hover:not(.active) {
+  border-color: rgba(255, 193, 7, 0.55);
+  color: var(--text, #fff);
+}
+
+.chart-toggle-btn:focus-visible {
+  outline: 2px solid #ffc107;
+  outline-offset: 2px;
 }
