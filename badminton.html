@@ -170,6 +170,37 @@
     @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.6;transform:scale(.85);} }
     .event-card-actions { padding:0 var(--space-lg) var(--space-lg); display:grid; gap:10px; }
 
+
+    /* pending state */
+.live-btn[data-state="pending"] {
+  opacity: .65;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: rgba(255,193,7,.08);
+  border-color: rgba(255,193,7,.25);
+}
+.live-btn[data-state="pending"]::before {
+  content: "Starts on Tournament Day";
+  position: absolute; top: 6px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px; font-weight: 800;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--gold-text); white-space: nowrap;
+}
+
+/* live state */
+.live-btn[data-state="live"] {
+  background: linear-gradient(135deg, rgba(255,193,7,.18), rgba(255,152,0,.12));
+  border-color: rgba(255,193,7,.45);
+}
+.live-btn[data-state="live"]::after {
+  content: "";
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--success);
+  position: absolute; top: 12px; left: 12px;
+  animation: pulse-dot 2s infinite;
+}
+
     /* TIMELINE */
     .timeline-section { padding:10px var(--pad) var(--space-2xl); }
     .timeline { margin-top:40px; position:relative; padding-left:16px;  }
@@ -368,6 +399,7 @@
           </div>
         </div>
         <div class="event-card-actions">
+          <a id="liveUpdatesBtn" class="btn btn-ghost live-btn"  data-state="pending" aria-disabled="true" href="badminton-setup.html#bracket"> Live Updates </a>
           <a class="btn btn-ghost" href="badminton-setup.html" aria-label="View tournament rules">View Rules</a>
         </div>
       </div>
@@ -430,7 +462,7 @@
   /* FIX 13: FALLBACK.hall now defined — Hall of Champions won't be blank on API failure */
   const FALLBACK = {
     tournament: {
-      name        : 'IFC Badminton Tournamnet',
+      name        : 'IFC Badminton Tournament',
       format      : "Men's Doubles",
       date        : '2026-06-14',
       time        : '09:00',
@@ -552,10 +584,19 @@
       if (!target || isNaN(target)) return;
       const diff = target - Date.now();
       if (diff <= 0) {
+        const liveBtn = document.getElementById('liveUpdatesBtn');
+
+        if (liveBtn) {
+          liveBtn.dataset.state = 'live';
+          liveBtn.removeAttribute('aria-disabled');
+          liveBtn.href = 'badminton-live.html';
+        }
+
         ['cd-days','cd-hours','cd-minutes','cd-seconds'].forEach(id => {
           const el = document.getElementById(id);
           if (el) el.textContent = '00';
         });
+
         clearInterval(countdownInterval);
         return;
       }
