@@ -415,6 +415,19 @@ document.addEventListener('visibilitychange', function() {
   if (!document.hidden) fetchData(false);
 });
 
+
+window.addEventListener('load', () => {
+  if (window.location.hash === '#bracket') {
+    const btn = document.querySelector(
+      '.tab-bar .tab:nth-child(3)'
+    );
+
+    if (btn) {
+      switchTab('bracket', btn);
+    }
+  }
+});
+
 function fetchData(showSpinner) {
   if (showSpinner) setLoadingState();
   var url = GAS_URL + '?action=fetch&_t=' + Date.now();
