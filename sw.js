@@ -3,7 +3,7 @@
  * Bump CACHE_VERSION whenever you deploy updates
  */
 
-const CACHE_VERSION = 'v114';
+const CACHE_VERSION = 'v115';
 const CACHE_NAME = `ironflow-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
