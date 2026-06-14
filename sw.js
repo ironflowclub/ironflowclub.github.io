@@ -3,7 +3,7 @@
  * Bump CACHE_VERSION whenever you deploy updates
  */
 
-const CACHE_VERSION = 'v115';
+const CACHE_VERSION = 'v117';
 const CACHE_NAME = `ironflow-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -23,6 +23,7 @@ const STATIC_ASSETS = [
   '/assets/js/data-handler.js',
   '/assets/js/utils.js',
   '/assets/js/translations.js',
+  '/champions.html',
   '/tournament.html',
   '/admin.html',
   '/auth-guard.js',
