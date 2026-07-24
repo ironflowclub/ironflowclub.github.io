@@ -6,15 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="Built for men who move. Weekly runs, sport sessions, and a community that refuses to settle." />
   <meta name="keywords" content="running club, Sharjah, fitness, track runs, leaderboard, running community" />
-  <meta name="theme-color" content="#ffc107" />
+  <meta name="theme-color" content="#10093A" />
   <title>IRON FLOW CLUB · Sharjah Running Club</title>
 
   
   <!-- Favicons -->
-  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png?v=20260724" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg?v=20260724" />
+  <link rel="shortcut icon" href="/assets/images/favicon.ico?v=20260724" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png?v=20260724" />
+  <link rel="manifest" href="/site.webmanifest?v=20260724" />
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website" />
@@ -80,7 +81,7 @@
       font-size: 11px;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: rgba(161,115,0,.90);
+      color: rgba(168, 126, 0, .90);
       font-weight: 800;
       white-space: nowrap;
       position: relative;
@@ -97,7 +98,7 @@
       letter-spacing: -.02em;
     }
     
-    .hero-title .accent { color: #d48d12; }
+    .hero-title .accent { color: #C4A000; }
     
     .hero-sub {
       margin: 0px 1px;
@@ -276,7 +277,7 @@
     }
     
     .quote-text .em {
-      background: linear-gradient(135deg, #b87400, #ff9800);
+      background: linear-gradient(135deg, #A87E00, #F2C51D);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -305,6 +306,204 @@
       .quote-section { padding: 70px 40px 80px; }
       .quote-text { max-width: 50ch; }
     }
+
+    /* ── Two-step sheet ─────────────────────────────────────── */
+    .sheet-step { display: grid; gap: 10px; }
+    .sheet-option {
+      display: grid;
+      grid-template-columns: 1fr 24px;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(17,20,28,.08);
+      background: rgba(255,255,255,.90);
+      box-shadow: 0 2px 12px rgba(17,20,28,.06);
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease;
+      -webkit-tap-highlight-color: transparent;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+    }
+    .sheet-option:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(17,20,28,.10); }
+    .sheet-option-title { display:block; font-weight:800; font-size:15px; color:rgba(17,20,28,.92); letter-spacing:-.01em; font-family: var(--font-display); }
+    .sheet-option-sub { display:block; margin-top:3px; font-size:12px; font-weight:600; color:rgba(17,20,28,.48); line-height:1.5; }
+    .sheet-chevron { width:18px; height:18px; fill:rgba(17,20,28,.25); flex-shrink:0; }
+
+    .sheet-back-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 24px 12px;
+    }
+    .sheet-back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(17,20,28,.10);
+      background: rgba(17,20,28,.04);
+      cursor: pointer;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+      transition: background .18s ease;
+    }
+    .sheet-back-btn:hover { background: rgba(17,20,28,.08); }
+    .sheet-back-btn svg { width:16px; height:16px; fill:rgba(17,20,28,.55); }
+
+
+    /* ── PWA Install Prompt ─────────────────────────────────── */
+#pwa-install-prompt {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  padding: 16px;
+  transform: translateY(120%);
+  transition: transform .45s cubic-bezier(.32,1.1,.45,1);
+  pointer-events: none;
+}
+#pwa-install-prompt.show {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.pwa-prompt-inner {
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-heavy);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pwa-prompt-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pwa-prompt-text strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.pwa-prompt-text span {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+#pwa-install-btn {
+  min-height: 38px;
+  padding: 0 18px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+#pwa-dismiss-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color .2s;
+}
+#pwa-dismiss-btn:hover { color: var(--ink); }
+
+/* iOS instructions overlay */
+#pwa-ios-instructions {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(8px);
+  z-index: 400;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.pwa-ios-card {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 28px;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: var(--shadow-heavy);
+  border: 1px solid var(--border);
+}
+.pwa-ios-card h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.pwa-ios-card p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 20px;
+  line-height: 1.6;
+}
+.pwa-share-icon {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  vertical-align: -7px;
+  margin: 0 2px;
+  color: var(--accent-dark);
+}
+
+/* Update toast for existing PWA users */
+.pwa-update-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: var(--dark-bg);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow-heavy);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+  animation: toastUp .4s var(--ease-out) both;
+}
+@keyframes toastUp {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+.pwa-update-toast button {
+  background: var(--accent);
+  color: var(--ink);
+  border: none;
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 11px;
+  cursor: pointer;
+  letter-spacing: .04em;
+}
+
+
   </style>
 </head>
 
@@ -314,15 +513,10 @@
     <div class="loader-logo-wrap">
       <div class="loader-ring-2"></div>
       <div class="loader-ring"></div>
-      <img class="loader-logo" src="assets/images/logo.jpeg" alt="" width="64" height="64" />
+      <img class="loader-logo" src="assets/images/logo.png" alt="" width="64" height="64" />
     </div>
-    <p class="loader-wordmark">IRON FLOW CLUB</p>
-    <p class="loader-sub">Men’s Movement Club</p>
-    <div class="loader-progress-wrap">
-      <div class="loader-progress-track">
-        <div class="loader-progress-bar"></div>
-      </div>
-    </div>
+    <p class="loader-sub">Men's Movement Club</p>
+    <p class="loader-bottom-brand">IRON FLOW CLUB</p>
   </div>
 
   <div id="site-content">
@@ -341,7 +535,6 @@
               <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
             </svg>
           </a>
-          <button class="lang-switch" id="langToggle" aria-label="Switch language">EN</button>
         </div>
       </div>
     </header>
@@ -376,18 +569,41 @@
     </main>
 
     <div id="footer-container"></div>
-
-
-    
   </div>
 
   <!-- Scripts -->
   <script src="assets/js/utils.js"></script>
-  <script src="assets/js/translations.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <!-- PWA Install Prompt -->
+<div id="pwa-install-prompt" aria-hidden="true">
+  <div class="pwa-prompt-inner">
+    <img src="assets/images/logo.png?v=2" alt="" width="48" height="48" style="border-radius:12px;flex-shrink:0;" />
+    <div class="pwa-prompt-text">
+      <strong>Add IRON FLOW CLUB to Home Screen</strong>
+      <span>Get quick access and a full-screen experience</span>
+    </div>
+    <button type="button" class="btn btn-primary" id="pwa-install-btn">Install</button>
+    <button type="button" id="pwa-dismiss-btn" aria-label="Dismiss">&times;</button>
+  </div>
+</div>
+
+<!-- iOS Install Instructions -->
+<div id="pwa-ios-instructions" aria-hidden="true">
+  <div class="pwa-ios-card">
+    <h3>Add to Home Screen</h3>
+    <p>
+      Tap the
+      <svg class="pwa-share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      button below, then scroll down and tap <strong>Add to Home Screen</strong>.
+    </p>
+    <button type="button" class="btn btn-primary" style="width:100%;" onclick="document.getElementById('pwa-ios-instructions').style.display='none'">Got it</button>
+  </div>
+</div>
+
 </body>
 
-<!-- ── Leaderboard Choice Modal ───────────────────────────── -->
+<!-- ── Running Choice Modal (two-step) ───────────────────────── -->
 <div id="lbChoiceModal" aria-hidden="true" style="
   position: fixed;
   inset: 0;
@@ -416,104 +632,71 @@
       <div style="width:40px;height:4px;border-radius:2px;background:rgba(17,20,28,.15)"></div>
     </div>
 
+    <!-- Back row (Step 2 only) -->
+    <div class="sheet-back-row" id="sheetBackRow" style="display:none">
+      <button type="button" class="sheet-back-btn" id="sheetBackBtn" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+    </div>
+
     <!-- Header -->
     <div style="padding:12px 24px 20px">
-      <p style="margin:0 0 4px;font-size:11px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:rgba(17,20,28,.45)">Leaderboard</p>
-      <h2 style="margin:0;font-family:var(--font-display);font-weight:800;font-size:22px;color:rgba(17,20,28,.94);letter-spacing:-.02em;line-height:1.2">
+      <p style="margin:0 0 4px;font-size:11px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:rgba(17,20,28,.45)" id="sheetEyebrow">Running</p>
+      <h2 style="margin:0;font-family:var(--font-display);font-weight:800;font-size:22px;color:rgba(17,20,28,.94);letter-spacing:-.02em;line-height:1.2" id="sheetTitle">
         What would you like to see?
       </h2>
     </div>
 
-    <!-- Options -->
-    <div style="padding:0 16px 20px;display:grid;gap:10px">
+    <!-- STEP 1: Plan vs Stats -->
+    <div class="sheet-step" id="sheetStep1" style="padding:0 16px 20px">
 
-      <a href="leaderboard.html" style="
-        display:grid;
-        grid-template-columns:1fr 24px;
-        align-items:center;
-        gap:14px;
-        padding:16px;
-        border-radius:18px;
-        border:1px solid rgba(17,20,28,.08);
-        border-left:3px solid rgba(255,193,7,.80);
-        background:rgba(255,255,255,.90);
-        box-shadow:0 2px 12px rgba(17,20,28,.06);
-        text-decoration:none;
-        transition:transform .18s ease, box-shadow .18s ease;
-        -webkit-tap-highlight-color:transparent;
-      "
-      onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(17,20,28,.10)'"
-      onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(17,20,28,.06)'">
+      <a href="runninginfo.html" class="sheet-option" style="border-left:3px solid rgba(16,9,58,.75)">
         <div>
-          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">Leaderboard</strong>
-          <span style="display:block;margin-top:3px;font-size:12px;font-weight:600;color:rgba(17,20,28,.48);line-height:1.5">
-            All-time &amp; monthly — Consistency, Distance, Pace
-          </span>
+          <strong class="sheet-option-title">Running Plan</strong>
+          <span class="sheet-option-sub">The 4-week training cycle &amp; weekly workouts</span>
         </div>
-        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:rgba(17,20,28,.25);flex-shrink:0">
-          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" class="sheet-chevron"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
       </a>
 
-      <a href="event-leaderboard.html" style="
-        display:grid;
-        grid-template-columns:1fr 24px;
-        align-items:center;
-        gap:14px;
-        padding:16px;
-        border-radius:18px;
-        border:1px solid rgba(17,20,28,.08);
-        border-left:3px solid rgba(42,157,92,.70);
-        background:rgba(255,255,255,.90);
-        box-shadow:0 2px 12px rgba(17,20,28,.06);
-        text-decoration:none;
-        transition:transform .18s ease, box-shadow .18s ease;
-        -webkit-tap-highlight-color:transparent;
-      "
-      onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(17,20,28,.10)'"
-      onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(17,20,28,.06)'">
+      <button type="button" class="sheet-option" id="statsOptionBtn" style="border-left:3px solid rgba(242,197,29,.80)">
         <div>
-          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">Weekly Runs</strong>
-          <span style="display:block;margin-top:3px;font-size:12px;font-weight:600;color:rgba(17,20,28,.48);line-height:1.5">
-            Pick a specific run — fastest pace on that day
-          </span>
+          <strong class="sheet-option-title">Runners Stats</strong>
+          <span class="sheet-option-sub">Leaderboard, weekly runs &amp; your progress</span>
         </div>
-        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:rgba(17,20,28,.25);flex-shrink:0">
-          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" class="sheet-chevron"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </button>
+
+    </div>
+
+    <!-- STEP 2: Stats sub-options -->
+    <div class="sheet-step" id="sheetStep2" style="padding:0 16px 20px; display:none">
+
+      <a href="leaderboard.html" class="sheet-option" style="border-left:3px solid rgba(242,197,29,.80)">
+        <div>
+          <strong class="sheet-option-title">Leaderboard</strong>
+          <span class="sheet-option-sub">All-time &amp; monthly — Consistency, Distance, Pace</span>
+        </div>
+        <svg viewBox="0 0 24 24" class="sheet-chevron"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
       </a>
 
-      <a href="progress.html" style="
-        display:grid;
-        grid-template-columns:1fr 24px;
-        align-items:center;
-        gap:14px;
-        padding:16px;
-        border-radius:18px;
-        border:1px solid rgba(17,20,28,.08);
-        border-left:3px solid rgba(99,102,241,.70);
-        background:rgba(255,255,255,.90);
-        box-shadow:0 2px 12px rgba(17,20,28,.06);
-        text-decoration:none;
-        transition:transform .18s ease, box-shadow .18s ease;
-        -webkit-tap-highlight-color:transparent;
-      "
-      onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(17,20,28,.10)'"
-      onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(17,20,28,.06)'">
+      <a href="event-leaderboard.html" class="sheet-option" style="border-left:3px solid rgba(42,157,92,.70)">
         <div>
-          <strong style="display:block;font-weight:800;font-size:15px;color:rgba(17,20,28,.92);letter-spacing:-.01em">My Progress</strong>
-          <span style="display:block;margin-top:3px;font-size:12px;font-weight:600;color:rgba(17,20,28,.48);line-height:1.5">
-            Your personal stats, history &amp; achievements
-          </span>
+          <strong class="sheet-option-title">Weekly Runs</strong>
+          <span class="sheet-option-sub">Pick a specific run — fastest pace on that day</span>
         </div>
-        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:rgba(17,20,28,.25);flex-shrink:0">
-          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" class="sheet-chevron"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+
+      <a href="progress.html" class="sheet-option" style="border-left:3px solid rgba(99,102,241,.70)">
+        <div>
+          <strong class="sheet-option-title">My Progress</strong>
+          <span class="sheet-option-sub">Your personal stats, history &amp; achievements</span>
+        </div>
+        <svg viewBox="0 0 24 24" class="sheet-chevron"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
       </a>
 
     </div>
 
-    
     <!-- Cancel -->
     <div style="padding:0 16px 20px">
       <button id="lbChoiceCancel" type="button" style="
@@ -533,13 +716,126 @@
 </div>
 
 <script>
+
+
+/* ── PWA Install Prompt + Version Check ─────────────────── */
 (function() {
-  const modal  = document.getElementById('lbChoiceModal');
-  const sheet  = document.getElementById('lbChoiceSheet');
-  const btn    = document.getElementById('leaderboardBtn');
-  const cancel = document.getElementById('lbChoiceCancel');
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const promptEl = document.getElementById('pwa-install-prompt');
+  const iosInstr = document.getElementById('pwa-ios-instructions');
+  const installBtn = document.getElementById('pwa-install-btn');
+  const dismissBtn = document.getElementById('pwa-dismiss-btn');
+  let deferredPrompt = null;
+
+  /* 1. Capture Android/Chrome install prompt */
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!localStorage.getItem('pwa-dismissed')) showPrompt();
+  });
+
+  function showPrompt() {
+    if (isStandalone) return;
+    promptEl.style.display = 'block';
+    promptEl.setAttribute('aria-hidden', 'false');
+    requestAnimationFrame(() => promptEl.classList.add('show'));
+  }
+
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (isIOS) {
+        iosInstr.style.display = 'flex';
+        iosInstr.setAttribute('aria-hidden', 'false');
+      } else if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') hidePrompt();
+        deferredPrompt = null;
+      } else {
+        alert('To install: tap your browser menu (⋮) and select "Add to Home Screen"');
+      }
+    });
+  }
+
+  if (dismissBtn) {
+    dismissBtn.addEventListener('click', () => {
+      hidePrompt();
+      localStorage.setItem('pwa-dismissed', '1');
+    });
+  }
+
+  function hidePrompt() {
+    promptEl.classList.remove('show');
+    setTimeout(() => {
+      promptEl.style.display = 'none';
+      promptEl.setAttribute('aria-hidden', 'true');
+    }, 450);
+  }
+
+  /* Show iOS prompt after 4s if not dismissed */
+  setTimeout(() => {
+    if (!isStandalone && !localStorage.getItem('pwa-dismissed') && isIOS) showPrompt();
+  }, 4000);
+
+
+  /* 2. VERSION CHECK — force existing PWA users to reinstall for new logo */
+  const CURRENT_PWA_VERSION = '2'; // 🔁 BUMP THIS every time you update logo/icons
+  const savedVersion = localStorage.getItem('pwa-version');
+
+  if (isStandalone && savedVersion !== CURRENT_PWA_VERSION) {
+    // Clear old caches so new assets load next time
+    if ('caches' in window) {
+      caches.keys().then(names => names.forEach(n => caches.delete(n)));
+    }
+
+    // Show update toast
+    const toast = document.createElement('div');
+    toast.className = 'pwa-update-toast';
+    toast.innerHTML = `
+      <span>New logo & update available</span>
+      <button onclick="localStorage.setItem('pwa-version','${CURRENT_PWA_VERSION}');this.parentElement.remove();">Dismiss</button>
+    `;
+    document.body.appendChild(toast);
+  }
+
+  // Track current version for fresh installs
+  if (!isStandalone) {
+    localStorage.setItem('pwa-version', CURRENT_PWA_VERSION);
+  }
+})();
+
+(function() {
+  const modal    = document.getElementById('lbChoiceModal');
+  const sheet    = document.getElementById('lbChoiceSheet');
+  const btn      = document.getElementById('leaderboardBtn');
+  const cancel   = document.getElementById('lbChoiceCancel');
+  const statsBtn = document.getElementById('statsOptionBtn');
+  const backRow  = document.getElementById('sheetBackRow');
+  const backBtn  = document.getElementById('sheetBackBtn');
+  const step1    = document.getElementById('sheetStep1');
+  const step2    = document.getElementById('sheetStep2');
+  const eyebrow  = document.getElementById('sheetEyebrow');
+  const title    = document.getElementById('sheetTitle');
+
+  function showStep1() {
+    step1.style.display = 'grid';
+    step2.style.display = 'none';
+    backRow.style.display = 'none';
+    eyebrow.textContent = 'Running';
+    title.textContent = 'What would you like to see?';
+  }
+
+  function showStep2() {
+    step1.style.display = 'none';
+    step2.style.display = 'grid';
+    backRow.style.display = 'flex';
+    eyebrow.textContent = 'Runners Stats';
+    title.textContent = 'Pick a view';
+  }
 
   function openModal() {
+    showStep1();
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -554,11 +850,16 @@
     sheet.style.transform = 'translateY(100%)';
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    setTimeout(() => { modal.style.display = 'none'; }, 350);
+    setTimeout(() => {
+      modal.style.display = 'none';
+      showStep1();
+    }, 350);
   }
 
   if (btn) btn.addEventListener('click', openModal);
   if (cancel) cancel.addEventListener('click', closeModal);
+  if (statsBtn) statsBtn.addEventListener('click', showStep2);
+  if (backBtn) backBtn.addEventListener('click', showStep1);
 
   modal.addEventListener('click', e => {
     if (e.target === modal) closeModal();
@@ -581,6 +882,13 @@
     else { sheet.style.transform = 'translateY(0)'; }
   });
 })();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js?v=2')
+    .then(reg => console.log('SW registered'))
+    .catch(err => console.log('SW error', err));
+}
+
 </script>
 <script src="/assets/js/components.js"></script>
 </html>

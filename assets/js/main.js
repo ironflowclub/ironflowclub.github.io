@@ -6,19 +6,17 @@
   'use strict';
 
   // Wait for dependencies
-  if (!window.IronflowTranslation || !window.IronflowUtils) {
+  if (!window.IronflowUtils) {
     console.error('Dependencies not loaded');
     return;
   }
 
-  const T = window.IronflowTranslation;
   const Utils = window.IronflowUtils;
 
   // DOM Elements
   const loader = document.getElementById('page-loader');
   const siteContent = document.getElementById('site-content');
   const header = document.getElementById('site-header');
-  const langToggleBtn = document.getElementById('langToggle');
 
   // Translation elements
   const kickerEl = document.getElementById('kickerText');
@@ -56,13 +54,7 @@
     }
   }
 
-  /**
-   * Language toggle handler
-   */
-  function toggleLanguage() {
-    T.toggle();
-    updateTranslations();
-  }
+
 
   /**
    * Launch site after loader
@@ -81,9 +73,6 @@
       document.querySelectorAll('.s-enter').forEach(el => {
         el.classList.add('go');
       });
-      // Set language after elements are visible
-      T.setLang('en');
-      updateTranslations();
     }, 220);
 
     setTimeout(() => {
@@ -147,11 +136,6 @@
     const yearEl = document.getElementById('yr');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Language toggle
-    if (langToggleBtn) {
-      langToggleBtn.addEventListener('click', toggleLanguage);
-    }
-
     // Check reduced motion
     if (Utils.prefersReducedMotion()) {
       if (loader) loader.remove();
@@ -160,10 +144,8 @@
         header.style.transform = 'none';
         header.style.opacity = '1';
       }
-      T.setLang('en');
-      updateTranslations();
     } else {
-      setTimeout(launchSite, 1500);
+      setTimeout(launchSite, 1900);
     }
 
     // Initialize features

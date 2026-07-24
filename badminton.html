@@ -1,10 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="IFC Badminton Championship — A competitive doubles tournament by IRONFLOW CLUB in Sharjah." />
-  <meta name="theme-color" content="#ffc107" />
+  <meta name="theme-color" content="#F2C51D" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="IFC Badminton Championship 2026 — IRONFLOW CLUB" />
   <meta property="og:description" content="Join the IFC Badminton Championship. Competitive men's doubles tournament in Sharjah." />
@@ -42,15 +42,15 @@
       --text: rgba(17,20,28,.88);
       --muted: rgba(17,20,28,.62);
       --muted-2: rgba(17,20,28,.56);
-      --accent: #ffc107;
-      --accent-2: #ff9800;
+      --accent: #F2C51D;
+      --accent-2: #F9E18B;
       --gold-text: rgba(130,90,0,.95);
       --stroke: rgba(17,20,28,.10);
       --stroke-2: rgba(17,20,28,.18);
       --success: #22c55e;
       --success-text: #15803d;
-      --dark-bg: #0b0d1a;
-      --dark-surface: #1c1f3a;
+      --dark-bg: #10093A;
+      --dark-surface: #1A1252;
       --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
       --space-lg: 28px; --space-xl: 48px; --space-2xl: 80px;
       --radius: 22px; --radius-lg: 28px; --radius-sm: 16px; --pill: 999px;
@@ -68,8 +68,8 @@
     body {
       font-family: var(--font-body); color: var(--text);
       background:
-        radial-gradient(800px 500px at 18% 0%, rgba(255,193,7,.15), transparent 55%),
-        radial-gradient(600px 500px at 100% 100%, rgba(255,152,0,.06), transparent 52%),
+        radial-gradient(800px 500px at 18% 0%, rgba(242,197,29,.15), transparent 55%),
+        radial-gradient(600px 500px at 100% 100%, rgba(249,225,139,.06), transparent 52%),
         linear-gradient(180deg, #fff 0%, var(--bg) 70%), var(--bg);
       line-height: 1.65; -webkit-font-smoothing: antialiased;
       padding-bottom: calc(env(safe-area-inset-bottom) + 14px);
@@ -97,19 +97,19 @@
     .nav-actions { flex-shrink: 0; }
     /* FIX 3: Tap target minimum 44px */
     .nav-home-btn { display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0 16px; border-radius:var(--pill); border:1px solid rgba(17,20,28,.14); background:rgba(255,255,255,.88); font-family:var(--font-display); font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:rgba(17,20,28,.88); box-shadow:0 4px 16px rgba(17,20,28,.07); transition:background .25s var(--ease-out),border-color .25s var(--ease-out),color .25s var(--ease-out),box-shadow .25s var(--ease-out),transform .25s var(--ease-out); -webkit-tap-highlight-color:transparent; user-select:none; white-space:nowrap; }
-    .nav-home-btn:hover { background:#fff; border-color:rgba(255,193,7,.50); color:var(--gold-text); box-shadow:0 6px 22px rgba(255,193,7,.16); transform:translateY(-1px); }
+    .nav-home-btn:hover { background:#fff; border-color:rgba(242,197,29,.50); color:var(--gold-text); box-shadow:0 6px 22px rgba(242,197,29,.16); transform:translateY(-1px); }
     .nav-home-btn:active { transform:scale(.96); }
     @media (max-width:360px) { .nav-home-btn span{display:none;} .nav-home-btn{width:44px;padding:0;justify-content:center;} }
 
     /* BUTTONS */
     .btn { min-height:56px; border-radius:var(--pill); display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; border:1px solid transparent; font-family:var(--font-display); font-weight:800; font-size:11px; letter-spacing:.18em; text-transform:uppercase; transition:all .25s var(--ease-out); -webkit-tap-highlight-color:transparent; user-select:none; position:relative; overflow:hidden; }
     .btn:active { transform:scale(.97); }
-    .btn-primary { background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#141414; box-shadow:0 14px 40px rgba(255,193,7,.26); }
-    .btn-primary:hover { box-shadow:0 18px 50px rgba(255,193,7,.36); transform:translateY(-1px); }
+    .btn-primary { background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#141414; box-shadow:0 14px 40px rgba(242,197,29,.26); }
+    .btn-primary:hover { box-shadow:0 18px 50px rgba(242,197,29,.36); transform:translateY(-1px); }
     .btn-primary::after { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent); animation:shimmer 3.5s 1.5s ease-in-out infinite; }
     .btn-ghost { background:rgba(255,255,255,.88); border-color:rgba(17,20,28,.22); border-width:1.5px; color:rgba(17,20,28,.88); box-shadow:0 8px 24px rgba(17,20,28,.08); }
     .btn-ghost:hover { background:rgba(255,255,255,1); border-color:rgba(17,20,28,.24); transform:translateY(-1px); }
-    .btn-cta-primary { background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#141414; box-shadow:0 16px 44px rgba(255,193,7,.28); }
+    .btn-cta-primary { background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#141414; box-shadow:0 16px 44px rgba(242,197,29,.28); }
     .btn-cta-ghost { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.82); }
     .btn-cta-ghost:hover { background:rgba(255,255,255,.14); }
     @keyframes shimmer { 0%{left:-60%;} 30%,100%{left:130%;} }
@@ -129,7 +129,7 @@
     /* HERO */
     /* FIX 4: overflow hidden on hero to clip SVG court lines */
     .hero { padding:clamp(70px,14vh,120px) var(--pad) 0; text-align:center; position:relative; overflow:hidden; }
-    .hero::before { content:''; position:absolute; top:-40px; left:50%; transform:translateX(-50%); width:min(600px,100vw); height:600px; background:radial-gradient(circle,rgba(255,193,7,.12) 0%,transparent 70%); pointer-events:none; }
+    .hero::before { content:''; position:absolute; top:-40px; left:50%; transform:translateX(-50%); width:min(600px,100vw); height:600px; background:radial-gradient(circle,rgba(242,197,29,.12) 0%,transparent 70%); pointer-events:none; }
     .hero-court-lines { position:absolute; inset:0; pointer-events:none; overflow:hidden; opacity:.02; }
     .hero-court-lines svg { width:100%; height:100%; }
     .hero-kicker { display:inline-flex; align-items:center; gap:10px; margin-bottom:20px; font-size:10px; font-weight:800; letter-spacing:.36em; text-transform:uppercase; color:var(--gold-text); animation:fadeUp .6s var(--ease-out) both; }
@@ -142,12 +142,12 @@
 
     /* COUNTDOWN */
     .countdown-section { padding:70px var(--pad) var(--space-2xl); text-align:center; position:relative; overflow:hidden; }
-    .countdown-section::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(500px,100vw); height:400px; background:radial-gradient(ellipse,rgba(255,193,7,.08),transparent 70%); pointer-events:none; }
+    .countdown-section::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(500px,100vw); height:400px; background:radial-gradient(ellipse,rgba(242,197,29,.08),transparent 70%); pointer-events:none; }
     /* FIX 6: Countdown grid — full width, won't overflow narrow screens */
     .countdown-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; width:100%; max-width:520px; margin:0 auto; }
-    .countdown-unit { background:linear-gradient(135deg,rgba(255,255,255,.90),rgba(255,255,255,.70)); border:1px solid rgba(255,193,7,.20); border-radius:var(--radius); padding:20px var(--space-sm); box-shadow:0 16px 40px rgba(17,20,28,.09),0 1px 0 rgba(255,255,255,.8) inset; position:relative; overflow:hidden; transition:transform var(--duration) var(--ease-out),box-shadow var(--duration) var(--ease-out); }
-    .countdown-unit:hover { transform:translateY(-3px); box-shadow:0 24px 60px rgba(17,20,28,.14),0 0 0 1px rgba(255,193,7,.2); }
-    .countdown-unit::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,rgba(255,193,7,.6),transparent); }
+    .countdown-unit { background:linear-gradient(135deg,rgba(255,255,255,.90),rgba(255,255,255,.70)); border:1px solid rgba(242,197,29,.20); border-radius:var(--radius); padding:20px var(--space-sm); box-shadow:0 16px 40px rgba(17,20,28,.09),0 1px 0 rgba(255,255,255,.8) inset; position:relative; overflow:hidden; transition:transform var(--duration) var(--ease-out),box-shadow var(--duration) var(--ease-out); }
+    .countdown-unit:hover { transform:translateY(-3px); box-shadow:0 24px 60px rgba(17,20,28,.14),0 0 0 1px rgba(242,197,29,.2); }
+    .countdown-unit::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,rgba(242,197,29,.6),transparent); }
     .countdown-num { display:block; font-family:var(--font-display); font-weight:900; font-size:clamp(24px,6vw,48px); letter-spacing:-.04em; line-height:1; color:var(--ink); margin-bottom:var(--space-sm); }
     .countdown-num.flip { animation:numFlip .3s var(--ease-out); }
     @keyframes numFlip { 0%{transform:translateY(-8px);opacity:.3;} 100%{transform:none;opacity:1;} }
@@ -155,7 +155,7 @@
 
     /* EVENT CARD */
     .event-card-wrap { padding:0 var(--pad) 60px; animation:fadeUp .8s .32s var(--ease-out) both; }
-    .event-card { max-width:480px; margin:0 auto; background:rgba(255,255,255,.94); border:1px solid rgba(255,193,7,.25); border-radius:var(--radius-lg); box-shadow:var(--shadow-heavy),0 0 0 1px rgba(255,255,255,.6) inset,0 1px 0 rgba(255,255,255,.9) inset; overflow:hidden; position:relative; }
+    .event-card { max-width:480px; margin:0 auto; background:rgba(255,255,255,.94); border:1px solid rgba(242,197,29,.25); border-radius:var(--radius-lg); box-shadow:var(--shadow-heavy),0 0 0 1px rgba(255,255,255,.6) inset,0 1px 0 rgba(255,255,255,.9) inset; overflow:hidden; position:relative; }
     .event-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent)); }
     .event-card-header { padding:var(--space-lg) var(--space-lg) 20px; border-bottom:1px solid rgba(17,20,28,.07); }
     .event-tag { font-size:9px; font-weight:800; letter-spacing:.28em; text-transform:uppercase; color:var(--gold-text); margin-bottom:var(--space-sm); }
@@ -176,8 +176,8 @@
   opacity: .65;
   cursor: not-allowed;
   pointer-events: none;
-  background: rgba(255,193,7,.08);
-  border-color: rgba(255,193,7,.25);
+  background: rgba(242,197,29,.08);
+  border-color: rgba(242,197,29,.25);
 }
 .live-btn[data-state="pending"]::before {
   content: "Starts on Tournament Day";
@@ -190,8 +190,8 @@
 
 /* live state */
 .live-btn[data-state="live"] {
-  background: linear-gradient(135deg, rgba(255,193,7,.18), rgba(255,152,0,.12));
-  border-color: rgba(255,193,7,.45);
+  background: linear-gradient(135deg, rgba(242,197,29,.18), rgba(249,225,139,.12));
+  border-color: rgba(242,197,29,.45);
 }
 .live-btn[data-state="live"]::after {
   content: "";
@@ -204,7 +204,7 @@
     /* TIMELINE */
     .timeline-section { padding:10px var(--pad) var(--space-2xl); }
     .timeline { margin-top:40px; position:relative; padding-left:16px;  }
-    .timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:2px; background:linear-gradient(to bottom,var(--accent),rgba(255,152,0,.3),transparent); }
+    .timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:2px; background:linear-gradient(to bottom,var(--accent),rgba(249,225,139,.3),transparent); }
     .timeline-item { position:relative; padding-bottom:36px; }
     .timeline-item:last-child { padding-bottom:0; }
     .timeline-dot {
@@ -216,7 +216,7 @@
       transform: translateX(-50%);
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 0 3px rgba(255,193,7,.15), 0 0 16px rgba(255,193,7,.3);
+      box-shadow: 0 0 0 3px rgba(242,197,29,.15), 0 0 16px rgba(242,197,29,.3);
     }
     .timeline-year { font-size:10px; font-weight:800; letter-spacing:.26em; text-transform:uppercase; color:var(--gold-text); margin-bottom:6px; }
     .timeline-content { background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,255,255,.65)); border:1px solid var(--stroke); border-radius:16px; padding:20px 22px; box-shadow:var(--shadow-soft); transition:transform var(--duration) var(--ease-out); }
@@ -224,14 +224,14 @@
     .timeline-event { font-family:var(--font-display); font-weight:800; font-size:16px; color:var(--ink); letter-spacing:-.01em; margin-bottom:var(--space-xs); }
     .timeline-winner { font-size:13px; font-weight:500; color:var(--muted); }
     .timeline-winner strong { color:var(--text); font-weight:600; }
-    .timeline-tbd { font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-text); background:rgba(255,193,7,.10); border:1px solid rgba(255,193,7,.20); border-radius:var(--pill); padding:3px 10px; display:inline-block; margin-top:6px; }
+    .timeline-tbd { font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-text); background:rgba(242,197,29,.10); border:1px solid rgba(242,197,29,.20); border-radius:var(--pill); padding:3px 10px; display:inline-block; margin-top:6px; }
 
     /* CTA */
     .cta-section { padding:60px var(--pad) 70px; text-align:center; }
-    .cta-inner { background:linear-gradient(135deg,var(--dark-surface),var(--dark-bg)); border-radius:var(--radius-lg); padding:52px var(--space-lg); position:relative; overflow:hidden; border:1px solid rgba(255,193,7,.15); box-shadow:0 30px 80px rgba(17,20,28,.22); }
-    .cta-inner::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:min(400px,100%); height:300px; background:radial-gradient(ellipse,rgba(255,193,7,.12) 0%,transparent 70%); pointer-events:none; }
+    .cta-inner { background:linear-gradient(135deg,var(--dark-surface),var(--dark-bg)); border-radius:var(--radius-lg); padding:52px var(--space-lg); position:relative; overflow:hidden; border:1px solid rgba(242,197,29,.15); box-shadow:0 30px 80px rgba(17,20,28,.22); }
+    .cta-inner::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:min(400px,100%); height:300px; background:radial-gradient(ellipse,rgba(242,197,29,.12) 0%,transparent 70%); pointer-events:none; }
     .cta-inner::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent),var(--accent-2),transparent); }
-    .cta-kicker { font-size:9px; font-weight:800; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,193,7,.7); margin-bottom:var(--space-md); position:relative; }
+    .cta-kicker { font-size:9px; font-weight:800; letter-spacing:.32em; text-transform:uppercase; color:rgba(242,197,29,.7); margin-bottom:var(--space-md); position:relative; }
     .cta-title { font-family:var(--font-display); font-weight:800; font-size:clamp(26px,6vw,38px); letter-spacing:-.025em; color:rgba(255,255,255,.96); line-height:1.2; margin-bottom:14px; position:relative; }
     .cta-text { color:rgba(255,255,255,.68); font-size:12px; font-weight:500; max-width:40ch; margin:0 auto 36px; line-height:1.65; position:relative; }
     /* FIX 8: CTA buttons — min-width:0 prevents squeeze; single col on small phones */
@@ -239,7 +239,7 @@
     .cta-actions .btn { min-width:0; width:100%; }
 
     /* FOOTER */
-    footer { padding:var(--space-lg) 0; background:#0e0f14; border-top:1px solid rgba(255,255,255,.08); }
+    footer { padding:var(--space-lg) 0; background:#10093A; border-top:1px solid rgba(255,255,255,.08); }
     .footer-inner { display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; padding-inline: var(--pad); }
     .footer-brand { font-family:var(--font-display); font-size:18px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.90); font-weight:800; }
     .footer-copy { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.50); }
@@ -258,8 +258,8 @@
 
 <body>
   <!-- LOADING SCREEN -->
-  <div id="loader" style="position:fixed;inset:0;z-index:99999;background:#0b0d1a;display:flex;align-items:center;justify-content:center;transition:opacity .6s cubic-bezier(.16,1,.3,1),visibility .6s;">
-    <div style="width:40px;height:40px;border-radius:50%;border:3px solid rgba(255,193,7,.15);border-top-color:#ffc107;animation:spin .8s linear infinite;"></div>
+  <div id="loader" style="position:fixed;inset:0;z-index:99999;background:#10093A;display:flex;align-items:center;justify-content:center;transition:opacity .6s cubic-bezier(.16,1,.3,1),visibility .6s;">
+    <div style="width:40px;height:40px;border-radius:50%;border:3px solid rgba(242,197,29,.15);border-top-color:#F2C51D;animation:spin .8s linear infinite;"></div>
   </div>
   <style>@keyframes spin{to{transform:rotate(360deg);}}</style>
   <script>
@@ -419,7 +419,7 @@
     <!-- CTA -->
 
     <section class="cta-section" aria-labelledby="cta-title">
-  <div class="container">
+    <div class="container">
     <div class="cta-inner reveal">
       
       <p class="cta-kicker">Write Your Chapter</p>
@@ -431,15 +431,9 @@
       <p class="cta-text">
         Compete for your place in IFC history and become the next champion.
       </p>
-
-      <div class="cta-actions">
-        <a class="btn btn-cta-primary" href="#upcoming">Register</a>
-        <a class="btn btn-cta-ghost" href="champions.html">View Previous Results</a>
+        </div>
       </div>
-
-    </div>
-  </div>
-</section>
+    </section>
 
   </main>
 

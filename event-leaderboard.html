@@ -1,11 +1,11 @@
-<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
+﻿<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="IRONFLOW CLUB Sharjah — Stats by Event" />
-  <meta name="theme-color" content="#ffc107" />
+  <meta name="theme-color" content="#F2C51D" />
   <title>Stats by Event · IRONFLOW CLUB Sharjah</title>
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon_v3.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
@@ -68,7 +68,7 @@
 
     .event-pill:hover {
       background: rgba(255,255,255,.14);
-      border-color: rgba(255,193,7,.40);
+      border-color: rgba(242,197,29,.40);
     }
 
     .event-pill-icon {
@@ -122,7 +122,7 @@
 
 .event-pill:hover {
   background: rgba(255,255,255,.14);
-  border-color: rgba(255,193,7,.40);
+  border-color: rgba(242,197,29,.40);
 }
 
 .event-pill-icon {
@@ -170,7 +170,7 @@
 }
 
 .nav-home-btn { display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0 16px; border-radius:var(--pill); border:1px solid rgba(17,20,28,.14); background:rgba(255,255,255,.88); font-family:var(--font-display); font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:rgba(17,20,28,.88); box-shadow:0 4px 16px rgba(17,20,28,.07); transition:background .25s var(--ease-out),border-color .25s var(--ease-out),color .25s var(--ease-out),box-shadow .25s var(--ease-out),transform .25s var(--ease-out); -webkit-tap-highlight-color:transparent; user-select:none; white-space:nowrap; }
-.nav-home-btn:hover { background:#fff; border-color:rgba(255,193,7,.50); color:var(--gold-text); box-shadow:0 6px 22px rgba(255,193,7,.16); transform:translateY(-1px); }
+.nav-home-btn:hover { background:#fff; border-color:rgba(242,197,29,.50); color:var(--gold-text); box-shadow:0 6px 22px rgba(242,197,29,.16); transform:translateY(-1px); }
 .nav-home-btn:active { transform:scale(.96); }
 
 .event-dropdown.open {
@@ -197,8 +197,8 @@
 }
 
 .event-dropdown-item.active {
-  background: rgba(255,193,7,.14);
-  border-color: rgba(255,193,7,.30);
+  background: rgba(242,197,29,.14);
+  border-color: rgba(242,197,29,.30);
 }
 
 .event-dropdown-name {
@@ -261,8 +261,8 @@
     }
 
     .event-dropdown-item.active {
-      background: rgba(255,193,7,.14);
-      border-color: rgba(255,193,7,.30);
+      background: rgba(242,197,29,.14);
+      border-color: rgba(242,197,29,.30);
     }
 
     .event-dropdown-name {
@@ -292,8 +292,8 @@
       padding: 12px 18px;
       margin-bottom: 14px;
       border-radius: 16px;
-      background: rgba(255,193,7,.10);
-      border: 1px solid rgba(255,193,7,.22);
+      background: rgba(242,197,29,.10);
+      border: 1px solid rgba(242,197,29,.22);
       font-size: 13px;
       font-weight: 700;
       color: rgba(255,255,255,.75);
@@ -322,14 +322,14 @@
       font-weight: 700;
       letter-spacing: .10em;
       text-transform: uppercase;
-      color: rgba(255,193,7,.65);
+      color: rgba(242,197,29,.65);
     }
 
     .event-info-banner .ev-dot {
       width: 3px;
       height: 3px;
       border-radius: 50%;
-      background: rgba(255,193,7,.40);
+      background: rgba(242,197,29,.40);
       display: inline-block;
     }
 
@@ -428,7 +428,7 @@
       font-weight: 800;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: rgba(255,193,7,.70);
+      color: rgba(242,197,29,.70);
       margin-bottom: 10px;
       text-align: center;
     }
@@ -447,7 +447,7 @@
 
 .home-btn:hover {
   background: rgba(255,255,255,.14);
-  border-color: rgba(255,193,7,.32);
+  border-color: rgba(242,197,29,.32);
 }
 
 @media (max-width: 640px) {
@@ -950,15 +950,15 @@
             datasets: [{
               label: 'Pace',
               data: paceVals,
-              borderColor: 'rgba(255,193,7,0.95)',
-              backgroundColor: 'rgba(255,193,7,0.10)',
+              borderColor: 'rgba(242,197,29,0.95)',
+              backgroundColor: 'rgba(242,197,29,0.10)',
               fill: true,
               tension: 0.35,
               pointRadius: 6,
               pointHoverRadius: 8,
               pointBackgroundColor: runs.map((r, i) => {
-                if (String(r.event_id) === String(highlightEventId)) return '#ffc107';
-                return paceVals[i] === minPace ? '#2a9d5c' : 'rgba(255,193,7,0.60)';
+                if (String(r.event_id) === String(highlightEventId)) return '#F2C51D';
+                return paceVals[i] === minPace ? '#2a9d5c' : 'rgba(242,197,29,0.60)';
               }),
               pointBorderColor: '#fff',
               pointBorderWidth: 2

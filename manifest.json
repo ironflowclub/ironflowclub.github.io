@@ -1,10 +1,10 @@
 {
-  "name": "IRONFLOW CLUB Sharjah",
+  "name": "IRON FLOW CLUB Sharjah",
   "short_name": "ironflowclub",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#0b0d1a",
-  "theme_color": "#ffc107",
+  "background_color": "#10093A",
+  "theme_color": "#F2C51D",
   "id": "/",
   "scope": "/",
   "icons": [

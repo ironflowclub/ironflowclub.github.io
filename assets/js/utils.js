@@ -175,3 +175,40 @@
   window.IronflowUtils = Utils;
 
 })(window);
+
+// Run this check when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches 
+             || window.navigator.standalone;
+
+  if (isPWA && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(registration => {
+      if (!registration.active) return;
+
+      const channel = new MessageChannel();
+
+      channel.port1.onmessage = event => {
+        const swVersion = event.data.version;
+        const storedVersion = localStorage.getItem('ironflow_pwa_version');
+
+        // Trigger banner if stored version exists and doesn't match current CACHE_VERSION
+        if (storedVersion && storedVersion !== swVersion) {
+          showReAddPrompt();
+        }
+
+        // Store active version
+        localStorage.setItem('ironflow_pwa_version', swVersion);
+      };
+
+      // Request version from SW
+      registration.active.postMessage({ type: 'GET_VERSION' }, [channel.port2]);
+    });
+  }
+});
+
+function showReAddPrompt() {
+  const banner = document.getElementById('readd-banner');
+  if (banner) {
+    banner.classList.remove('hidden');
+  }
+}

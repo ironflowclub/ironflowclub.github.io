@@ -6,26 +6,26 @@
 :root {
 
   /* ── Brand Colors ── */
-  --accent:         #ffc107;
-  --accent-2:       #ff9800;
-  --accent-mid:     #d48d12;
-  --accent-dark:    #b87400;
-  --accent-glow:    rgba(255, 193, 7, .14);
-  --accent-dim:     rgba(255, 193, 7, .10);
-  --gold-text:      rgba(130, 90, 0, .95);
+  --accent:         #F2C51D;           /* Primary Yellow  */
+  --accent-2:       #F9E18B;           /* Pastel Yellow   */
+  --accent-mid:     #D4A800;           /* Mid Yellow      */
+  --accent-dark:    #A87E00;           /* Dark Yellow (text on light) */
+  --accent-glow:    rgba(242, 197, 29, .16);
+  --accent-dim:     rgba(242, 197, 29, .10);
+  --gold-text:      rgba(148, 100, 0, .95);
 
   /* ── Backgrounds ── */
   --bg:             #fbfbfd;
-  --bg-2:           #f5f4f0;
+  --bg-2:           #f5f5f0;
   --surface:        #ffffff;
   --surface-2:      #f9f8f5;
-  --surface-3:      #efefec;
-  --dark-bg:        #0b0d1a;
-  --dark-surface:   #1c1f3a;
-  --dark-surface-2: #22263a;
-  --night-1:        #1c1f3a;
-  --night-2:        #11142a;
-  --night-3:        #0b0d1a;
+  --surface-3:      #efeef0;
+  --dark-bg:        #10093A;           /* Dark Indigo     */
+  --dark-surface:   #1A1252;           /* Lighter Indigo  */
+  --dark-surface-2: #20185E;
+  --night-1:        #1A1252;
+  --night-2:        #130D40;
+  --night-3:        #10093A;           /* Deepest Indigo  */
 
   /* ── Text ── */
   --ink:            rgba(17, 20, 28, .94);

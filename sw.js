@@ -3,7 +3,7 @@
  * Bump CACHE_VERSION whenever you deploy updates
  */
 
-const CACHE_VERSION = 'v201';
+const CACHE_VERSION = 'v300';
 const CACHE_NAME = `ironflow-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -27,7 +27,8 @@ const STATIC_ASSETS = [
   '/tournament.html',
   '/admin.html',
   '/auth-guard.js',
-  '/running.html'
+  '/running.html',
+  '/runninginfo.html'
 ];
 
 // ── Install: cache all static assets ──────────────────────────
@@ -108,4 +109,14 @@ self.addEventListener('fetch', event => {
         });
       })
   );
+});
+
+
+// Add this at the bottom of sw.js
+
+// ── Message Listener: Respond with current CACHE_VERSION ──────────
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'GET_VERSION') {
+    event.ports[0].postMessage({ version: CACHE_VERSION });
+  }
 });

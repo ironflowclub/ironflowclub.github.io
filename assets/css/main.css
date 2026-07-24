@@ -57,8 +57,8 @@ button, input, select {
   --text: rgba(17,20,28,.88);
   --muted: rgba(17,20,28,.62);
   --muted-2: rgba(17,20,28,.45);
-  --accent: #ffc107;
-  --accent-2: #ff9800;
+  --accent: #F2C51D;
+  --accent-2: #F9E18B;
   --stroke: rgba(17,20,28,.10);
   --stroke-2: rgba(17,20,28,.18);
   --radius: 22px;
@@ -74,9 +74,9 @@ button, input, select {
   --ease-bounce: cubic-bezier(.34,1.56,.64,1);
   --font-display: Outfit, system-ui, sans-serif;
   --font-body: Inter, system-ui, -apple-system, sans-serif;
-  --night-1: #1c1f3a;
-  --night-2: #11142a;
-  --night-3: #0b0d1a;
+  --night-1: #1A1252;
+  --night-2: #130D40;
+  --night-3: #10093A;
 }
 
 /* ── Body Base ── */
@@ -84,8 +84,8 @@ body {
   font-family: var(--font-body);
   color: var(--text);
   background:
-    radial-gradient(1200px 700px at 18% 0%, rgba(255,193,7,.20), transparent 55%),
-    radial-gradient(900px 650px at 100% 100%, rgba(0,170,255,.08), transparent 52%),
+    radial-gradient(1200px 700px at 18% 0%, rgba(242, 197, 29, .14), transparent 55%),
+    radial-gradient(900px 650px at 100% 100%, rgba(16, 9, 58, .06), transparent 52%),
     linear-gradient(180deg, #fff 0%, #fbfbfd 70%),
     var(--bg);
   line-height: 1.65;
@@ -145,7 +145,7 @@ body.home header.go {
   height: 42px;
   border-radius: 14px;
   object-fit: cover;
-  border: 1px solid rgba(255,193,7,.30);
+  border: 1px solid rgba(242, 197, 29, .30);
   background: rgba(255,255,255,.9);
   box-shadow: 0 10px 24px rgba(17,20,28,.08);
   flex-shrink: 0;
@@ -174,7 +174,7 @@ body.home header.go {
   font-weight: 600;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(161,115,0,.92) !important; /* ✅ gold colour back */
+  color: rgba(148, 100, 0, .92) !important; /* ✅ new gold */
   margin-top: 2px;
 
   
@@ -220,8 +220,8 @@ body.home header.go {
 }
 
 .nav-btn:hover, .lang-switch:hover, .nav-cta:hover {
-  background: rgba(255,193,7,.14);
-  border-color: rgba(255,193,7,.35);
+  background: rgba(242, 197, 29, .14);
+  border-color: rgba(242, 197, 29, .35);
 }
 
 .nav-btn:active, .lang-switch:active, .nav-cta:active {
@@ -272,8 +272,8 @@ main {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #141414;
-  box-shadow: 0 16px 44px rgba(255,193,7,.28);
+  color: #10093A;
+  box-shadow: 0 16px 44px rgba(242, 197, 29, .30);
 }
 
 .btn-ghost {
@@ -320,7 +320,7 @@ main {
 /* ── Footer ── */
 footer {
   padding: 28px 0;
-  background: #0e0f14;
+  background: #10093A;
   border-top: 1px solid rgba(255,255,255,.08);
 }
 
@@ -405,7 +405,7 @@ footer {
   width: 32px;
   height: 32px;
   margin: 0 auto 14px;
-  border: 3px solid rgba(255,193,7,.25);
+  border: 3px solid rgba(242, 197, 29, .25);
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin .7s linear infinite;

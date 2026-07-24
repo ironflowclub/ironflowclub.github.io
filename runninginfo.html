@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="IFC Running Program — a 4-week progression from speed to endurance to race pace, by IRONFLOW CLUB in Sharjah." />
+  <meta name="theme-color" content="#10093A" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="IFC Running Program — IRONFLOW CLUB" />
+  <meta property="og:description" content="A 4-week training cycle: speed, endurance, tempo, and the long run test." />
+  <meta property="og:url" content="https://ironflowclub.github.io/running-schedule" />
+  <meta property="og:site_name" content="IRON FLOW CLUB" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="IFC Running Program" />
+  <meta name="twitter:description" content="4-week training cycle for the IFC running club." />
+  <link rel="canonical" href="https://ironflowclub.github.io/running-schedule" />
+  <title>Running Program · IRONFLOW CLUB</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="IRONFLOW" />
+  <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png?v=20260724" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg?v=20260724" />
+  <link rel="shortcut icon" href="/assets/images/favicon.ico?v=20260724" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png?v=20260724" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+
+  <!-- Shared site theme + styles -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+
+  <style>
+    /* ============================================================
+       Page-specific styles only — colors, spacing, fonts, buttons,
+       nav, and footer all come from theme.css / main.css above.
+       ============================================================ */
+
+    html, body { overflow-x: hidden; max-width: 100%; }
+
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .skip-link { position:absolute; top:-100%; left:var(--pad); padding:12px 24px; background:var(--accent); color:#141414; border-radius:var(--pill); font-family:var(--font-display); font-weight:700; font-size:14px; z-index:100; transition:top .2s var(--ease-out); }
+    .skip-link:focus { top:12px; }
+
+    /* NAV — page-specific home button (shared nav/brand/header styles come from main.css) */
+    .nav-home-btn { display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0 16px; border-radius:var(--pill); border:1px solid var(--border-2); background:rgba(255,255,255,.88); font-family:var(--font-display); font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:rgba(17,20,28,.88); box-shadow:0 4px 16px rgba(17,20,28,.07); transition:background .25s var(--ease-out),border-color .25s var(--ease-out),color .25s var(--ease-out),box-shadow .25s var(--ease-out),transform .25s var(--ease-out); -webkit-tap-highlight-color:transparent; user-select:none; white-space:nowrap; }
+    .nav-home-btn:hover { background:#fff; border-color:rgba(242,197,29,.50); color:var(--gold-text); box-shadow:0 6px 22px rgba(242,197,29,.16); transform:translateY(-1px); }
+    .nav-home-btn:active { transform:scale(.96); }
+    @media (max-width:360px) { .nav-home-btn span{display:none;} .nav-home-btn{width:44px;padding:0;justify-content:center;} }
+
+    /* REVEAL — staggered variant used by the timeline (base .reveal lives in main.css) */
+    .reveal-up { opacity:0; transform:translateY(16px); transition:opacity .6s var(--ease-out),transform .6s var(--ease-out); transition-delay:var(--rd,0ms); }
+    .reveal-up.visible { opacity:1; transform:none; }
+
+    /* SECTION TYPOGRAPHY */
+    .section-kicker { font-size:10px; font-weight:800; letter-spacing:.32em; text-transform:uppercase; color:var(--gold-text); margin-bottom:14px; }
+    .section-title { font-family:var(--font-display); font-weight:800; font-size:clamp(28px,6vw,42px); letter-spacing:-.025em; color:var(--ink); margin-bottom:var(--space-xl); line-height:1.15; }
+    .section-divider { width:60px; height:2px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:1px; margin-top:10px; }
+
+    /* HERO */
+    .hero { padding:clamp(70px,14vh,120px) var(--pad) 0; text-align:center; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; top:-40px; left:50%; transform:translateX(-50%); width:min(600px,100vw); height:600px; background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%); pointer-events:none; }
+    .hero-track-lines { position:absolute; inset:0; pointer-events:none; overflow:hidden; opacity:.025; }
+    .hero-track-lines svg { width:100%; height:100%; }
+    .hero-kicker { display:inline-flex; align-items:center; gap:10px; margin-bottom:20px; font-size:10px; font-weight:800; letter-spacing:.36em; text-transform:uppercase; color:var(--gold-text); animation:fadeUp .6s var(--ease-out) both; }
+    .hero-kicker-dot { width:18px; height:1px; background:linear-gradient(90deg,transparent,var(--accent)); }
+    .hero-title { font-family:var(--font-display); font-weight:900; font-size:clamp(44px,11vw,96px); line-height:.96; letter-spacing:-.04em; color:var(--ink); margin-bottom:6px; animation:fadeUp .7s .08s var(--ease-out) both; }
+    .hero-subtitle { font-family:var(--font-display); font-weight:700; font-size:clamp(16px,4vw,28px); letter-spacing:.08em; text-transform:uppercase; background:linear-gradient(135deg,var(--accent-dark),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:var(--space-lg); animation:fadeUp .7s .16s var(--ease-out) both; }
+    .hero-desc { max-width:44ch; margin:0 auto var(--space-xl); color:var(--muted); font-size:14px; font-weight:500; line-height:1.7; animation:fadeUp .7s .24s var(--ease-out) both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:none;} }
+
+    /* GOAL STRIP */
+    .goal-strip-wrap { padding:0 var(--pad) 60px; }
+    .goal-strip { max-width:640px; margin:0 auto; background:rgba(255,255,255,.90); border:1px solid var(--accent-dim); border-radius:var(--radius); padding:20px 24px; box-shadow:var(--shadow-soft); text-align:center; }
+    .goal-strip-label { font-size:9px; font-weight:800; letter-spacing:.26em; text-transform:uppercase; color:var(--gold-text); margin-bottom:8px; }
+    .goal-strip-text { font-family:var(--font-display); font-weight:700; font-size:15px; color:var(--ink); line-height:1.5; }
+
+    /* WEEK TIMELINE */
+    .timeline-section { padding:10px var(--pad) var(--space-2xl); }
+    .timeline { margin-top:40px; position:relative; padding-left:16px; }
+    .timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:2px; background:linear-gradient(to bottom,var(--accent),rgba(249,225,139,.3),transparent); }
+    .timeline-item { position:relative; padding-bottom:36px; }
+    .timeline-item:last-child { padding-bottom:0; }
+    .timeline-dot { position:absolute; left:-16px; top:8px; width:12px; height:12px; transform:translateX(-50%); border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:0 0 0 3px var(--accent-glow), 0 0 16px rgba(242,197,29,.3); }
+    .timeline-week { font-size:10px; font-weight:800; letter-spacing:.26em; text-transform:uppercase; color:var(--gold-text); margin-bottom:6px; }
+    .timeline-content { background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,255,255,.65)); border:1px solid var(--stroke); border-radius:16px; padding:22px 22px 20px; box-shadow:var(--shadow-soft); transition:transform var(--duration) var(--ease-out); }
+    .timeline-content:hover { transform:translateX(4px); }
+    .timeline-item.is-test .timeline-content { border-color:rgba(242,197,29,.45); }
+    .timeline-event { font-family:var(--font-display); font-weight:800; font-size:17px; color:var(--ink); letter-spacing:-.01em; margin-bottom:2px; }
+    .timeline-goal { font-size:12px; font-weight:600; color:var(--muted); margin-bottom:14px; }
+    .timeline-format-label { font-size:9px; font-weight:800; letter-spacing:.20em; text-transform:uppercase; color:var(--muted-2); margin-bottom:5px; }
+    .timeline-format-text { font-family:var(--font-display); font-weight:600; font-size:13px; color:var(--text); line-height:1.6; }
+
+    .week4-badge { display:inline-flex; align-items:center; gap:6px; padding:var(--space-xs) 10px; border-radius:var(--pill); background:var(--success-dim); border:1px solid rgba(34,197,94,.25); font-size:10px; font-weight:700; letter-spacing:.08em; color:var(--success-text); margin-top:14px; }
+    .week4-dot { width:6px; height:6px; border-radius:50%; background:var(--success); }
+
+    /* CTA */
+    .cta-section { padding:60px var(--pad) 70px; text-align:center; }
+    .cta-inner { background:linear-gradient(135deg,var(--dark-surface),var(--dark-bg)); border-radius:var(--radius-lg); padding:52px var(--space-lg); position:relative; overflow:hidden; border:1px solid rgba(242,197,29,.15); box-shadow:var(--shadow-heavy); }
+    .cta-inner::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:min(400px,100%); height:300px; background:radial-gradient(ellipse,var(--accent-glow) 0%,transparent 70%); pointer-events:none; }
+    .cta-inner::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent),var(--accent-2),transparent); }
+    .cta-kicker { font-size:9px; font-weight:800; letter-spacing:.32em; text-transform:uppercase; color:rgba(242,197,29,.7); margin-bottom:var(--space-md); position:relative; }
+    .cta-title { font-family:var(--font-display); font-weight:800; font-size:clamp(26px,6vw,38px); letter-spacing:-.025em; color:rgba(255,255,255,.96); line-height:1.2; margin-bottom:14px; position:relative; }
+    .cta-text { color:rgba(255,255,255,.68); font-size:12px; font-weight:500; max-width:40ch; margin:0 auto 36px; line-height:1.65; position:relative; }
+    .cta-actions { display:grid; gap:12px; position:relative; }
+    .cta-actions .btn { min-width:0; width:100%; }
+
+    /* RESPONSIVE — page-specific breakpoints only */
+    @media (min-width:640px) { .cta-actions{grid-template-columns:1fr 1fr;max-width:480px;margin-inline:auto;} }
+
+    @media (prefers-reduced-motion:reduce) { .reveal-up{opacity:1 !important;transform:none !important;} }
+  </style>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="/">
+          <div class="brand-text">
+            <strong>IRON FLOW CLUB</strong>
+            <small>Running</small>
+          </div>
+        </a>
+        <div class="nav-actions">
+          <a class="nav-home-btn" href="index.html" aria-label="Go to homepage">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/>
+              <path d="M9 21V12h6v9"/>
+            </svg>
+            <span>Home</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" aria-label="IFC Running Program">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-track-lines" aria-hidden="true">
+        <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" fill="none" stroke="rgba(17,20,28,1)" stroke-width="1">
+          <line x1="40" y1="60" x2="40" y2="340"/>
+          <line x1="120" y1="60" x2="120" y2="340"/>
+          <line x1="200" y1="60" x2="200" y2="340"/>
+          <line x1="280" y1="60" x2="280" y2="340"/>
+          <line x1="360" y1="60" x2="360" y2="340"/>
+          <line x1="40" y1="300" x2="360" y2="300" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="container">
+        <p class="hero-kicker">
+          <span class="hero-kicker-dot" aria-hidden="true"></span>
+          IFC Training Program
+          <span class="hero-kicker-dot" style="transform:scaleX(-1);" aria-hidden="true"></span>
+        </p>
+        <h1 class="hero-title" id="hero-title">Running</h1>
+        <p class="hero-subtitle">4-Week Cycle</p>
+        <p class="hero-desc">Speed. Endurance. Tempo. Test day. Every four weeks, a new PB.</p>
+      </div>
+    </section>
+
+    <!-- GOAL STRIP -->
+    <div class="goal-strip-wrap reveal">
+      <div class="goal-strip">
+        <p class="goal-strip-label">How It Works</p>
+        <p class="goal-strip-text">Each week we meet and start with a short warm up followed by group runs in the following schedule below</p>
+      </div>
+    </div>
+
+    <!-- WEEKLY BREAKDOWN -->
+    <section class="timeline-section" aria-labelledby="timeline-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-kicker">The Cycle</p>
+          <h2 class="section-title" id="timeline-title" style="margin-bottom:0">Weekly Breakdown</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+        </div>
+
+        <div class="timeline" role="list">
+
+          <!-- WEEK 1 -->
+          <div class="timeline-item reveal-up" style="--rd:0ms" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <p class="timeline-week">Week 1</p>
+            <div class="timeline-content">
+              <p class="timeline-event">Speed Intervals</p>
+              <p class="timeline-goal">Building Pace</p>
+              <p class="timeline-format-label">Format</p>
+              <p class="timeline-format-text">10 min dynamic warmup, then 6 to 8 rounds of 1 min hard push followed by 2 min easy jog / walk recovery.</p>
+            </div>
+          </div>
+
+          <!-- WEEK 2 -->
+          <div class="timeline-item reveal-up" style="--rd:80ms" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <p class="timeline-week">Week 2</p>
+            <div class="timeline-content">
+              <p class="timeline-event">Aerobic Endurance</p>
+              <p class="timeline-goal">Building Stamina</p>
+              <p class="timeline-format-label">Format</p>
+              <p class="timeline-format-text">10 min warmup, then 4 to 8 x 400m at a steady, conversational pace with a strict 90 sec walk recovery between loops. Finish with 10 min of core work.</p>
+            </div>
+          </div>
+
+          <!-- WEEK 3 -->
+          <div class="timeline-item reveal-up" style="--rd:160ms" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <p class="timeline-week">Week 3</p>
+            <div class="timeline-content">
+              <p class="timeline-event">Tempo &amp; Mechanics</p>
+              <p class="timeline-goal">Pace + Form</p>
+              <p class="timeline-format-label">Format</p>
+              <p class="timeline-format-text">10 min warmup, then 2 to 3km continuous at medium effort — no full conversation pace. Rest 3 min, then 4 x 100m relaxed strides to focus on form.</p>
+            </div>
+          </div>
+
+          <!-- WEEK 4 -->
+          <div class="timeline-item is-test reveal-up" style="--rd:240ms" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <p class="timeline-week">Week 4</p>
+            <div class="timeline-content">
+              <p class="timeline-event">The Long Run</p>
+              <p class="timeline-goal">Test Day</p>
+              <p class="timeline-format-label">Format</p>
+              <p class="timeline-format-text">A 5K+ time trial at Mamzar or Hera track — the measure of the cycle, and a shot at a new PB.</p>
+              <span class="week4-badge"><span class="week4-dot" aria-hidden="true"></span>PB Test</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-container">
+    <footer>
+      <div class="footer-inner container">
+        <span class="footer-brand">Iron Flow Club</span>
+        <span class="footer-copy">© 2026 Ironflow Club · Sharjah</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    'use strict';
+    function initReveal() {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal:not(.visible), .reveal-up:not(.visible)').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('visible');
+        } else {
+          obs.observe(el);
+        }
+      });
+    }
+    initReveal();
+  </script>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/analytics.js"></script>
+</body>
+</html>
