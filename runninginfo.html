@@ -15,9 +15,7 @@
   <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js?v=2')
-        .then(reg => console.log('SW registered'))
-        .catch(err => console.log('SW error', err));
+      navigator.serviceWorker.register('/sw.js').then(r => r.update()).catch(() => {});
     }
   </script>
 
@@ -36,11 +34,7 @@
   <link rel="canonical" href="https://ironflowclub.github.io/running-schedule" />
   <title>Running Program · IRONFLOW CLUB</title>
 
-  <!-- PWA -->
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="IRONFLOW" />
+
   <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png?v=20260724" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg?v=20260724" />
   <link rel="shortcut icon" href="/assets/images/favicon.ico?v=20260724" />

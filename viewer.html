@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>IRONFLOW · IFC Badminton Tournament</title>
+<meta name="theme-color" content="#10093A" />
+<link rel="manifest" href="/manifest.json" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="IRONFLOW" />
+<link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+<script src="/assets/js/config.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').then(r=>r.update()).catch(()=>{});}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -283,7 +292,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(245,244,240,.94);backdro
   <div class="nav">
     <a class="brand" href="index.html">
       <div class="brand-icon">
-        <img src="assets/images/logo.jpeg" alt="IRONFLOW" onerror="this.parentElement.textContent='IF'">
+        <img src="assets/images/logo.png" alt="IRONFLOW" onerror="this.parentElement.textContent='IF'">
       </div>
       <div class="brand-text">
         <strong>IRONFLOW</strong>
@@ -356,7 +365,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(245,244,240,.94);backdro
 // ─────────────────────────────────────────────────────────────
 //  CONFIG
 // ─────────────────────────────────────────────────────────────
-var GAS_URL       = 'https://script.google.com/macros/s/AKfycbzLO1YP1yw0GW7XQ7LVqu0IC2ih_LpWT8orQdQB4Y8ucKBCy_IjmT8I2v8kV65n/exec';
+var GAS_URL       = (window.IFC_CONFIG && window.IFC_CONFIG.PROXY_URL) ? window.IFC_CONFIG.PROXY_URL : 'https://ironflow-proxy.syed-mujeebprojects.workers.dev';
 var CACHE_KEY     = 'ifc_viewer_cache_v1';
 var POLL_INTERVAL = 30000;   // 30 s auto-refresh
 var _data         = null;    // latest tournament payload

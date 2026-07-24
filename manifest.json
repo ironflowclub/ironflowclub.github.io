@@ -1,24 +1,38 @@
 {
   "name": "IRON FLOW CLUB Sharjah",
   "short_name": "ironflowclub",
-  "start_url": "/index.html",
+  "description": "Built for men who move. Weekly runs, sport sessions, and a community that refuses to settle.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#10093A",
   "theme_color": "#F2C51D",
   "id": "/",
   "scope": "/",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "assets/images/web-app-manifest-192x192.png",
+      "src": "/assets/images/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "assets/images/web-app-manifest-192x192.png",
+      "src": "/assets/images/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/images/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/images/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

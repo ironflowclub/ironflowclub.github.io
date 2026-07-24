@@ -1,4 +1,4 @@
-﻿<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
+<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,9 +16,7 @@
   <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js?v=2')
-        .then(reg => console.log('SW registered'))
-        .catch(err => console.log('SW error', err));
+      navigator.serviceWorker.register('/sw.js').then(r => r.update()).catch(() => {});
     }
   </script>
 
@@ -33,8 +31,6 @@
 
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
 
   <!-- Open Graph -->
@@ -42,7 +38,7 @@
   <meta property="og:url" content="https://ironflowclub.github.io/progress.html" />
   <meta property="og:title" content="My Progress · IRONFLOW CLUB" />
   <meta property="og:description" content="Track your running progress and personal records" />
-  <meta property="og:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
+  <meta property="og:image" content="https://ironflowclub.github.io/assets/images/logo.png" />
 
 
 

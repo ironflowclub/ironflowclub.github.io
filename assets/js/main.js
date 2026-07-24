@@ -33,7 +33,10 @@
    * Update all text content with translations
    */
   function updateTranslations() {
+    const T = window.IronflowTranslation;
+    if (!T) return;
     const t = T.getAll();
+    const langToggleBtn = document.getElementById('langToggleBtn');
 
     if (kickerEl) kickerEl.textContent = t.kicker;
     if (heroTitleEl) heroTitleEl.innerHTML = t.heroTitleHtml;

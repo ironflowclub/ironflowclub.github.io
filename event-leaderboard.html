@@ -1,4 +1,4 @@
-﻿<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
+<!-- © 2026 IRONFLOW CLUB, Sharjah, UAE. All rights reserved. -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,12 +13,12 @@
   <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png?v=2" sizes="96x96" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png?v=2" />
 
+  <script src="/assets/js/config.js"></script>
+
   <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js?v=2')
-        .then(reg => console.log('SW registered'))
-        .catch(err => console.log('SW error', err));
+      navigator.serviceWorker.register('/sw.js').then(r => r.update()).catch(() => {});
     }
   </script>
   
@@ -27,10 +27,8 @@
   <meta name="description" content="IRONFLOW CLUB Sharjah — Stats by Event" />
   <meta name="theme-color" content="#F2C51D" />
   <title>Stats by Event · IRONFLOW CLUB Sharjah</title>
-  <link rel="icon" type="image/x-icon" href="/assets/images/favicon_v3.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon_v3.png">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
 
     <!-- Security -->
 
@@ -39,7 +37,7 @@
   <meta property="og:url" content="https://ironflowclub.github.io/event-leaderboard.html" />
   <meta property="og:title" content="Stats by Event · IRONFLOW CLUB" />
   <meta property="og:description" content="Event-by-event pace leaderboard — IRONFLOW CLUB Sharjah" />
-  <meta property="og:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
+  <meta property="og:image" content="https://ironflowclub.github.io/assets/images/logo.png" />
 
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -607,7 +605,7 @@
     (function () {
       'use strict';
 
-      const EVENTS_URL = 'https://opensheet.elk.sh/1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg/Event_details';
+      const EVENTS_URL = (window.IFC_CONFIG && window.IFC_CONFIG.endpoints && window.IFC_CONFIG.endpoints.eventDetails) ? window.IFC_CONFIG.endpoints.eventDetails : 'https://opensheet.elk.sh/1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg/Event_details';
       const TIER_MAIN = 5;
       const TIER_MID = 4;
       const TIER_LOW = 3;

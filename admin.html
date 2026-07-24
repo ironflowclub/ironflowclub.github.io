@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 
@@ -6,6 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="IRONFLOW" />
+  <meta name="theme-color" content="#10093A" />
   <link rel="manifest" href="/manifest.json?v=2" />
 
   <!-- Favicons -->
@@ -15,9 +16,7 @@
   <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js?v=2')
-        .then(reg => console.log('SW registered'))
-        .catch(err => console.log('SW error', err));
+      navigator.serviceWorker.register('/sw.js').then(r => r.update()).catch(() => {});
     }
   </script>
 
@@ -467,12 +466,13 @@
 
   <div class="toast" id="toast">Saved</div>
 
+  <script src="/assets/js/config.js"></script>
   <script>
     'use strict';
 
     const CONFIG = {
-      APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbx5hJrtKlcude3vR5954psRtg0XUqsBa7tERzlV_avVcDE7FqigIyNeVxJn5dimW-w/exec',
-      SHEET_ID: '1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg'
+      APPS_SCRIPT_URL: (window.IFC_CONFIG && window.IFC_CONFIG.PROXY_URL) ? window.IFC_CONFIG.PROXY_URL : 'https://ironflow-proxy.syed-mujeebprojects.workers.dev',
+      SHEET_ID: (window.IFC_CONFIG && window.IFC_CONFIG.SHEET_ID) ? window.IFC_CONFIG.SHEET_ID : '1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg'
     };
     const OPENSHEET = (tab) => `https://opensheet.elk.sh/${CONFIG.SHEET_ID}/${tab}`;
 

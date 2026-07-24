@@ -2,7 +2,9 @@ const AuthGuard = (function () {
 
   const SESSION_KEY = 'if_admin_session';
   const EXPIRY_KEY  = 'if_admin_expiry';
-  const SHEETS_URL  = 'https://script.google.com/macros/s/AKfycbx_Lap_lkvgk0xKIzTGp5joffnGEJrfNr9ltvPsWTCt8RkXw2pXXPomT3dpdslFo5I/exec';
+  const SHEETS_URL  = (window.IFC_CONFIG && window.IFC_CONFIG.PROXY_URL)
+    ? window.IFC_CONFIG.PROXY_URL
+    : 'https://ironflow-proxy.syed-mujeebprojects.workers.dev';
 
   /* ── helpers ── */
   function getToken()  { try { return sessionStorage.getItem(SESSION_KEY); } catch(e) { return null; } }

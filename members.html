@@ -1,10 +1,18 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#F2C51D" />
   <title>Members · IRONFLOW CLUB Admin</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="IRONFLOW" />
+  <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').then(r=>r.update()).catch(()=>{});}</script>
+  <script src="/assets/js/config.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -643,7 +651,7 @@
 
   <div class="intro-body">
     <div class="intro-logo">
-      <img src="assets/images/logo.jpeg" alt="" />
+      <img src="assets/images/logo.png" alt="" />
     </div>
 
     <p class="intro-title">
@@ -660,7 +668,7 @@
   <header>
     <div class="nav">
       <a class="brand" href="admin.html">
-        <img src="assets/images/logo.jpeg" alt="IronFlow Club logo" />
+        <img src="assets/images/logo.png" alt="IronFlow Club logo" />
         <div class="brand-text">
           <strong>IRONFLOW CLUB</strong>
           <small>Admin</small>
@@ -777,8 +785,8 @@
   /* ================================================================
      CONFIG — replace WRITE_URL with your auth Apps Script URL
   ================================================================ */ 
-  const SHEET_ID  = '1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg';
-  const READ_URL  = `https://opensheet.elk.sh/${SHEET_ID}/Member_details`;
+  const SHEET_ID  = (window.IFC_CONFIG && window.IFC_CONFIG.SHEET_ID) ? window.IFC_CONFIG.SHEET_ID : '1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg';
+  const READ_URL  = (window.IFC_CONFIG && window.IFC_CONFIG.endpoints && window.IFC_CONFIG.endpoints.memberDetails) ? window.IFC_CONFIG.endpoints.memberDetails : `https://opensheet.elk.sh/${SHEET_ID}/Member_details`;
   const WRITE_URL = 'https://ironflow-proxy.syed-mujeebprojects.workers.dev';
 
   /* ── AUTH GUARD ── */

@@ -7,7 +7,7 @@ async function loadComponent(id, file) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await loadComponent("footer-container", "assets/components/footer.html");
+  await loadComponent("footer-container", "/assets/components/footer.html");
 
   // Set year after footer is injected into the DOM
   document.querySelectorAll('.footer-year, .yr').forEach(el => {

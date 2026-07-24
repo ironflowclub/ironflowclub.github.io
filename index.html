@@ -15,21 +15,20 @@
   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg?v=20260724" />
   <link rel="shortcut icon" href="/assets/images/favicon.ico?v=20260724" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png?v=20260724" />
-  <link rel="manifest" href="/site.webmanifest?v=20260724" />
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ironflowclub.github.io/" />
   <meta property="og:title" content="IRONFLOW CLUB · Sharjah Running Club" />
   <meta property="og:description" content="Built for men who move. Weekly runs, sport sessions, and a community that refuses to settle." />
-  <meta property="og:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
+  <meta property="og:image" content="https://ironflowclub.github.io/assets/images/logo.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://ironflowclub.github.io/" />
   <meta name="twitter:title" content="IRONFLOW CLUB · Sharjah Running Club" />
   <meta name="twitter:description" content="Track your runs and watch your progress unfold." />
-  <meta name="twitter:image" content="https://ironflowclub.github.io/assets/images/og-image.jpg" />
+  <meta name="twitter:image" content="https://ironflowclub.github.io/assets/images/logo.png" />
 
   <!-- Security -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -62,11 +61,12 @@
   <link rel="stylesheet" href="/assets/css/theme.css" />
 
 
+<script src="/assets/js/config.js"></script>
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
-      appId: "82207c5d-d78c-4fde-b5a0-5939771239a9",
+      appId: window.IFC_CONFIG ? window.IFC_CONFIG.ONESIGNAL_APP_ID : "82207c5d-d78c-4fde-b5a0-5939771239a9",
     });
   });
 </script>

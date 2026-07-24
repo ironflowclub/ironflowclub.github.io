@@ -3,7 +3,7 @@
  * Bump CACHE_VERSION whenever you deploy updates
  */
 
-const CACHE_VERSION = 'v301';
+const CACHE_VERSION = 'v302';
 const CACHE_NAME = `ironflow-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -17,18 +17,28 @@ const STATIC_ASSETS = [
   '/assets/css/leaderboard.css',
   '/assets/css/progress.css',
   '/assets/css/loader.css',
+  '/assets/css/theme.css',
+  '/assets/js/config.js',
   '/assets/js/main.js',
   '/assets/js/leaderboard.js',
   '/assets/js/progress.js',
   '/assets/js/data-handler.js',
   '/assets/js/utils.js',
   '/assets/js/translations.js',
+  '/assets/js/components.js',
   '/champions.html',
   '/tournament.html',
   '/admin.html',
   '/auth-guard.js',
   '/running.html',
-  '/runninginfo.html'
+  '/runninginfo.html',
+  '/badminton.html',
+  '/badminton-setup.html',
+  '/members.html',
+  '/privacy.html',
+  '/viewer.html',
+  '/event-leaderboard.html',
+  '/maintainance.html'
 ];
 
 // ── Install: cache all static assets ──────────────────────────
@@ -51,7 +61,7 @@ self.addEventListener('activate', event => {
       ))
       .then(() => self.clients.claim()) // take control of all open tabs immediately
       .then(() => {
-        // 🔑 Force-reload every open tab/window so they get the new assets
+        // Force-reload every open tab/window so they get the new assets
         return self.clients.matchAll({ type: 'window' }).then(clients => {
           clients.forEach(client => client.navigate(client.url));
         });
@@ -110,9 +120,6 @@ self.addEventListener('fetch', event => {
       })
   );
 });
-
-
-// Add this at the bottom of sw.js
 
 // ── Message Listener: Respond with current CACHE_VERSION ──────────
 self.addEventListener('message', event => {

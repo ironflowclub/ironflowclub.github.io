@@ -1,9 +1,18 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>IronFlow Club — Tournament</title>
+<meta name="theme-color" content="#10093A" />
+<link rel="manifest" href="/manifest.json" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="IRONFLOW" />
+<link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+<script src="/assets/js/config.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').then(r=>r.update()).catch(()=>{});}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -556,7 +565,7 @@ header{
     <div class="nav">
       <div class="brand">
         <div class="brand-icon">
-          <img src="assets/images/logo.jpeg" alt="IRONFLOW" width="36" height="36">
+          <img src="assets/images/logo.png" alt="IRONFLOW" width="36" height="36">
         </div>
         <div class="brand-text">
           <strong>IRONFLOW</strong>
@@ -692,7 +701,7 @@ header{
 /* ─────────────────────────────────────────────────────────────
    CONSTANTS & STATE
 ───────────────────────────────────────────────────────────── */
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx_Lap_lkvgk0xKIzTGp5joffnGEJrfNr9ltvPsWTCt8RkXw2pXXPomT3dpdslFo5I/exec';
+const SHEETS_URL = (window.IFC_CONFIG && window.IFC_CONFIG.PROXY_URL) ? window.IFC_CONFIG.PROXY_URL : 'https://ironflow-proxy.syed-mujeebprojects.workers.dev';
 const STORAGE_KEY    = 'if_tournament';
 const BACKUP_KEY     = 'if_tournament_backup';
 const AUTO_SAVE_MS   = 30000;       // 30-second autosave interval

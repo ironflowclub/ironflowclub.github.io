@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" dir="ltr">
 <head>
 
@@ -15,9 +15,7 @@
   <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js?v=2')
-        .then(reg => console.log('SW registered'))
-        .catch(err => console.log('SW error', err));
+      navigator.serviceWorker.register('/sw.js').then(r => r.update()).catch(() => {});
     }
   </script>
   

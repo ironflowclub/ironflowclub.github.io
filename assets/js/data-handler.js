@@ -7,8 +7,9 @@
 (function(window) {
   'use strict';
 
-  const SHEET_URL =
-    "https://opensheet.elk.sh/1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg/APP_DATA";
+  const SHEET_URL = (window.IFC_CONFIG && window.IFC_CONFIG.endpoints && window.IFC_CONFIG.endpoints.appData)
+    ? window.IFC_CONFIG.endpoints.appData
+    : "https://opensheet.elk.sh/1L8m_uoBtYx-UIwqDy6D_TPHa_N7BygkAhmpYMHSUStg/APP_DATA";
 
   const MAX_RETRIES = 3;
   const TIMEOUT_MS  = 10000; // 10 seconds per attempt
